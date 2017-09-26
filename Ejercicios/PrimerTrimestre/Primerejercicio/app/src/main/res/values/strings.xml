@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">La mejor aplicación de la historia</string>
+    <string name="nombre">Introduce tu nombre, Paco</string>
+    <string name="introduce">Escribe aqui...</string>
+    <string name="Boton">Enviar</string>
+</resources>
