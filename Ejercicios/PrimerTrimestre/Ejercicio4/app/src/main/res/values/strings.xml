@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Ejercicio4</string>
+    <string name="izquierda">Anterior</string>
+    <string name="derecha">Posterior</string>
+</resources>

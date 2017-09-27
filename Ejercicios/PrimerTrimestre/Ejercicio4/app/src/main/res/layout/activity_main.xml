@@ -4,36 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="es.iesnervion.agomez.ejercicio3.MainActivity">
+    tools:context="es.iesnervion.agomez.ejercicio4.MainActivity">
 
-    <EditText
-        android:id="@+id/texto"
+    <ImageView
+        android:id="@+id/imagen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/texto"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/android5"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:layout_marginLeft="70dp"
+        />
 
     <Button
         android:id="@+id/boton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/izquierda"
-        app:layout_constraintTop_toBottomOf="@id/texto"
+        app:layout_constraintTop_toBottomOf="@+id/imagen"
         app:layout_constraintLeft_toRightOf="parent"
-        android:layout_marginLeft="100dp"
-        android:onClick="alinear"/>
+        android:text="@string/izquierda"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"/>
 
     <Button
         android:id="@+id/boton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/derecha"
-        app:layout_constraintTop_toBottomOf="@id/texto"
+        app:layout_constraintTop_toBottomOf="@+id/imagen"
         app:layout_constraintLeft_toRightOf="parent"
-        android:layout_marginLeft="200dp"
-        android:onClick="alinear"/>
-
+        android:text="@string/derecha"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="20dp"/>
 
 </android.support.constraint.ConstraintLayout>
