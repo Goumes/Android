@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Ejercicio1</string>
+    <string name="mensajeSuma">SUMA</string>
+    <string name="botonSuma">Sumar</string>
+    <string name="num1">Numero 1</string>
+    <string name="num2">Numero 2</string>
+    <string name="mensajemas">+</string>
+</resources>

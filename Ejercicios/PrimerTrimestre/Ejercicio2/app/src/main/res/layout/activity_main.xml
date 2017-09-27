@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="es.iesnervion.agomez.ejercicio2.MainActivity">
+
+    <EditText
+        android:id="@+id/cajon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saludo"/>
+    <Button
+        android:id="@+id/rojo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Rojo"
+        app:layout_constraintTop_toBottomOf ="@id/cajon"
+        app:layout_constraintLeft_toLeftOf ="parent"
+        android:onClick="cambiarColor"
+        />
+
+    <Button
+        android:id="@+id/azul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Azul"
+        app:layout_constraintLeft_toRightOf ="@id/rojo"
+        app:layout_constraintTop_toBottomOf ="@id/cajon"
+        android:onClick="cambiarColor"
+        />
+
+    <Button
+        android:id="@+id/amarillo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Amarillo"
+        app:layout_constraintLeft_toRightOf ="@id/azul"
+        app:layout_constraintTop_toBottomOf ="@id/cajon"
+        android:onClick="cambiarColor"
+        />
+
+
+
+</android.support.constraint.ConstraintLayout>

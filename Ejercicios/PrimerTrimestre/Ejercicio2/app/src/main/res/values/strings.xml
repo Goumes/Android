@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Ejercicio 2</string>
+    <string name="saludo">Introduce tu texto makina</string>
+    <string name="Rojo">Rojo</string>
+    <string name="Azul">Azul</string>
+    <string name="Amarillo">Amarillo</string>
+</resources>
