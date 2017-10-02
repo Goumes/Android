@@ -6,13 +6,17 @@
     android:layout_height="match_parent"
     tools:context="es.iesnervion.agomez.ejercicio4.MainActivity">
 
+
     <ImageView
         android:id="@+id/imagen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/android5"
+        android:maxHeight="200dp"
+        android:maxWidth="200dp"
         app:layout_constraintLeft_toRightOf="parent"
         android:layout_marginLeft="70dp"
+        android:layout_gravity="center_horizontal|top"
         />
 
     <Button
@@ -23,7 +27,8 @@
         app:layout_constraintLeft_toRightOf="parent"
         android:text="@string/izquierda"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:onClick="cambiarImagen"/>
 
     <Button
         android:id="@+id/boton2"
@@ -33,6 +38,7 @@
         app:layout_constraintLeft_toRightOf="parent"
         android:text="@string/derecha"
         android:layout_marginLeft="240dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:onClick="cambiarImagen"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Ejercicio 5</string>
+    <string name="aumentar">aumentar</string>
+    <string name="reducir">reducir</string>
+</resources>
