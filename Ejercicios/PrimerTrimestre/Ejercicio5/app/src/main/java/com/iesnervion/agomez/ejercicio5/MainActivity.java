@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    int size = 11;
+    int size = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
