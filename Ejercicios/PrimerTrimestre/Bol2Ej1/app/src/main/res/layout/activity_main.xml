@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="es.iesnervion.agomez.bol2ej1.MainActivity">
+    <LinearLayout
+        android:id="@+id/layoutGrande"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearCheckbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/linearText"
+            android:orientation="vertical"
+            android:layout_weight="50">
+
+            <CheckBox
+                android:id="@+id/negrita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/negrita"
+                android:layout_marginLeft="30dp"
+                android:onClick="checkBoxClick"/>
+
+            <CheckBox
+                android:id="@+id/agrandar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/agrandar"
+                android:layout_marginLeft="30dp"
+                android:onClick="checkBoxClick"/>
+
+            <CheckBox
+                android:id="@+id/reducir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reducir"
+                android:layout_marginLeft="30dp"
+                android:onClick="checkBoxClick"/>
+
+            <CheckBox
+                android:id="@+id/enrojecer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enrojecer"
+                android:layout_marginLeft="30dp"
+                android:onClick="checkBoxClick"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

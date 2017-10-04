@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Bol2Ej1</string>
+    <string name="negrita">negrita</string>
+    <string name="agrandar">agrandar</string>
+    <string name="reducir">reducir</string>
+    <string name="enrojecer">enrojecer</string>
+    <string name="text">Este texto va a ser tuneado</string>
+</resources>
