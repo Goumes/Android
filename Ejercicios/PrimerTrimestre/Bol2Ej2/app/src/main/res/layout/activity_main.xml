@@ -59,25 +59,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sumar"
-                    android:onClick="operacionRadio"/>
+                    android:onClick="onClick"/>
                 <RadioButton
                     android:id="@+id/restar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/restar"
-                    android:onClick="operacionRadio"/>
+                    android:onClick="onClick"/>
                 <RadioButton
                     android:id="@+id/multiplicar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/multiplicar"
-                    android:onClick="operacionRadio"/>
+                    android:onClick="onClick"/>
                 <RadioButton
                     android:id="@+id/dividir"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dividir"
-                    android:onClick="operacionRadio"/>
+                    android:onClick="onClick"/>
             </RadioGroup>
         </LinearLayout>
 
