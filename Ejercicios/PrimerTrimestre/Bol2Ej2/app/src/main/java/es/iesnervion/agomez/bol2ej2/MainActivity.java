@@ -21,23 +21,35 @@ public class MainActivity extends AppCompatActivity {
             TextView resultado = (TextView) findViewById(R.id.resultado);
             double operacion = 0;
 
-            switch (id) {
-                case (R.id.sumar):
-                    operacion = (Double.parseDouble(num1.getText().toString()) + Integer.parseInt(num2.getText().toString()));
-                    resultado.setText(String.valueOf(operacion));
-                    break;
-                case (R.id.restar):
-                    operacion = (Double.parseDouble(num1.getText().toString()) - Integer.parseInt(num2.getText().toString()));
-                    resultado.setText(String.valueOf(operacion));
-                    break;
-                case (R.id.multiplicar):
-                    operacion = (Double.parseDouble(num1.getText().toString()) * Integer.parseInt(num2.getText().toString()));
-                    resultado.setText(String.valueOf(operacion));
-                    break;
-                case (R.id.dividir):
-                    operacion = (Double.parseDouble(num1.getText().toString()) / Integer.parseInt(num2.getText().toString()));
-                    resultado.setText(String.valueOf(operacion));
-                    break;
+            if (!num1.getText().toString().isEmpty() || !num2.getText().toString().isEmpty()) {
+
+                switch (id) {
+                    case (R.id.sumar):
+                        operacion = (Double.parseDouble(num1.getText().toString()) + Integer.parseInt(num2.getText().toString()));
+                        resultado.setText(String.valueOf(operacion));
+                        break;
+                    case (R.id.restar):
+                        operacion = (Double.parseDouble(num1.getText().toString()) - Integer.parseInt(num2.getText().toString()));
+                        resultado.setText(String.valueOf(operacion));
+                        break;
+                    case (R.id.multiplicar):
+                        operacion = (Double.parseDouble(num1.getText().toString()) * Integer.parseInt(num2.getText().toString()));
+                        resultado.setText(String.valueOf(operacion));
+                        break;
+                    case (R.id.dividir):
+                        operacion = (Double.parseDouble(num1.getText().toString()) / Integer.parseInt(num2.getText().toString()));
+                        resultado.setText(String.valueOf(operacion));
+                        break;
+
+                    case (R.id.cuadrado):
+
+                        break;
+                }
+            }
+
+            else
+            {
+                resultado.setText("Mete algo hoolio");
             }
         }
     }

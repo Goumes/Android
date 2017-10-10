@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
     {
         int boton = view.getId();
         ImageView imagen = (ImageView) findViewById(R.id.imagen);
+        int [] ids = {
+                R.drawable.android4,
+                R.drawable.android5,
+                R.drawable.android6
+                    };
 
         switch (boton)
         {

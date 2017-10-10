@@ -6,4 +6,5 @@
     <string name="multiplicar">multiplicar</string>
     <string name="dividir">dividir</string>
     <string name="resultado" />
+    <string name="cuadrado">cuadrado</string>
 </resources>

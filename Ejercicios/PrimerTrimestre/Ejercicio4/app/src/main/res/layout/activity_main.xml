@@ -6,39 +6,36 @@
     android:layout_height="match_parent"
     tools:context="es.iesnervion.agomez.ejercicio4.MainActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imagen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/android5"
-        android:maxHeight="200dp"
-        android:maxWidth="200dp"
-        app:layout_constraintLeft_toRightOf="parent"
-        android:layout_marginLeft="70dp"
-        android:layout_gravity="center_horizontal|top"
-        />
+        <ImageView
+            android:id="@+id/imagen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/android5"
+            android:layout_centerHorizontal="true"
+            />
 
-    <Button
-        android:id="@+id/boton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/imagen"
-        app:layout_constraintLeft_toRightOf="parent"
-        android:text="@string/izquierda"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
-        android:onClick="cambiarImagen"/>
+        <Button
+            android:id="@+id/boton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/izquierda"
+            android:onClick="cambiarImagen"
+            android:layout_below="@id/imagen"
+            android:layout_marginLeft="80dp"/>
 
-    <Button
-        android:id="@+id/boton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/imagen"
-        app:layout_constraintLeft_toRightOf="parent"
-        android:text="@string/derecha"
-        android:layout_marginLeft="240dp"
-        android:layout_marginTop="20dp"
-        android:onClick="cambiarImagen"/>
+        <Button
+            android:id="@+id/boton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/derecha"
+            android:onClick="cambiarImagen"
+            android:layout_below="@id/imagen"
+            android:layout_toRightOf="@id/boton1"/>
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
