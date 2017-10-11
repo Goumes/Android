@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">EjercicioRandom</string>
+    <string name="N1">1</string>
+    <string name="N2">2</string>
+    <string name="N3">3</string>
+    <string name="N4">4</string>
+    <string name="N5">5</string>
+    <string name="N6">6</string>
+    <string name="N7">7</string>
+    <string name="N8">8</string>
+    <string name="N9">9</string>
+    <string name="N0">0</string>
+    <string name="limpiar">C</string>
+    <string name="dividir">%</string>
+    <string name="multiplicar">X</string>
+    <string name="sumar">+</string>
+    <string name="restar">-</string>
+    <string name="igual">=</string>
+    <string name="coma">,</string>
+    <string name="resultado" />
+
+
+</resources>
