@@ -2,7 +2,10 @@ package com.example.agomez.ejerciciorandom;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
@@ -14,10 +17,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);//Si es una ListActivity no es necesario.
     }
 
-    public void onClick(View view)
+    public void onClick(View view) //Dividir en métodos por separado.
     {
         int id = view.getId();
         TextView resultado = (TextView) findViewById(R.id.resultado);
@@ -177,6 +180,7 @@ public class MainActivity extends AppCompatActivity
 
                         break;
                 }
+
                 break;
         }
     }
