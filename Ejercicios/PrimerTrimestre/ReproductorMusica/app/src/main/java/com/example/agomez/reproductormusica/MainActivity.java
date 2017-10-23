@@ -1,12 +1,14 @@
 package com.example.agomez.reproductormusica;
 
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,13 +20,14 @@ public class MainActivity extends AppCompatActivity {
     private Integer [] portadas = {R.drawable.portada1};
 
     private ListView lista;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Adaptador adaptador = new Adaptador(this, titulos, autores, albumes, duraciones, portadas);
+        final Adaptador adaptador = new Adaptador(this, titulos, autores, albumes, duraciones, portadas);
 
         lista = (ListView) findViewById(R.id.list);
 
@@ -33,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         lista.setOnItemClickListener (new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                TextView txtView =  (TextView) findViewById(R.id.titulo);
+            }
         });
     }
 }

@@ -43,6 +43,7 @@ public class Adaptador extends ArrayAdapter<String>
     public View getView (int posicion, View convertView, ViewGroup parent)
     {
         View vista = convertView;
+
         if (vista == null) {
             LayoutInflater inflater = actividad.getLayoutInflater();
             vista = inflater.inflate(R.layout.row, null, true);//super.getView(posicion,view,parent);
