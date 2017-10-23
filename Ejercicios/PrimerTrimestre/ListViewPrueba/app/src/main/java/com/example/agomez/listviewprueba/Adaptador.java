@@ -29,7 +29,10 @@ public class Adaptador extends ArrayAdapter <String>
     public View getView (int posicion, View view, ViewGroup parent)
     {
         LayoutInflater inflater = actividad.getLayoutInflater();
-        View vista = inflater.inflate(R.layout.row, null, true);//super.getView(posicion,view,parent);
+        View vista = inflater.inflate(R.layout.row, null);//super.getView(posicion,view,parent);
+        //En el null se le pasa la id de otro linear layout del que es hijo el layout a usar. En este caso no es ninguno.
+        //El true o false sirve para indicar si queremos que se usen las propiedades del padre. False sólo coge las propiedades
+        //y true mete el objeto entero dentro del padre.
 
         TextView txtView = (TextView) vista.findViewById(R.id.texto);
         ImageView imgView = (ImageView) vista.findViewById(R.id.imagen);
