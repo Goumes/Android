@@ -20,24 +20,16 @@ import com.example.agomez.reproductormusica.R;
  * Created by agomez on 18/10/17.
  */
 
-public class Adaptador extends ArrayAdapter<String>
+public class Adaptador extends ArrayAdapter<Cancion>
 {
     private final Activity actividad;
-    private final String [] titulos;
-    private final String [] autores;
-    private final String [] albumes;
-    private final String [] duraciones;
-    private final Integer [] portadas;
+    private final Cancion [] canciones;
 
-    public Adaptador (Activity actividad, String [] titulos, String [] autores, String [] albumes, String [] duraciones, Integer [] portadas)
+    public Adaptador (Activity actividad,Cancion [] canciones)
     {
-        super(actividad, R.layout.row, titulos);
+        super(actividad, R.layout.row, canciones);
         this.actividad = actividad;
-        this.titulos = titulos;
-        this.autores = autores;
-        this.albumes = albumes;
-        this.portadas = portadas;
-        this.duraciones = duraciones;
+        this.canciones = canciones;
     }
 
     public View getView (int posicion, View convertView, ViewGroup parent)
@@ -55,10 +47,10 @@ public class Adaptador extends ArrayAdapter<String>
         TextView txtDuraciones = (TextView) vista.findViewById(R.id.duracion);
         ImageView imgPortadas = (ImageView) vista.findViewById(R.id.portada);
 
-        txtTitulos.setText(titulos[posicion]);
-        txtAutores.setText(autores[posicion]);
-        txtAlbumes.setText(albumes[posicion]);
-        txtDuraciones.setText(duraciones[posicion]);
+        txtTitulos.setText(canciones[posicion].getTitulo());
+        txtAutores.setText(canciones[posicion].getAutor());
+        txtAlbumes.setText(canciones[posicion].getAlbum());
+        txtDuraciones.setText(canciones[posicion].getDuracion());
         imgPortadas.setImageResource(/*portadas[posicion]*/R.drawable.portada1);
 
         return vista;

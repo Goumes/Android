@@ -4,4 +4,6 @@
     <string name="autor">Autor</string>
     <string name="album">Album</string>
     <string name="duracion">4:13</string>
+    <string name="pause">Stop</string>
+    <string name="play">Play</string>
 </resources>
