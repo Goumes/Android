@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView lista;
     private MediaPlayer mp;
     private SeekBar mSeekBar;
+    //private Handler handler;
+    //private Runnable runnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
+
+        //handler = new Handler ();
 
         final Adaptador adaptador = new Adaptador(this, canciones);
 
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     mp = MediaPlayer.create(MainActivity.this, R.raw.underground);
 
+                    //playCycle();
                     mp.start();
                     int mCurrentPosition = mp.getCurrentPosition() / 1000;
                     mSeekBar.setProgress(mCurrentPosition);
@@ -105,4 +110,22 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    /*
+    public void playCycle ()
+    {
+        mSeekBar.setProgress(mp.getCurrentPosition());
+        if (mp.isPlaying())
+        {
+            runnable = new Runnable (){
+                @Override
+                public void run ()
+                {
+                    playCycle ();
+                }
+            };
+            handler.postDelayed(runnable, 1000);
+        }
+    }
+    */
 }
