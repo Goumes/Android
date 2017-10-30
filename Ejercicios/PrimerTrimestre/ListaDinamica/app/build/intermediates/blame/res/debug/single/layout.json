@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/agomez/Documentos/Android/Ejercicios/PrimerTrimestre/ListaDinamica/app/build/intermediates/res/merged/debug/layout/activity_lista_dinamica.xml",
+        "source": "/home/agomez/Documentos/Android/Ejercicios/PrimerTrimestre/ListaDinamica/app/src/main/res/layout/activity_lista_dinamica.xml"
+    },
+    {
+        "merged": "/home/agomez/Documentos/Android/Ejercicios/PrimerTrimestre/ListaDinamica/app/build/intermediates/res/merged/debug/layout/row.xml",
+        "source": "/home/agomez/Documentos/Android/Ejercicios/PrimerTrimestre/ListaDinamica/app/src/main/res/layout/row.xml"
+    }
+]

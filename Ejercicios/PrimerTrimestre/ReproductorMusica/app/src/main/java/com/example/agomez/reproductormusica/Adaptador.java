@@ -6,15 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.app.Activity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.agomez.reproductormusica.R;
 
 /**
  * Created by agomez on 18/10/17.
@@ -35,17 +27,27 @@ public class Adaptador extends ArrayAdapter<Cancion>
     public View getView (int posicion, View convertView, ViewGroup parent)
     {
         View vista = convertView;
+        ViewHolder viewHolder;
 
         if (vista == null) {
             LayoutInflater inflater = actividad.getLayoutInflater();
             vista = inflater.inflate(R.layout.row, null, true);//super.getView(posicion,view,parent);
+
+            viewHolder = new ViewHolder (vista);
+            vista.setTag(viewHolder);
+
         }
 
-        TextView txtTitulos = (TextView) vista.findViewById(R.id.titulo);
-        TextView txtAutores = (TextView) vista.findViewById(R.id.autor);
-        TextView txtAlbumes = (TextView) vista.findViewById(R.id.album);
-        TextView txtDuraciones = (TextView) vista.findViewById(R.id.duracion);
-        ImageView imgPortadas = (ImageView) vista.findViewById(R.id.portada);
+        else
+        {
+            viewHolder = (ViewHolder) vista.getTag();
+        }
+
+        TextView txtTitulos = viewHolder.getTitulo();
+        TextView txtAutores = viewHolder.getAutor();
+        TextView txtAlbumes = viewHolder.getAlbum();
+        TextView txtDuraciones = viewHolder.getDuracion();
+        ImageView imgPortadas = viewHolder.getPortada();
 
         txtTitulos.setText(canciones[posicion].getTitulo());
         txtAutores.setText(canciones[posicion].getAutor());

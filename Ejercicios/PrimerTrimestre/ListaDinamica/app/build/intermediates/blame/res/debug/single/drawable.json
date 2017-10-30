@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/agomez/Documentos/Android/Ejercicios/PrimerTrimestre/ListaDinamica/app/build/intermediates/res/merged/debug/drawable/calendar48x48.png",
+        "source": "/home/agomez/Documentos/Android/Ejercicios/PrimerTrimestre/ListaDinamica/app/src/main/res/drawable/calendar48x48.png"
+    },
+    {
+        "merged": "/home/agomez/Documentos/Android/Ejercicios/PrimerTrimestre/ListaDinamica/app/build/intermediates/res/merged/debug/drawable/delete.png",
+        "source": "/home/agomez/Documentos/Android/Ejercicios/PrimerTrimestre/ListaDinamica/app/src/main/res/drawable/delete.png"
+    },
+    {
+        "merged": "/home/agomez/Documentos/Android/Ejercicios/PrimerTrimestre/ListaDinamica/app/build/intermediates/res/merged/debug/drawable/alarm48x48.png",
+        "source": "/home/agomez/Documentos/Android/Ejercicios/PrimerTrimestre/ListaDinamica/app/src/main/res/drawable/alarm48x48.png"
+    }
+]

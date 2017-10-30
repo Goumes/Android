@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     mp = MediaPlayer.create(MainActivity.this, R.raw.underground);
 
+
                     //playCycle();
                     mp.start();
                     int mCurrentPosition = mp.getCurrentPosition() / 1000;
@@ -80,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
 
                 seekBar.setMax(mp.getDuration() / 1000);
 
