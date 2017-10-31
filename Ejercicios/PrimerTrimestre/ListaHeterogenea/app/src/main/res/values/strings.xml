@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ListaHeterogenea</string>
+    <string name="modelo">Modelo</string>
+    <string name="marca">Marca</string>
+    <string name="precio">Precio</string>
+    <string name="fuente">Fuente</string>
+    <string name="minutero">Longitud minutero</string>
 </resources>

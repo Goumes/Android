@@ -6,7 +6,7 @@
         android:id="@+id/preview"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/reloj_digital_1"
+        android:src="@drawable/reloj_analogico_1"
         />
 
     <TextView
@@ -38,10 +38,10 @@
         />
 
     <TextView
-        android:id="@+id/fuente"
+        android:id="@+id/minutero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fuente"
+        android:text="@string/minutero"
         android:layout_toRightOf="@id/preview"
         android:layout_below="@id/precio"
         />
