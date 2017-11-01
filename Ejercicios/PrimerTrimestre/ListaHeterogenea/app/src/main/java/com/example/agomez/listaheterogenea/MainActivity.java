@@ -19,15 +19,13 @@ public class MainActivity extends AppCompatActivity {
         relojes = new ArrayList<Reloj>();
         relojes.add(new RelojDigital(1, "modelo1", "marca1", 20.0, "fuente1"));
         relojes.add(new RelojAnalogico (2, "modelo2", "marca2", 20.0, 10));
-        relojes.add(new RelojDigital(3, "modelo3", "marca3", 20.0, "fuente2"));
-        relojes.add(new RelojDigital(4, "modelo4", "marca4", 20.0, "fuente3"));
-        relojes.add(new RelojAnalogico (5, "modelo5", "marca5", 20.0, 10));
-        relojes.add(new RelojDigital(6, "modelo6", "marca6", 20.0, "fuente4"));
-
-        final Adapter adaptador = new Adapter(this, R.layout.row_digital, relojes);
+        relojes.add(new RelojDigital(1, "modelo3", "marca3", 20.0, "fuente2"));
+        relojes.add(new RelojDigital(1, "modelo4", "marca4", 20.0, "fuente3"));
+        relojes.add(new RelojAnalogico (2, "modelo5", "marca5", 20.0, 10));
+        relojes.add(new RelojDigital(1, "modelo6", "marca6", 20.0, "fuente4"));
 
         lista = (ListView) findViewById(R.id.list);
-
+        Adapter adaptador = new Adapter(this, R.layout.row_digital, relojes);
         lista.setAdapter(adaptador);
 
     }

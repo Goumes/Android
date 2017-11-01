@@ -48,86 +48,82 @@ public class Adapter extends ArrayAdapter <Reloj>
         return 2;
     }
 
-    public View getView (int posicion, View convertView, ViewGroup parent)
+    public View getView (int position, View convertView, ViewGroup parent)
     {
-        View vista;
+        View vista = convertView;
         ViewHolderDigital viewHolder = null;
         ViewHolderAnalogico viewHolder2 = null;
+        int tipo = getItemViewType(position);
 
-        vista = convertView;
-
-
-        if (vista == null) {
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            if(getItemViewType(posicion) == 0)
-            {
-                vista = inflater.inflate(R.layout.row_digital, null, true);//super.getView(posicion,view,parent);
-                viewHolder = new ViewHolderDigital (vista);
-                vista.setTag(viewHolder);
-            }
-
-            else if (getItemViewType(posicion) == 1)
-            {
-                vista = inflater.inflate(R.layout.row_analogico, null, true);//super.getView(posicion,view,parent);
-                viewHolder2 = new ViewHolderAnalogico (vista);
-                vista.setTag(viewHolder2);
-            }
-
-        }
-
-        else
+        switch (tipo)
         {
-            if (getItemViewType(posicion) == 0) {
-                viewHolder = (ViewHolderDigital) vista.getTag();
-            }
+            case 0:
 
-            else if (getItemViewType(posicion) == 1)
-            {
-                viewHolder2 = (ViewHolderAnalogico) vista.getTag();
-            }
+                if (vista == null)
+                {
+                    LayoutInflater inflater = LayoutInflater.from(getContext());
+                    vista = inflater.inflate(R.layout.row_digital, null);
+                    viewHolder = (ViewHolderDigital) vista.getTag();
+                    vista.setTag(viewHolder);
+                }
 
+                else
+                {
+                    viewHolder = (ViewHolderDigital) vista.getTag();
+                }
+
+                RelojDigital relojD = (RelojDigital) getItem(position);
+
+                if (relojD != null)
+                {
+                    TextView txtModelo = viewHolder.getModelo();
+                    TextView txtMarca = viewHolder.getMarca();
+                    TextView txtPrecio = viewHolder.getPrecioprecio();
+                    TextView txtFuente = viewHolder.getFuenteDigito();
+                    ImageView imgReloj = viewHolder.getPreview();
+
+                    txtModelo.setText(relojD.getModelo());
+                    txtMarca.setText(relojD.getMarca());
+                    txtPrecio.setText(String.valueOf(relojD.getPrecio()));
+                    txtFuente.setText(relojD.getFuenteDigito());
+                    imgReloj.setImageResource(R.drawable.reloj_digital_1);
+                }
+
+                break;
+            case 1:
+
+                if (vista == null)
+                {
+                    LayoutInflater inflater = LayoutInflater.from(getContext());
+                    vista = inflater.inflate(R.layout.row_analogico, null);
+                    viewHolder2 = (ViewHolderAnalogico) vista.getTag();
+                    vista.setTag(viewHolder2);
+                }
+
+                else
+                {
+                    viewHolder2 = (ViewHolderAnalogico) vista.getTag();
+                }
+
+                RelojAnalogico relojA = (RelojAnalogico) getItem(position);
+
+                if (relojA != null)
+                {
+                    TextView txtModelo = viewHolder2.getModelo();
+                    TextView txtMarca = viewHolder2.getMarca();
+                    TextView txtPrecio = viewHolder2.getPrecioprecio();
+                    TextView txtFuente = viewHolder2.getLongitudMinutero();
+                    ImageView imgReloj = viewHolder2.getPreview();
+
+                    txtModelo.setText(relojA.getModelo());
+                    txtMarca.setText(relojA.getMarca());
+                    txtPrecio.setText(String.valueOf(relojA.getPrecio()));
+                    txtFuente.setText(relojA.getLongitudMinutero());
+                    imgReloj.setImageResource(R.drawable.reloj_analogico_1);
+                }
+
+                break;
         }
-
-
-
-        if (getItemViewType(posicion) == 0)
-        {
-            RelojDigital reloj = (RelojDigital) relojes.get(posicion);
-            TextView txtModelo = viewHolder.getModelo();
-            TextView txtMarca = viewHolder.getMarca();
-            TextView txtPrecio = viewHolder.getPrecioprecio();
-            TextView txtFuente = viewHolder.getFuenteDigito();
-            ImageView imgReloj = viewHolder.getPreview();
-
-            txtModelo.setText(reloj.getModelo());
-            txtMarca.setText(reloj.getMarca());
-            txtPrecio.setText(String.valueOf(reloj.getPrecio()));
-            txtFuente.setText(reloj.getFuenteDigito());
-            imgReloj.setImageResource(R.drawable.reloj_digital_1);
-        }
-
-        else if (getItemViewType(posicion) == 1)
-        {
-            RelojAnalogico reloj = (RelojAnalogico) relojes.get(posicion);
-            TextView txtModelo = viewHolder2.getModelo();
-            TextView txtMarca = viewHolder2.getMarca();
-            TextView txtPrecio = viewHolder2.getPrecioprecio();
-            TextView txtMinutero = viewHolder2.getLongitudMinutero();
-            ImageView imgReloj = viewHolder2.getPreview();
-
-            txtModelo.setText(reloj.getModelo());
-            txtMarca.setText(reloj.getMarca());
-            txtPrecio.setText(String.valueOf(reloj.getPrecio()));
-            txtMinutero.setText(reloj.getLongitudMinutero());
-            imgReloj.setImageResource(R.drawable.reloj_analogico_1);
-        }
-
-        //TextView txtMinutero = viewHolder2.getLongitudMinutero();
-
-
-
-        //txtFuente.setText(relojes.get(posicion).getFuenteDigito());
 
 
 
