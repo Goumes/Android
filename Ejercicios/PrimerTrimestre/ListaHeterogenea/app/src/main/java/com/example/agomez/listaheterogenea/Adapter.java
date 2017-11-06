@@ -119,7 +119,7 @@ public class Adapter extends ArrayAdapter <Reloj>
             txtModelo.setText(reloj.getModelo());
             txtMarca.setText(reloj.getMarca());
             txtPrecio.setText(String.valueOf(reloj.getPrecio()));
-            txtMinutero.setText(reloj.getLongitudMinutero());
+            txtMinutero.setText(String.valueOf(reloj.getLongitudMinutero()));
             imgReloj.setImageResource(R.drawable.reloj_analogico_1);
         }
 
