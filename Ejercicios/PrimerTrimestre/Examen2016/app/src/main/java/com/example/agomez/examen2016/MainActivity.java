@@ -5,26 +5,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Team> teams;
-    ArrayList<String> items = new ArrayList<String>();
+    ArrayList<Team> teams ;
+    ArrayList<String> items;
     ListView lista;
     ArrayAdapter<String> adapter;
+    Spinner spinner;
+    Adapter adaptador;
+    AutoCompleteTextView autoComplete;
+    int contador;
+    Button button;
+    Gestora gestora;
+    ArrayAdapter<String> aa;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        teams = new ArrayList<Team>();
+        items = new ArrayList<String>();
+        button = (Button) this.findViewById(R.id.addBtn);
+        gestora = new Gestora();
 
-        teams = new ArrayList<Team> ();
+
         teams.add(new Team (1, "Blazzers", R.drawable.blazzers));
         teams.add(new Team (2, "Bucks", R.drawable.bucks));
         teams.add(new Team (3, "Bulls", R.drawable.bulls));
@@ -57,14 +71,53 @@ public class MainActivity extends AppCompatActivity {
         teams.add(new Team (30, "Wolves", R.drawable.wolves));
 
         lista = (ListView) findViewById(R.id.list);
-        Adapter adaptador = new Adapter(this, R.layout.row, teams);
+        adaptador = new Adapter(this, R.layout.row, teams);
         lista.setAdapter(adaptador);
 
-        adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, TEAMS);
-        AutoCompleteTextView textView = (AutoCompleteTextView)
-                findViewById(R.id.autoComplete);
-        textView.setAdapter(adapter);
+        contador = 0;
+
+
+        spinner = (Spinner) this.findViewById(R.id.spinner);
+
+        aa=new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(aa);
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, TEAMS);
+        autoComplete = (AutoCompleteTextView) findViewById(R.id.autoComplete);
+        autoComplete.setAdapter(adapter);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String txtEquipo = autoComplete.getText().toString();
+
+                if (contador < 4) {
+
+                    if (!gestora.comprobarNombreEquipo (txtEquipo, teams))
+                    {
+                        Toast.makeText(getApplicationContext(), "Este equipo no existe", Toast.LENGTH_SHORT).show();
+                    }
+
+                    else {
+
+                        items.add(txtEquipo);
+
+                        aa = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_spinner_item, items);
+                        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner.setAdapter(aa);
+
+                        contador++;
+                    }
+                }
+
+                else
+                {
+                    button.setClickable(false);
+                }
+            }
+        });
+
 
         //Creo que lo que hay que hacer es crear el spinner y buscar el autocompletetextview dentro de un listener
         //En vez de en un onClick ();
@@ -78,22 +131,4 @@ public class MainActivity extends AppCompatActivity {
             "Nuggets", "Pacers", "Pelicans", "Pistons", "Raptors", "Rockets", "Spurs", "Suns",
             "Thunders",  "Warriors", "Wizards", "Wolves"
     };
-
-    public void addButton(View view)
-    {
-        TextView equipo = view.findViewById(R.id.autoComplete);
-
-        String txtEquipo = equipo.getText().toString();
-        items.add(txtEquipo);
-
-        Spinner spinner = (Spinner) this.findViewById(R.id.spinner);
-
-        ArrayAdapter<String> aa=new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,
-                items);
-
-        aa.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(aa);
-    }
 }
