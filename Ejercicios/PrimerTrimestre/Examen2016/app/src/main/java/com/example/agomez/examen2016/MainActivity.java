@@ -8,7 +8,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -103,9 +102,13 @@ public class MainActivity extends AppCompatActivity {
 
                         items.add(txtEquipo);
 
+                        /*
+
                         aa = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_spinner_item, items);
                         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner.setAdapter(aa);
+
+                        */ //NO ES NECESARIO CRACK
 
                         contador++;
                     }
