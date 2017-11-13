@@ -12,7 +12,7 @@ public class Gestora
     {
         boolean resultado = false;
 
-        for (int i = 0; i < teams.size() && resultado == false ;i++)
+        for (int i = 0; i < teams.size() && resultado == false; i++)
         {
             if (teams.get(i).getNombre().equals(nombreEquipo)) resultado = true;
         }

@@ -102,13 +102,12 @@ public class MainActivity extends AppCompatActivity {
 
                         items.add(txtEquipo);
 
-                        /*
-
                         aa = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_spinner_item, items);
                         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner.setAdapter(aa);
 
-                        */ //NO ES NECESARIO CRACK
+
+                         //NO ES NECESARIO CRACK
 
                         contador++;
                     }
