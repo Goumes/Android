@@ -19,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
         {
             public void onClick (View v)
             {
-                Intent i = new Intent ();
-                i.setComponent(new ComponentName("com.example.agomez.ejerciciorandom", "com.example.agomez.ejerciciorandom.MainActivity"));
-                startActivity(i);
+                //Intent i = new Intent (this, Class.forName("com.example.agomez.ejerciciorandom.MainActivity"));
+                //i.setComponent(new ComponentName("com.example.agomez.ejerciciorandom", "com.example.agomez.ejerciciorandom.MainActivity"));
+               // startActivity(i);
             }
         });
 

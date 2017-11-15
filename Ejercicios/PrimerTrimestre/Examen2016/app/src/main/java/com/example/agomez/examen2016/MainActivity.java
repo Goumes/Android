@@ -1,8 +1,10 @@
 package com.example.agomez.examen2016;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     Gestora gestora;
     ArrayAdapter<String> aa;
+    Intent myIntent;
 
 
     @Override
@@ -86,6 +89,20 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, TEAMS);
         autoComplete = (AutoCompleteTextView) findViewById(R.id.autoComplete);
         autoComplete.setAdapter(adapter);
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                myIntent = new Intent (MainActivity.this, DatosActivity.class);
+                /*
+                myIntent.putExtra("nombre", teams.get(position).getNombre());
+                myIntent.putExtra("imagen", teams.get(position).getLogo());
+                */
+                myIntent.putExtra("equipo", teams.get(position));
+                startActivity (myIntent);
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
