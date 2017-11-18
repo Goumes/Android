@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Correo</string>
+    <string name="escribirCorreo">Escribe tu correo, CRACK...</string>
+    <string name="destinatario">Destinatario</string>
+    <string name="remitente">Remitente</string>
+    <string name="enviar">Enviar</string>
+    <string name="titulo">Titulo</string>
+</resources>

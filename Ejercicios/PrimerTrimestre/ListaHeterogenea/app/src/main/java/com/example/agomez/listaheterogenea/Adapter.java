@@ -112,13 +112,13 @@ public class Adapter extends ArrayAdapter <Reloj>
                     TextView txtModelo = viewHolder2.getModelo();
                     TextView txtMarca = viewHolder2.getMarca();
                     TextView txtPrecio = viewHolder2.getPrecioprecio();
-                    TextView txtFuente = viewHolder2.getLongitudMinutero();
+                    TextView txtMinutero = viewHolder2.getLongitudMinutero();
                     ImageView imgReloj = viewHolder2.getPreview();
 
                     txtModelo.setText(relojA.getModelo());
                     txtMarca.setText(relojA.getMarca());
                     txtPrecio.setText(String.valueOf(relojA.getPrecio()));
-                    txtMinutero.setText(String.valueOf(reloj.getLongitudMinutero()));
+                    txtMinutero.setText(String.valueOf(relojA.getLongitudMinutero()));
                     imgReloj.setImageResource(R.drawable.reloj_analogico_1);
                 }
 
