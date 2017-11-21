@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imagenInfo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/plus"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:id="@+id/textInfoNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:layout_below="@id/imagenInfo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="15dp"/>
+
+    //Nombre, peso, foto, posición, altura
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/textInfoNombre">
+        <RadioButton
+            android:id="@+id/radioBtnBase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radioBtnBase"/>
+
+        <RadioButton
+            android:id="@+id/radioBtnEscolta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radioBtnEscolta"/>
+
+        <RadioButton
+            android:id="@+id/radioBtnAlero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radioBtnAlero"/>
+
+        <RadioButton
+            android:id="@+id/radioBtnAlaPivot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radioBtnAlaPivot"/>
+
+        <RadioButton
+            android:id="@+id/radioBtnPivot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radioBtnPivot"/>
+
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/SpinnerPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radioGroup"
+        android:layout_marginTop="20dp"></Spinner>
+
+    <Spinner
+        android:id="@+id/SpinnerAltura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radioGroup"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"></Spinner>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnGuardar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"/>
+
+</RelativeLayout>

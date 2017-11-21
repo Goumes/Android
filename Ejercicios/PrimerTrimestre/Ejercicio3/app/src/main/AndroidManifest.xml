@@ -15,6 +15,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name= "CALCULADORA" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <!--<data android:mimeType="text/plain"/> Tipo de datos aceptado -->
+            </intent-filter>
         </activity>
     </application>
 
