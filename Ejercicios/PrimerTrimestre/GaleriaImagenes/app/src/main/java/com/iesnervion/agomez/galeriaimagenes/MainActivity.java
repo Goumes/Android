@@ -4,17 +4,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.v4.view.PagerAdapter;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -52,9 +49,18 @@ public class MainActivity extends AppCompatActivity {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                imagenes.add(selectedImage);
+                //InputStream imagenGlide;
+                /*
+                Glide.with(getApplicationContext())
+                        .asBitmap()
+                        .load(selectedImage)
+                        .into(imagenGlide);
+                */
+                imagenes.add(Bitmap.createScaledBitmap(selectedImage, 1080, 1450, false));
                 bitmapAdapter = new bitmapAdapter(getApplicationContext(), imagenes);
                 viewPager.setAdapter(bitmapAdapter);
+
+
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
