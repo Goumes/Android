@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ExamenAntiguo</string>
+    <string name="nombreInfo">Nombre</string>
+    <string name="radioBtnBase">Base</string>
+    <string name="radioBtnEscolta">Escolta</string>
+    <string name="radioBtnAlero">Alero</string>
+    <string name="radioBtnAlaPivot">Ala-Pivot</string>
+    <string name="radioBtnPivot">Pivot</string>
+    <string name="btnGuardar">Guardar</string>
+    <string name="nombreRow">Nombre</string>
+    <string name="posicionRow">Posicion</string>
+    <string name="pesoRow">Peso</string>
+    <string name="alturaRow">Altura</string>
+</resources>

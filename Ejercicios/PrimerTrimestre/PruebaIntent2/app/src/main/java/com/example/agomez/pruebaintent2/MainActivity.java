@@ -20,9 +20,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick (View v)
             {
 
-                    Intent i = new Intent();
-                    i.setComponent(new ComponentName("com.example.agomez.ejerciciorandom", "com.example.agomez.ejerciciorandom.MainActivity"));
-                    startActivity(i);
+                    Intent i = new Intent("CALCULADORA");
+                    startActivity(Intent.createChooser(i, "CALCULA CON MI CALCULADORA CRACK, NO HAY MAS OPCIONES"));
+
+                //Intent i = new Intent ();
+                //i.setComponent(new ComponentName("com.example.agomez.ejerciciorandom", "com.example.agomez.ejerciciorandom.MainActivity"));
+                // startActivity(i);
 
             }
         });

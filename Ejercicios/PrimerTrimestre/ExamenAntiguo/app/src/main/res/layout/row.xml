@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imagenRow"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@color/colorPrimaryDark"
+        android:src="@drawable/plus"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/nombreRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nombreRow"
+        android:layout_toRightOf="@id/imagenRow"
+        android:layout_alignTop="@id/imagenRow"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/posicionRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/posicionRow"
+        android:layout_toRightOf="@id/imagenRow"
+        android:layout_below="@id/nombreRow"/>
+
+    <TextView
+        android:id="@+id/pesoRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pesoRow"
+        android:textSize="10dp"
+        android:layout_toRightOf="@id/imagenRow"
+        android:layout_below="@id/posicionRow"/>
+
+    <TextView
+        android:id="@+id/alturaRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alturaRow"
+        android:textSize="10dp"
+        android:layout_toRightOf="@id/imagenRow"
+        android:layout_below="@id/pesoRow"/>
+
+
+
+</RelativeLayout>
