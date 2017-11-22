@@ -39,6 +39,6 @@ public class MainActivity extends AppCompatActivity {
     public void clickAdd(View view)
     {
         Intent i = new Intent(getApplicationContext(), Info.class);
-        startActivity(i);
+        startActivityForResult(i, 1);
     }
 }

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Examen2017_AlejandroGomez</string>
+    <string name="verProducto">VER PRODUCTO</string>
+    <string name="nombreInfo">Nombre producto</string>
+    <string name="tallaInfo">Talla</string>
+    <string name="colorInfo">Color</string>
+    <string name="precioInfo">Precio Eur</string>
+    <string name="descripcionInfo">Descripcion del producto</string>
+    <string name="precioTotal">Precio total Eur</string>
+    <string name="btnSeguirComprando">Seguir comprando</string>
+    <string name="nombreInfo2">Nombre producto</string>
+    <string name="descripcionInfo2">Descripcion del producto</string>
+    <string name="addCesta">Añadir a la cesta</string>
+    <string name="addCesta2">Añadir a la cesta</string>
+    <string name="colorModa">Color</string>
+    <string name="precioModa">Precio</string>
+    <string name="numeroItems">X 3</string>
+    <string name="tallaModa">Talla</string>
+</resources>

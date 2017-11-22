@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/imgMueble"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:id="@+id/colorMueble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imgMueble"
+        android:layout_toRightOf="@id/imgMueble"
+        android:text="@string/colorModa"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/precioMueble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imgMueble"
+        android:layout_alignBottom="@id/imgMueble"
+        android:text="@string/precioModa"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/numeroMueble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/imgMueble"
+        android:text="@string/numeroItems"
+        android:textSize="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/nombreInfo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nombreInfo2"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/fotoInfo2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/nombreInfo2"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/colorInfo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/colorInfo"
+        android:layout_toRightOf="@id/fotoInfo2"
+        android:layout_marginLeft="10dp"
+        android:textSize="15dp"
+        android:layout_alignTop="@id/fotoInfo2"
+        android:layout_marginTop="10dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerColor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/colorInfo2"
+        android:layout_toRightOf="@id/fotoInfo2"
+        android:layout_marginLeft="10dp">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/precioInfo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/precioInfo"
+        android:textSize="25dp"
+        android:layout_toRightOf="@id/fotoInfo2"
+        android:layout_alignBottom="@id/fotoInfo2"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/descripcionInfo2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/descripcionInfo2"
+        android:layout_below="@id/fotoInfo2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:lines="3"/>
+
+    <Button
+        android:id="@+id/btnAddCesta2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addCesta2"
+        android:layout_below="@id/descripcionInfo2"
+        android:layout_centerHorizontal="true"
+        android:onClick="btnAddCesta"/>
+
+</RelativeLayout>

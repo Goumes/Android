@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/nombreInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nombreInfo"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/fotoInfo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/nombreInfo"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/tallaInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tallaInfo"
+        android:layout_alignTop="@id/fotoInfo"
+        android:layout_toRightOf="@id/fotoInfo"
+        android:layout_marginLeft="10dp"
+        android:textSize="15dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerTalla"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tallaInfo"
+        android:layout_toRightOf="@id/fotoInfo"
+        android:layout_marginLeft="10dp">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/colorInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/colorInfo"
+        android:layout_toRightOf="@id/fotoInfo"
+        android:layout_marginLeft="10dp"
+        android:textSize="15dp"
+        android:layout_below="@id/tallaInfo"
+        android:layout_marginTop="40dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/colorInfo"
+        android:layout_toRightOf="@id/fotoInfo"
+        android:layout_marginLeft="10dp">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/precioInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/precioInfo"
+        android:textSize="25dp"
+        android:layout_toRightOf="@id/fotoInfo"
+        android:layout_below="@id/spinnerColor"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:id="@+id/descripcionInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/descripcionInfo"
+        android:layout_below="@id/fotoInfo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:lines="3"/>
+
+
+    <Button
+        android:id="@+id/btnAddCesta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addCesta"
+        android:layout_below="@id/descripcionInfo"
+        android:layout_centerHorizontal="true"
+        android:onClick="btnAddCesta"/>
+
+
+</RelativeLayout>

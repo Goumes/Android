@@ -1,9 +1,7 @@
 package com.iesnervion.agomez.examenantiguo;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -19,11 +17,22 @@ public class Info extends AppCompatActivity {
     Spinner spinnerPeso;
     Double [] alturas;
     Double [] pesos;
+    Jugador jugador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_jugador);
+
+        /*
+        alturas = new Double[15];
+        pesos = new Double[15];
+
+        for (int i = 70; i<alturas.length;i++)
+        {
+            alturas[i] = (i + 0.5);
+        }
+
 
         spinnerAltura = findViewById(R.id.SpinnerAltura);
 
@@ -54,7 +63,13 @@ public class Info extends AppCompatActivity {
 
         Intent i = getIntent();
 
-        i.putExtra("nombre", txtNombre.getText().toString());
-        i.putExtra("posicion", radioSelected.getText().toString());
+        jugador = new Jugador (txtNombre.getText().toString(), radioSelected.getText().toString(), R.drawable.jugador1, 0.0, 0.0);
+
+        i.putExtra("jugador", jugador);
+        setResult(MainActivity.RESULT_OK, i);
+        finish();
+
+        */
+
     }
 }
