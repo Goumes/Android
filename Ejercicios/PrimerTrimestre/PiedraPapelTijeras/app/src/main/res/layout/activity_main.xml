@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.agomez.piedrapapeltijeras.MainActivity">
+
+    <TextView
+        android:id="@+id/resultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resultado"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageButton
+        android:id="@+id/Piedra"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/piedra"
+        android:scaleType="fitStart"
+        android:background="@color/transparent"
+        android:layout_alignBottom="@id/Papel"
+        android:layout_toLeftOf="@id/Papel"
+        android:onClick="seleccionarJugada"/>
+
+    <ImageButton
+        android:id="@+id/Papel"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/papel"
+        android:scaleType="fitStart"
+        android:background="@color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:onClick="seleccionarJugada"/>
+
+    <ImageButton
+        android:id="@+id/Tijeras"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/tijeras"
+        android:scaleType="fitStart"
+        android:background="@color/transparent"
+        android:layout_toRightOf="@id/Papel"
+        android:layout_alignBottom="@id/Papel"
+        android:onClick="seleccionarJugada"/>
+
+    <ImageView
+        android:id="@+id/resultadoJugador1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/tijeras"
+        android:layout_marginTop="150dp"/>
+
+    <TextView
+        android:id="@+id/vs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vs"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="50dp" />
+
+    <ImageView
+        android:id="@+id/resultadoJugador2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/piedra"
+        android:layout_alignBottom="@id/resultadoJugador1"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
