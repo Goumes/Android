@@ -20,8 +20,9 @@ public class MainActivity extends AppCompatActivity
     TextView resultado;
     TextView vs;
     Random random;
-    Runnable mMyRunnable;
-    Handler myHandler;
+    //Runnable mMyRunnable;
+    //Handler myHandler;
+    GestoraAsincrona gestoraAsincrona;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity
         jugador2.setImageResource(android.R.color.transparent);
         vs.setText("");
         resultado.setText("");
+        gestoraAsincrona = new GestoraAsincrona ();
+        /*
         myHandler = new Handler();
         mMyRunnable = new Runnable() {
             @Override
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity
                 jugador1.setImageResource(R.drawable.piedra);
             }
         };
-
+*/
     }
 
     public void seleccionarJugada(View view)
@@ -85,51 +88,107 @@ public class MainActivity extends AppCompatActivity
             switch (id) {
                 case R.id.Piedra:
                     //Thread.sleep(1000);
-                    myHandler.postDelayed (mMyRunnable, 1000);
+                    //myHandler.postDelayed (mMyRunnable, 1000);
                     //Thread.sleep(1000);
-                    vs.setText("VS");
+                    gestoraAsincrona = new GestoraAsincrona(); //Solo puedes ejecutar una vez una misma tarea asincrona, asi que tengo que crear una nueva cada vez
+                    gestoraAsincrona.setImagen(jugador1);
+                    gestoraAsincrona.setId(R.drawable.piedra);
+                    gestoraAsincrona.setTiempo(1000);
+                    gestoraAsincrona.execute();
+
+                    gestoraAsincrona = new GestoraAsincrona();
+                    gestoraAsincrona.setTexto(vs);
+                    gestoraAsincrona.setCadena("VS");
+                    gestoraAsincrona.setTiempo(1000);
+                    gestoraAsincrona.execute();
                     //AsyncTask
                     //Thread.sleep(1000);
-                    jugador2.setImageResource(imagen);
+
+                    gestoraAsincrona = new GestoraAsincrona();
+                    gestoraAsincrona.setImagen(jugador2);
+                    gestoraAsincrona.setId(imagen);
+                    gestoraAsincrona.setTiempo(1000);
+                    gestoraAsincrona.execute();
+
                     resultado1 = "piedra";
                     break;
 
                 case R.id.Papel:
+                    gestoraAsincrona = new GestoraAsincrona(); //Solo puedes ejecutar una vez una misma tarea asincrona, asi que tengo que crear una nueva cada vez
+                    gestoraAsincrona.setImagen(jugador1);
+                    gestoraAsincrona.setId(R.drawable.papel);
+                    gestoraAsincrona.setTiempo(1000);
+                    gestoraAsincrona.execute();
+
+                    gestoraAsincrona = new GestoraAsincrona();
+                    gestoraAsincrona.setTexto(vs);
+                    gestoraAsincrona.setCadena("VS");
+                    gestoraAsincrona.setTiempo(1000);
+                    gestoraAsincrona.execute();
+                    //AsyncTask
                     //Thread.sleep(1000);
-                    jugador1.setImageResource(R.drawable.papel);
-                   // Thread.sleep(1000);
-                    vs.setText("VS");
-                  //  Thread.sleep(1000);
-                    jugador2.setImageResource(imagen);
+
+                    gestoraAsincrona = new GestoraAsincrona();
+                    gestoraAsincrona.setImagen(jugador2);
+                    gestoraAsincrona.setId(imagen);
+                    gestoraAsincrona.setTiempo(1000);
+                    gestoraAsincrona.execute();
+
                     resultado1 = "papel";
                     break;
 
                 case R.id.Tijeras:
-                  //  Thread.sleep(1000);
-                    jugador1.setImageResource(R.drawable.tijeras);
-                   // Thread.sleep(1000);
-                    vs.setText("VS");
-                  //  Thread.sleep(1000);
-                    jugador2.setImageResource(imagen);
+                    gestoraAsincrona = new GestoraAsincrona(); //Solo puedes ejecutar una vez una misma tarea asincrona, asi que tengo que crear una nueva cada vez
+                    gestoraAsincrona.setImagen(jugador1);
+                    gestoraAsincrona.setId(R.drawable.tijeras);
+                    gestoraAsincrona.setTiempo(1000);
+                    gestoraAsincrona.execute();
+
+                    gestoraAsincrona = new GestoraAsincrona();
+                    gestoraAsincrona.setTexto(vs);
+                    gestoraAsincrona.setCadena("VS");
+                    gestoraAsincrona.setTiempo(1000);
+                    gestoraAsincrona.execute();
+                    //AsyncTask
+                    //Thread.sleep(1000);
+
+                    gestoraAsincrona = new GestoraAsincrona();
+                    gestoraAsincrona.setImagen(jugador2);
+                    gestoraAsincrona.setId(imagen);
+                    gestoraAsincrona.setTiempo(1000);
+                    gestoraAsincrona.execute();
+
                     resultado1 = "tijeras";
                     break;
             }
 
             if ((resultado1.equals("piedra") && resultado2.equals("papel"))
                     || (resultado1.equals("papel") && resultado2.equals("tijeras"))
-                    || (resultado1.equals("tijeras") && resultado2.equals("piedra"))) {
-               // Thread.sleep(1000);
-                resultado.setText("Has perdido, crack!");
+                    || (resultado1.equals("tijeras") && resultado2.equals("piedra")))
+            {
+                gestoraAsincrona = new GestoraAsincrona();
+                gestoraAsincrona.setTexto(resultado);
+                gestoraAsincrona.setCadena("Has perdido, crack!");
+                gestoraAsincrona.setTiempo(1000);
+                gestoraAsincrona.execute();
             } else if ((resultado1.equals("piedra") && resultado2.equals("tijeras"))
                     || (resultado1.equals("papel") && resultado2.equals("piedra"))
-                    || (resultado1.equals("tijeras") && resultado2.equals("papel"))) {
-                //Thread.sleep(1000);
-                resultado.setText("Has ganado, crack!");
+                    || (resultado1.equals("tijeras") && resultado2.equals("papel")))
+            {
+                gestoraAsincrona = new GestoraAsincrona();
+                gestoraAsincrona.setTexto(resultado);
+                gestoraAsincrona.setCadena("Has ganado, crack!");
+                gestoraAsincrona.setTiempo(1000);
+                gestoraAsincrona.execute();
             } else if ((resultado1.equals("piedra") && resultado2.equals("piedra"))
                     || (resultado1.equals("papel") && resultado2.equals("papel"))
-                    || (resultado1.equals("tijeras") && resultado2.equals("tijeras"))) {
-                //Thread.sleep(1000);
-                resultado.setText("Has empatado, crack!");
+                    || (resultado1.equals("tijeras") && resultado2.equals("tijeras")))
+            {
+                gestoraAsincrona = new GestoraAsincrona();
+                gestoraAsincrona.setTexto(resultado);
+                gestoraAsincrona.setCadena("Has empatado, crack!");
+                gestoraAsincrona.setTiempo(1000);
+                gestoraAsincrona.execute();
             }
        // }
 

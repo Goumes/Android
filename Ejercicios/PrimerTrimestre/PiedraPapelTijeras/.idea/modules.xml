@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PiedraPapelTijeras.iml" filepath="$PROJECT_DIR$/PiedraPapelTijeras.iml" />
+      <module fileurl="file://C:\Users\aleja\Documents\GitHub\Android\Ejercicios\PrimerTrimestre\PiedraPapelTijeras\PiedraPapelTijeras.iml" filepath="C:\Users\aleja\Documents\GitHub\Android\Ejercicios\PrimerTrimestre\PiedraPapelTijeras\PiedraPapelTijeras.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\aleja\Documents\GitHub\Android\Ejercicios\PrimerTrimestre\PiedraPapelTijeras\app\app.iml" filepath="C:\Users\aleja\Documents\GitHub\Android\Ejercicios\PrimerTrimestre\PiedraPapelTijeras\app\app.iml" />
     </modules>
   </component>
 </project>
