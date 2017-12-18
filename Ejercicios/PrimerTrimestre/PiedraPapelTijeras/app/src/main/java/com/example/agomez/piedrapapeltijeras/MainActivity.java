@@ -1,7 +1,8 @@
 package com.example.agomez.piedrapapeltijeras;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,6 +20,11 @@ public class MainActivity extends AppCompatActivity
     ImageView jugador2;
     TextView resultado;
     TextView vs;
+    TextView ganadas;
+    TextView perdidas;
+    TextView empatadas;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     Random random;
     //Runnable mMyRunnable;
     //Handler myHandler;
@@ -38,11 +44,26 @@ public class MainActivity extends AppCompatActivity
         vs = findViewById(R.id.vs);
         random = new Random ();
 
+        sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        ganadas = findViewById(R.id.ganadas);
+        perdidas = findViewById(R.id.perdidas);
+        empatadas = findViewById(R.id.empatadas);
+
         jugador1.setImageResource(android.R.color.transparent);
         jugador2.setImageResource(android.R.color.transparent);
         vs.setText("");
         resultado.setText("");
         gestoraAsincrona = new GestoraAsincrona ();
+
+        editor.putInt("empatadas", 0);
+        editor.putInt("ganadas", 0);
+        editor.putInt("perdidas", 0);
+
+        ganadas.setText(String.valueOf(sharedPreferences.getInt("ganadas", 1)));
+        perdidas.setText(String.valueOf(sharedPreferences.getInt("perdidas", 1)));
+        empatadas.setText(String.valueOf(sharedPreferences.getInt("empatadas", 1)));
+
         /*
         myHandler = new Handler();
         mMyRunnable = new Runnable() {
@@ -171,6 +192,16 @@ public class MainActivity extends AppCompatActivity
                 gestoraAsincrona.setCadena("Has perdido, crack!");
                 gestoraAsincrona.setTiempo(1000);
                 gestoraAsincrona.execute();
+
+                editor.putInt("perdidas", sharedPreferences.getInt("perdidas", 0) + 1);
+                editor.commit ();
+
+                gestoraAsincrona = new GestoraAsincrona();
+                gestoraAsincrona.setTexto(perdidas);
+                gestoraAsincrona.setCadena(String.valueOf(sharedPreferences.getInt("perdidas", 1)));
+                gestoraAsincrona.setTiempo(1000);
+                gestoraAsincrona.execute();
+
             } else if ((resultado1.equals("piedra") && resultado2.equals("tijeras"))
                     || (resultado1.equals("papel") && resultado2.equals("piedra"))
                     || (resultado1.equals("tijeras") && resultado2.equals("papel")))
@@ -180,6 +211,17 @@ public class MainActivity extends AppCompatActivity
                 gestoraAsincrona.setCadena("Has ganado, crack!");
                 gestoraAsincrona.setTiempo(1000);
                 gestoraAsincrona.execute();
+
+                editor.putInt("ganadas", 1 + sharedPreferences.getInt("ganadas", 0));
+                editor.commit ();
+
+
+                gestoraAsincrona = new GestoraAsincrona();
+                gestoraAsincrona.setTexto(ganadas);
+                gestoraAsincrona.setCadena(String.valueOf(sharedPreferences.getInt("ganadas", 1)));
+                gestoraAsincrona.setTiempo(1000);
+                gestoraAsincrona.execute();
+
             } else if ((resultado1.equals("piedra") && resultado2.equals("piedra"))
                     || (resultado1.equals("papel") && resultado2.equals("papel"))
                     || (resultado1.equals("tijeras") && resultado2.equals("tijeras")))
@@ -189,6 +231,15 @@ public class MainActivity extends AppCompatActivity
                 gestoraAsincrona.setCadena("Has empatado, crack!");
                 gestoraAsincrona.setTiempo(1000);
                 gestoraAsincrona.execute();
+
+                editor.putInt("empatadas", 1 + sharedPreferences.getInt("empatadas", 0));
+                editor.commit ();
+
+                gestoraAsincrona = new GestoraAsincrona();
+                gestoraAsincrona.setTexto(empatadas);
+                gestoraAsincrona.setCadena(String.valueOf(sharedPreferences.getInt("empatadas", 1)));
+                gestoraAsincrona.setTiempo(1000);
+                gestoraAsincrona.execute();
             }
        // }
 
@@ -196,7 +247,7 @@ public class MainActivity extends AppCompatActivity
         catch (InterruptedException e)
         {
             e.printStackTrace();
-        }
+        }perdidas
 */
 
     }

@@ -14,6 +14,57 @@
         android:textSize="30dp"
         android:layout_centerHorizontal="true"/>
 
+    <TextView
+        android:id="@+id/txtGanadas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtGanadas"
+        android:layout_below="@id/resultado"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/ganadas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/txtGanadas"
+        android:layout_alignBottom="@id/txtGanadas"
+        android:text="@string/ganadas"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/txtPerdidas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtPerdidas"
+        android:layout_below="@id/txtGanadas"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/perdidas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/txtPerdidas"
+        android:layout_alignBottom="@id/txtPerdidas"
+        android:text="@string/perdidas"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/txtEmpatadas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtEmpatadas"
+        android:layout_below="@id/txtPerdidas"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/empatadas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/txtEmpatadas"
+        android:layout_alignBottom="@id/txtEmpatadas"
+        android:text="@string/empatadas"
+        android:layout_marginLeft="5dp"/>
+
     <ImageButton
         android:id="@+id/Piedra"
         android:layout_width="75dp"
