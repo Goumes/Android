@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         vs = findViewById(R.id.vs);
         random = new Random ();
 
-        sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         ganadas = findViewById(R.id.ganadas);
         perdidas = findViewById(R.id.perdidas);
@@ -56,13 +56,9 @@ public class MainActivity extends AppCompatActivity
         resultado.setText("");
         gestoraAsincrona = new GestoraAsincrona ();
 
-        editor.putInt("empatadas", 0);
-        editor.putInt("ganadas", 0);
-        editor.putInt("perdidas", 0);
-
-        ganadas.setText(String.valueOf(sharedPreferences.getInt("ganadas", 1)));
-        perdidas.setText(String.valueOf(sharedPreferences.getInt("perdidas", 1)));
-        empatadas.setText(String.valueOf(sharedPreferences.getInt("empatadas", 1)));
+        ganadas.setText(String.valueOf(sharedPreferences.getInt("ganadas", 0)));
+        perdidas.setText(String.valueOf(sharedPreferences.getInt("perdidas", 0)));
+        empatadas.setText(String.valueOf(sharedPreferences.getInt("empatadas", 0)));
 
         /*
         myHandler = new Handler();
@@ -198,7 +194,7 @@ public class MainActivity extends AppCompatActivity
 
                 gestoraAsincrona = new GestoraAsincrona();
                 gestoraAsincrona.setTexto(perdidas);
-                gestoraAsincrona.setCadena(String.valueOf(sharedPreferences.getInt("perdidas", 1)));
+                gestoraAsincrona.setCadena(String.valueOf(sharedPreferences.getInt("perdidas", 0)));
                 gestoraAsincrona.setTiempo(1000);
                 gestoraAsincrona.execute();
 
@@ -218,7 +214,7 @@ public class MainActivity extends AppCompatActivity
 
                 gestoraAsincrona = new GestoraAsincrona();
                 gestoraAsincrona.setTexto(ganadas);
-                gestoraAsincrona.setCadena(String.valueOf(sharedPreferences.getInt("ganadas", 1)));
+                gestoraAsincrona.setCadena(String.valueOf(sharedPreferences.getInt("ganadas", 0)));
                 gestoraAsincrona.setTiempo(1000);
                 gestoraAsincrona.execute();
 
@@ -237,7 +233,7 @@ public class MainActivity extends AppCompatActivity
 
                 gestoraAsincrona = new GestoraAsincrona();
                 gestoraAsincrona.setTexto(empatadas);
-                gestoraAsincrona.setCadena(String.valueOf(sharedPreferences.getInt("empatadas", 1)));
+                gestoraAsincrona.setCadena(String.valueOf(sharedPreferences.getInt("empatadas", 0)));
                 gestoraAsincrona.setTiempo(1000);
                 gestoraAsincrona.execute();
             }
