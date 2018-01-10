@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/customborder"
+    android:layout_margin="10dp"
+    >
+
+    <FrameLayout
+        android:id="@+id/frame_1"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/rectangulo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/rectangle" />
+
+            <TextView
+                android:id="@+id/nombre_equipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nombre_equipo"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/letra_equipo"
+                android:fontFamily="sans-serif"
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/banner"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:src="@drawable/banner"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="190dp"
+        android:layout_height="120dp"
+        android:src="@drawable/lakers"
+        android:layout_below="@id/frame_1"
+        android:layout_centerHorizontal="true" />
+
+    <FrameLayout
+        android:id="@+id/frame_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/rectangulo_datos"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@drawable/rectangle" />
+
+            <TextView
+                android:id="@+id/datos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/datos"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/letra_equipo"
+                android:fontFamily="sans-serif"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/frame_2"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fundacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fundacion"
+            android:layout_marginBottom="6dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/colores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/colores"
+            android:layout_marginBottom="6dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/presidente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/presidente"
+            android:layout_marginBottom="6dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/entrenador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entrenador"
+            android:layout_marginBottom="6dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearDatos_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/linearDatos"
+        android:layout_below="@id/frame_2"
+        android:layout_marginLeft="20dp">
+
+        <TextView
+            android:id="@+id/fundacion_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fundacion_txt"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/colores_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/colores_txt"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/presidente_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/presidente_txt"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/entrenador_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entrenador_txt"
+            android:layout_marginBottom="6dp" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearDatos_txt"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/rectangulo_instalaciones"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@drawable/rectangle" />
+
+            <TextView
+                android:id="@+id/instalaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instalaciones"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/letra_equipo"
+                android:fontFamily="sans-serif"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearInstalaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/frame_3"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/estadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/estadio"
+            android:layout_marginBottom="6dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/ubicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ubicacion"
+            android:layout_marginBottom="6dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearInstalaciones_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/linearDatos"
+        android:layout_below="@id/frame_3"
+        android:layout_marginLeft="20dp">
+
+        <TextView
+            android:id="@+id/estadio_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/estadio_txt"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/ubicacion_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ubicacion_txt"
+            android:layout_marginBottom="6dp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

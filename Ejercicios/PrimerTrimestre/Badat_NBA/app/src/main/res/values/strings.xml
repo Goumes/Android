@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Badat_NBA</string>
+    <string name="nombre_equipo">Los Angeles Lakers</string>
+    <string name="datos">Datos generales</string>
+    <string name="deporte">Deporte</string>
+    <string name="fundacion">Fundación</string>
+    <string name="colores">Colores</string>
+    <string name="presidente">Presidente</string>
+    <string name="entrenador">Entrenador</string>
+    <string name="fundacion_txt">1946</string>
+    <string name="colores_txt">Púrpura y Oro</string>
+    <string name="presidente_txt">Magic Johnson</string>
+    <string name="entrenador_txt">Luke Walton</string>
+    <string name="instalaciones">Instalaciones</string>
+    <string name="estadio">Estadio</string>
+    <string name="ubicacion">Ubicación</string>
+    <string name="ubicacion_txt">Los Angeles, California</string>
+    <string name="estadio_txt">Staples Center</string>
+</resources>
