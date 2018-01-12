@@ -1,0 +1,22 @@
+Conectar emulador Android a REST hecho con xampp en máquina local:
+
+WINDOWS:
+Ir a carpeta donde está instalado el sdk de android, y nos situamos donde esté el emulador
+(habitualmente en la carpeta tools o platform-tools).
+En Windows escribimos:
+1. emulator -avd (nombre emulador) -writable-system
+2. adb remount
+3. adb pull (Ruta fichero hosts.conf) (Ruta donde queremos bajar el archivo)
+Modificamos el fichero y lo subimos
+4. adb push (Ruta donde está bajado) (Ruta donde estaba, /system/etc/)
+
+LINUX:
+Ir a carpeta donde está instalado el sdk de android, y nos situamos donde esté el emulador
+(habitualmente en la carpeta tools o platform-tools).
+En Windows escribimos:
+1. ./emulator -avd (nombre emulador) -writable-system
+2. ./adb remount
+3. ./adb pull /etc/hosts (Ruta donde queremos bajar el archivo)
+Cambiar fichero /etc/hosts.conf y poner
+rest.dev 10.0.2.2 en vez de 127.0.0.1 porque esa apunta al propio emulador
+4. ./adb push (Ruta donde está bajado) (Ruta donde estaba, /system/etc/)
