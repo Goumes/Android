@@ -3,15 +3,13 @@ package com.iesnervion.agomez.badat_nba;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class DatosActivity extends AppCompatActivity {
 
@@ -64,7 +62,7 @@ public class DatosActivity extends AppCompatActivity {
         entrenador.setText(equipo.getEntrenador());
         estadio.setText(equipo.getEstadio());
         ubicacion.setText(equipo.getUbicacion());
-        logo.setImageResource(equipo.getLogo());
+        logo.setImageBitmap(equipo.getLogo());
 
         rectangulo.setBackgroundColor(Color.parseColor(equipo.getColor1Hex()));
         rectanguloDatos.setBackgroundColor(Color.parseColor(equipo.getColor1Hex()));

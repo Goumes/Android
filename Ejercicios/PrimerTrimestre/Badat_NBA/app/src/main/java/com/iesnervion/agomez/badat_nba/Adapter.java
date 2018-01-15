@@ -41,7 +41,7 @@ public class Adapter extends ArrayAdapter<Equipo> {
         ImageView logo = view.findViewById(R.id.logoLista);
 
         nombreEquipo.setText(equipo.getNombre());
-        logo.setImageResource(Integer.parseInt(String.valueOf(equipo.getLogo())));
+        logo.setImageBitmap(equipo.getLogo());
 
         return view;
     }

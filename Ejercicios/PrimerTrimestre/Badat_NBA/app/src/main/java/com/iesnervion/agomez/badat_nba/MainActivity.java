@@ -1,8 +1,10 @@
 package com.iesnervion.agomez.badat_nba;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Adapter adaptador;
     ArrayList<Equipo> equipos;
     Intent myIntent;
+    Bitmap icon;
 
 
     @Override
@@ -25,9 +28,12 @@ public class MainActivity extends AppCompatActivity {
         equipos = new ArrayList<>();
 
         //Simplemente rellenar este array desde la base de datos para completar el ejercicio
-
-        equipos.add(new Equipo("Los Angeles Lakers", 1946, "Púrpura", "Oro","#5c2f83" , "#Fcb625",  "Magic Johnson", "Luke Walton", "Staples Center", "Los Angeles, California", R.drawable.lakers));
-        equipos.add(new Equipo("Los Angeles Clippers", 1970, "Rojo", "Azul","#ED174C" , "#006BB6",  "Steve Ballmer", "Doc Rivers", "Staples Center", "Los Angeles, California", R.drawable.clippers));
+        icon = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.lakers);
+        equipos.add(new Equipo("Los Angeles Lakers", 1946, "Púrpura", "Oro","#5c2f83" , "#Fcb625",  "Magic Johnson", "Luke Walton", "Staples Center", "Los Angeles, California", icon));
+        icon = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.clippers);
+        equipos.add(new Equipo("Los Angeles Clippers", 1970, "Rojo", "Azul","#ED174C" , "#006BB6",  "Steve Ballmer", "Doc Rivers", "Staples Center", "Los Angeles, California", icon));
+        icon = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.hornets);
+        equipos.add(new Equipo("Charlotte Hornets", 1970, "Celeste", "Azul","#008CA8" , "#1D1160",  "Michael Jordan", "Steve Clifford", "Spectrum Center", " \tCharlotte, Carolina del Norte", icon));
 
         lista = (ListView) findViewById(R.id.lista);
         adaptador = new Adapter(this,R.layout.row_equipo, equipos);
