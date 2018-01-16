@@ -1,8 +1,10 @@
-package com.iesnervion.agomez.badat_nba;
+package com.iesnervion.agomez.badat_nba.Adapter;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.iesnervion.agomez.badat_nba.R;
 
 /**
  * Created by aleja on 10/01/2018.

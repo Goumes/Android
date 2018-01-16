@@ -1,6 +1,8 @@
-package com.iesnervion.agomez.badat_nba;
+package com.iesnervion.agomez.badat_nba.Entities;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.graphics.Bitmap;
 import android.os.Parcel;
@@ -10,16 +12,26 @@ import android.os.Parcelable;
  * Created by aleja on 10/01/2018.
  */
 
-@Entity
+@Entity (tableName = "equipos", indices = {@Index("nombre")}) //No consigo meter el unique
 public class Equipo implements Parcelable
 {
     @PrimaryKey
     private String nombre;
+
     private int fundacion;
+
+    @ColumnInfo (name = "color_1")
     private String color1;
+
+    @ColumnInfo (name = "color_2")
     private String color2;
+
+    @ColumnInfo (name = "color_1_Hex")
     private String color1Hex;
+
+    @ColumnInfo (name = "color_2_Hex")
     private String color2Hex;
+
     private String presidente;
     private String entrenador;
     private String estadio;

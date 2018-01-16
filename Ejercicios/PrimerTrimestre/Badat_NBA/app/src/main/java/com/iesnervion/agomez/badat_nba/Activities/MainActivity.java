@@ -1,4 +1,4 @@
-package com.iesnervion.agomez.badat_nba;
+package com.iesnervion.agomez.badat_nba.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.iesnervion.agomez.badat_nba.Adapter.Adapter;
+import com.iesnervion.agomez.badat_nba.Entities.Equipo;
+import com.iesnervion.agomez.badat_nba.R;
 
 import java.util.ArrayList;
 

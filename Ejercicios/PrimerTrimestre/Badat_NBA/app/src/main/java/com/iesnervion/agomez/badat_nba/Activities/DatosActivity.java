@@ -1,4 +1,4 @@
-package com.iesnervion.agomez.badat_nba;
+package com.iesnervion.agomez.badat_nba.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +10,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.iesnervion.agomez.badat_nba.Entities.Equipo;
+import com.iesnervion.agomez.badat_nba.R;
 
 public class DatosActivity extends AppCompatActivity {
 

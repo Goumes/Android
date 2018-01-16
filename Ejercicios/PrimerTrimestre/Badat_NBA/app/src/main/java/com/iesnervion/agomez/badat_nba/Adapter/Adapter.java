@@ -1,4 +1,4 @@
-package com.iesnervion.agomez.badat_nba;
+package com.iesnervion.agomez.badat_nba.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.iesnervion.agomez.badat_nba.Entities.Equipo;
+import com.iesnervion.agomez.badat_nba.R;
 
 import java.util.ArrayList;
 
