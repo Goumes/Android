@@ -10,10 +10,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.iesnervion.agomez.badat_nba.Adapter.Adapter;
+import com.iesnervion.agomez.badat_nba.Database.AppDatabase;
+import com.iesnervion.agomez.badat_nba.Database.DatabaseInitializer;
 import com.iesnervion.agomez.badat_nba.Entities.Equipo;
 import com.iesnervion.agomez.badat_nba.R;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Equipo> equipos;
     Intent myIntent;
     Bitmap icon;
+    AppDatabase mDb;
+
 
 
     @Override
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         equipos = new ArrayList<>();
 
+        /*
         //Simplemente rellenar este array desde la base de datos para completar el ejercicio
         icon = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.lakers);
         equipos.add(new Equipo("Los Angeles Lakers", 1946, "Púrpura", "Oro","#5c2f83" , "#Fcb625",  "Magic Johnson", "Luke Walton", "Staples Center", "Los Angeles, California", icon));
@@ -38,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
         equipos.add(new Equipo("Los Angeles Clippers", 1970, "Rojo", "Azul","#ED174C" , "#006BB6",  "Steve Ballmer", "Doc Rivers", "Staples Center", "Los Angeles, California", icon));
         icon = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.hornets);
         equipos.add(new Equipo("Charlotte Hornets", 1970, "Celeste", "Azul","#008CA8" , "#1D1160",  "Michael Jordan", "Steve Clifford", "Spectrum Center", " \tCharlotte, Carolina del Norte", icon));
+        */
+
+        mDb = AppDatabase.getDatabase(getApplicationContext());
+
+        populateDb();
+
+        rellenarArray();
 
         lista = (ListView) findViewById(R.id.lista);
         adaptador = new Adapter(this,R.layout.row_equipo, equipos);
@@ -52,5 +66,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity (myIntent);
             }
         });
+    }
+
+    private void populateDb() {
+        DatabaseInitializer.populateSync(mDb);
+    }
+
+    private void rellenarArray() {
+        // Note: this kind of logic should not be in an activity.
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Equipo> equipos2 = mDb.equipoDao().cargarTodosEquipos();
+
+        for (int i = 0; i < equipos2.size(); i++)
+        {
+            equipos.add(equipos2.get(i));
+        }
     }
 }

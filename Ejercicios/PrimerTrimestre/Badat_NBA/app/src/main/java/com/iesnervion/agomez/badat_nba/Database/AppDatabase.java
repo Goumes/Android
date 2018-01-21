@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import com.iesnervion.agomez.badat_nba.DAO.MyDao;
+import com.iesnervion.agomez.badat_nba.DAO.EquipoDao;
 import com.iesnervion.agomez.badat_nba.Entities.Equipo;
 
 /**
@@ -15,11 +15,11 @@ import com.iesnervion.agomez.badat_nba.Entities.Equipo;
 @Database(entities = {Equipo.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase
 {
-    public abstract MyDao equipoDao (); //No estoy seguro de esto
+    public abstract EquipoDao equipoDao (); //No estoy seguro de esto
 
     private static AppDatabase INSTANCE;
 
-    static AppDatabase getDatabase (final Context context)
+    public static AppDatabase getDatabase (final Context context)
     {
         if (INSTANCE == null)
         {
