@@ -11,16 +11,16 @@ import android.widget.TextView;
 import com.iesnervion.agomez.badat_nba.Entities.Equipo;
 import com.iesnervion.agomez.badat_nba.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by aleja on 10/01/2018.
  */
 
 public class Adapter extends ArrayAdapter<Equipo> {
-    private ArrayList<Equipo> equipos;
+    private List<Equipo> equipos;
 
-    public Adapter(Context context, int resource, ArrayList<Equipo> equipos) {
+    public Adapter(Context context, int resource, List<Equipo> equipos) {
         super(context, resource, equipos);
         this.equipos = equipos;
     }
@@ -44,7 +44,7 @@ public class Adapter extends ArrayAdapter<Equipo> {
         ImageView logo = view.findViewById(R.id.logoLista);
 
         nombreEquipo.setText(equipo.getNombre());
-        logo.setImageBitmap(equipo.getLogo());
+        logo.setImageResource(equipo.getLogo());
 
         return view;
     }

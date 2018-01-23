@@ -65,7 +65,7 @@ public class DatosActivity extends AppCompatActivity {
         entrenador.setText(equipo.getEntrenador());
         estadio.setText(equipo.getEstadio());
         ubicacion.setText(equipo.getUbicacion());
-        logo.setImageBitmap(equipo.getLogo());
+        logo.setImageResource(equipo.getLogo());
 
         rectangulo.setBackgroundColor(Color.parseColor(equipo.getColor1Hex()));
         rectanguloDatos.setBackgroundColor(Color.parseColor(equipo.getColor1Hex()));

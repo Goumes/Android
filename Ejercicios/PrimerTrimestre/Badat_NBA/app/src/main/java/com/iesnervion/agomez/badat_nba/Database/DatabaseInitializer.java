@@ -4,30 +4,15 @@ package com.iesnervion.agomez.badat_nba.Database;
  * Created by aleja on 21/01/2018.
  */
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.iesnervion.agomez.badat_nba.Entities.Equipo;
 import com.iesnervion.agomez.badat_nba.R;
 
-import java.util.Calendar;
-import java.util.Date;
-
 public class DatabaseInitializer {
 
     // Simulate a blocking operation delaying each Loan insertion with a delay:
-    private static Bitmap icon;
-    private static Context context;
-
-    public DatabaseInitializer (Context context) //Hago esto para poder pasar el contexto y asi utilizar el getResources.
-    {
-        this.context = context;
-    }
 
     public static void populateAsync(final AppDatabase db) {
 
@@ -39,8 +24,8 @@ public class DatabaseInitializer {
         populateWithTestData(db);
     }
 
-    private static Equipo addEquipo(final AppDatabase db, final String nombre, final int fundacion, final String color1, final String color2, final String color1Hex, final String color2Hex, final String presidente, final String entrenador,
-                                    final String estadio, final String ubicacion, final Bitmap logo) {
+    private static Equipo addEquipo(AppDatabase db, String nombre, int fundacion, String color1, String color2, String color1Hex, String color2Hex, String presidente, String entrenador,
+                                    String estadio, String ubicacion, int logo) {
         Equipo equipo = new Equipo();
         equipo.setNombre(nombre);
         equipo.setFundacion(fundacion);
@@ -60,14 +45,14 @@ public class DatabaseInitializer {
     private static void populateWithTestData(AppDatabase db) {
         db.equipoDao().deleteAll();
 
-        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.lakers);
-        addEquipo(db, "Los Angeles Lakers", 1946, "Púrpura", "Oro","#5c2f83" , "#Fcb625",  "Magic Johnson", "Luke Walton", "Staples Center", "Los Angeles, California", icon);
+        addEquipo(db, "Los Angeles Lakers", 1946, "Púrpura", "Oro","#5c2f83" , "#Fcb625",  "Magic Johnson", "Luke Walton", "Staples Center", "Los Angeles, California", R.drawable.lakers);
 
-        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.clippers);
-        addEquipo(db,"Los Angeles Clippers", 1970, "Rojo", "Azul","#ED174C" , "#006BB6",  "Steve Ballmer", "Doc Rivers", "Staples Center", "Los Angeles, California", icon);
+        addEquipo(db,"Los Angeles Clippers", 1970, "Rojo", "Azul","#ED174C" , "#006BB6",  "Steve Ballmer", "Doc Rivers", "Staples Center", "Los Angeles, California", R.drawable.clippers);
 
-        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.hornets);
-        addEquipo(db,"Charlotte Hornets", 1970, "Celeste", "Azul","#008CA8" , "#1D1160",  "Michael Jordan", "Steve Clifford", "Spectrum Center", " \tCharlotte, Carolina del Norte", icon);
+        addEquipo(db,"Charlotte Hornets", 1970, "Celeste", "Azul","#008CA8" , "#1D1160",  "Michael Jordan", "Steve Clifford", "Spectrum Center", "Charlotte, Carolina del Norte", R.drawable.hornets);
+
+        addEquipo(db,"Boston Celtics", 1946, "Verde", "Blanco","#008040" , "#ffffff",  "Danny Ainge", "Brad Stevens", "TD Garden", "Boston, Massachusetts", R.drawable.celtics);
+
 
     }
 
@@ -84,6 +69,5 @@ public class DatabaseInitializer {
             populateWithTestData(mDb);
             return null;
         }
-
     }
 }

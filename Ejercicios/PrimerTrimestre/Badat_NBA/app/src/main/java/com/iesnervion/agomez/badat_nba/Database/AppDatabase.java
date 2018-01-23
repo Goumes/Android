@@ -1,9 +1,11 @@
 package com.iesnervion.agomez.badat_nba.Database;
 
+import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.iesnervion.agomez.badat_nba.DAO.EquipoDao;
 import com.iesnervion.agomez.badat_nba.Entities.Equipo;
@@ -27,7 +29,16 @@ public abstract class AppDatabase extends RoomDatabase
             {
                 if (INSTANCE == null)
                 {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "equipo_database.db").build ();
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "equipo_database.db")
+                            //.allowMainThreadQueries() //Esto es para que se puedan hacer querys desde el main
+                            .addCallback(new Callback() {
+                                @Override
+                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                                    super.onCreate(db);
+                                    DatabaseInitializer.populateAsync(INSTANCE);
+                                }
+                            })
+                            .build ();
                 }
             }
         }
