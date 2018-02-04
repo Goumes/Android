@@ -4,9 +4,9 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
-import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 /**
  * Created by aleja on 10/01/2018.
@@ -15,7 +15,7 @@ import android.os.Parcelable;
 @Entity (tableName = "equipos", indices = {@Index("nombre")}) //No consigo meter el unique
 public class Equipo implements Parcelable
 {
-    @PrimaryKey
+    @PrimaryKey @NonNull
     private String nombre;
 
     private int fundacion;
@@ -36,9 +36,9 @@ public class Equipo implements Parcelable
     private String entrenador;
     private String estadio;
     private String ubicacion;
-    private Bitmap logo;
+    private int logo;
 
-    public Equipo(String nombre, int fundacion, String color1, String color2, String color1Hex, String color2Hex, String presidente, String entrenador, String estadio, String ubicacion, Bitmap logo) {
+    public Equipo(String nombre, int fundacion, String color1, String color2, String color1Hex, String color2Hex, String presidente, String entrenador, String estadio, String ubicacion, int logo) {
         this.nombre = nombre;
         this.fundacion = fundacion;
         this.color1 = color1;
@@ -64,7 +64,7 @@ public class Equipo implements Parcelable
         this.entrenador = "";
         this.estadio = "";
         this.ubicacion = "";
-        this.logo = null;
+        this.logo = 0;
     }
 
     public String getNombre() {
@@ -148,12 +148,12 @@ public class Equipo implements Parcelable
         this.ubicacion = ubicacion;
     }
 
-    public Bitmap getLogo ()
+    public int getLogo ()
     {
         return this.logo;
     }
 
-    public void setLogo (Bitmap logo)
+    public void setLogo (int logo)
     {
         this.logo = logo;
     }
@@ -176,7 +176,7 @@ public class Equipo implements Parcelable
         dest.writeString(this.entrenador);
         dest.writeString(this.estadio);
         dest.writeString(this.ubicacion);
-        dest.writeParcelable(this.logo, flags);
+        dest.writeInt(this.logo);
     }
 
     protected Equipo(Parcel in) {
@@ -190,7 +190,7 @@ public class Equipo implements Parcelable
         this.entrenador = in.readString();
         this.estadio = in.readString();
         this.ubicacion = in.readString();
-        this.logo = in.readParcelable(Bitmap.class.getClassLoader());
+        this.logo = in.readInt();
     }
 
     public static final Creator<Equipo> CREATOR = new Creator<Equipo>() {
