@@ -4,6 +4,8 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -26,6 +30,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity  implements Comunicador{
     Fragment fragment;
+    FrameLayout frameDetalles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +42,25 @@ public class MainActivity extends AppCompatActivity  implements Comunicador{
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        //Hago esto para reiniciar el color de la barra de notificaciones, que se queda por defecto con la última selección.
+        if (frameDetalles == null)
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+            }
+        }
+    }
+
+
+    @Override
     public void responder(Equipo equipo) {
 
-        FrameLayout frameDetalles = findViewById(R.id.FrameDetalles);
+        frameDetalles = findViewById(R.id.FrameDetalles);
 
         if (frameDetalles != null)
         {
