@@ -70,6 +70,5 @@ public class ListFragment extends Fragment
         adaptador = new Adapter(getActivity(),R.layout.row_equipo, equipos);
         lista.setAdapter(adaptador);
     }
-
-
+    
 }
