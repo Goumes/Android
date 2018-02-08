@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -106,12 +106,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/negro"
+                    android:background="@drawable/background_cell_grey"
                     />
             </LinearLayout>
 
@@ -123,12 +122,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/grisOscuro"
+                    android:background="@drawable/background_cell_primary"
                     />
             </LinearLayout>
 
@@ -139,12 +137,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/blanco"
+                    android:background="@drawable/background_cell_secondary"
                     />
             </LinearLayout>
 
@@ -155,12 +152,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/blanco"
+                    android:background="@drawable/background_cell_red"
                     />
             </LinearLayout>
 
@@ -181,12 +177,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/negro"
+                    android:background="@drawable/background_cell_grey"
                     />
             </LinearLayout>
 
@@ -198,12 +193,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/grisOscuro"
+                    android:background="@drawable/background_cell_primary"
                     />
             </LinearLayout>
 
@@ -214,12 +208,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/blanco"
+                    android:background="@drawable/background_cell_secondary"
                     />
             </LinearLayout>
 
@@ -230,12 +223,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/blanco"
+                    android:background="@drawable/background_cell_red"
                     />
             </LinearLayout>
 
@@ -257,12 +249,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/negro"
+                    android:background="@drawable/background_cell_grey"
                     />
             </LinearLayout>
 
@@ -274,12 +265,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/grisOscuro"
+                    android:background="@drawable/background_cell_primary"
                     />
             </LinearLayout>
 
@@ -290,12 +280,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/blanco"
+                    android:background="@drawable/background_cell_secondary"
                     />
             </LinearLayout>
 
@@ -306,12 +295,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/blanco"
+                    android:background="@drawable/background_cell_red"
                     />
             </LinearLayout>
 
@@ -332,12 +320,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/negro"
+                    android:background="@drawable/background_cell_grey"
                     />
             </LinearLayout>
 
@@ -349,12 +336,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/grisOscuro"
+                    android:background="@drawable/background_cell_primary"
                     />
             </LinearLayout>
 
@@ -365,12 +351,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/blanco"
+                    android:background="@drawable/background_cell_secondary"
                     />
             </LinearLayout>
 
@@ -381,12 +366,11 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/background_grid"
-                    android:fontFamily="@font/ClearSans-Medium"
+                    android:textColor="@color/blanco"
+                    android:background="@drawable/background_cell_red"
                     />
             </LinearLayout>
 
