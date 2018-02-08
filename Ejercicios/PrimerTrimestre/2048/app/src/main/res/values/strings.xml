@@ -5,4 +5,7 @@
     <string name="btnEstadisticas">Puntuaciones</string>
     <string name="puntuacion">Score</string>
     <string name="highscore">Highscore</string>
+    <string name="valorScore">100</string>
+    <string name="valorHighscore">9999</string>
+    <string name="btnReiniciar">Reiniciar</string>
 </resources>
