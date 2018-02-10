@@ -8,22 +8,45 @@ import android.widget.TextView;
 
 public class Tablero
 {
-    private int[][] tabla;
+    private String[][] tabla;
 
     public Tablero()
     {
-        this.tabla = new int[4][4];
+        this.tabla = new String[4][4];
     }
 
-    public Tablero(int[][] tabla) {
+    public Tablero(String[][] tabla) {
         this.tabla = tabla;
     }
 
-    public int[][] getTabla() {
+    public String[][] getTabla() {
         return tabla;
     }
 
-    public void setTabla(int[][] tabla) {
+    public void setTabla(String[][] tabla) {
         this.tabla = tabla;
+    }
+
+    public void rellenarTablero ()
+    {
+        String [][] tabla2 =  {
+                            {String.valueOf(0), String.valueOf(2), String.valueOf(0), String.valueOf(2)},
+                            {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(512)},
+                            {String.valueOf(0), String.valueOf(0), String.valueOf(8), String.valueOf(0)},
+                            {String.valueOf(0), String.valueOf(512), String.valueOf(0), String.valueOf(0)}
+                            };
+        /*
+        for (int i = 0; i < this.tabla.length; i++)
+        {
+
+            for (int j = 0; j < this.tabla[0].length; j++)
+            {
+                if ((i == 0 && j == 0) || (i == 3 && j == 2))
+                this.tabla[i][j] = 2;
+            }
+        }
+        */
+
+        this.tabla = tabla2;
     }
 }

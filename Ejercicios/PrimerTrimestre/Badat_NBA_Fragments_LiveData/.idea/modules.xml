@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Badat_NBA_Fragments_LiveData.iml" filepath="$PROJECT_DIR$/Badat_NBA_Fragments_LiveData.iml" />
-      <module fileurl="file://C:\Users\aleja\Documents\GitHub\Android\Ejercicios\PrimerTrimestre\Badat_NBA_Fragments_LiveData\Badat_NBA_Fragments_LiveData.iml" filepath="C:\Users\aleja\Documents\GitHub\Android\Ejercicios\PrimerTrimestre\Badat_NBA_Fragments_LiveData\Badat_NBA_Fragments_LiveData.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\aleja\Documents\GitHub\Android\Ejercicios\PrimerTrimestre\Badat_NBA_Fragments_LiveData\app\app.iml" filepath="C:\Users\aleja\Documents\GitHub\Android\Ejercicios\PrimerTrimestre\Badat_NBA_Fragments_LiveData\app\app.iml" />
     </modules>
   </component>
 </project>
