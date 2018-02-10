@@ -74,7 +74,8 @@
             android:layout_centerHorizontal="true"
             android:textStyle="bold"
             android:background="@drawable/shape_boton_claro"
-            android:fontFamily="casual"/>
+            android:fontFamily="casual"
+            android:onClick="clickReiniciar"/>
 
     </RelativeLayout>
 
@@ -111,11 +112,11 @@
                     android:id="@+id/txt_0_0"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="2"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
                     android:textColor="@color/negro"
-                    android:background="@drawable/background_cell_grey"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -129,11 +130,11 @@
                     android:id="@+id/txt_0_1"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text=""
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/grisOscuro"
-                    android:background="@drawable/background_cell_primary"
+                    android:textColor="@color/tile0"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -146,11 +147,11 @@
                     android:id="@+id/txt_0_2"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text=""
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
                     android:textColor="@color/blanco"
-                    android:background="@drawable/background_cell_secondary"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -159,16 +160,16 @@
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1">
+
                 <TextView
                     android:id="@+id/txt_0_3"
-                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="4"
-                    android:textSize="50sp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_tile_0"
                     android:gravity="center"
+                    android:text="@string/valorCelda"
                     android:textColor="@color/blanco"
-                    android:background="@drawable/background_cell_red"
-                    />
+                    android:textSize="50sp" />
             </LinearLayout>
 
         </TableRow>
@@ -192,11 +193,11 @@
                     android:id="@+id/txt_1_0"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text=""
+                    android:text="@string/valorCelda"
                     android:textSize="40sp"
                     android:gravity="center"
                     android:textColor="@color/negro"
-                    android:background="@drawable/background_cell_grey"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -210,11 +211,11 @@
                     android:id="@+id/txt_1_1"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text=""
+                    android:text="@string/valorCelda"
                     android:textSize="40sp"
                     android:gravity="center"
-                    android:textColor="@color/grisOscuro"
-                    android:background="@drawable/background_cell_primary"
+                    android:textColor="@color/tile0"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -227,11 +228,11 @@
                     android:id="@+id/txt_1_2"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text=""
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
                     android:textColor="@color/blanco"
-                    android:background="@drawable/background_cell_secondary"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -244,11 +245,11 @@
                     android:id="@+id/txt_1_3"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="1024"
+                    android:text="@string/valorCelda"
                     android:textSize="30sp"
                     android:gravity="center"
                     android:textColor="@color/blanco"
-                    android:background="@drawable/background_cell_red"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -274,11 +275,11 @@
                     android:id="@+id/txt_2_0"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="4"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
                     android:textColor="@color/negro"
-                    android:background="@drawable/background_cell_grey"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -292,11 +293,11 @@
                     android:id="@+id/txt_2_1"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="2"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/grisOscuro"
-                    android:background="@drawable/background_cell_primary"
+                    android:textColor="@color/tile0"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -309,11 +310,11 @@
                     android:id="@+id/txt_2_2"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="128"
+                    android:text="@string/valorCelda"
                     android:textSize="40sp"
                     android:gravity="center"
                     android:textColor="@color/blanco"
-                    android:background="@drawable/background_cell_secondary"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -326,11 +327,11 @@
                     android:id="@+id/txt_2_3"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="4"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
                     android:textColor="@color/blanco"
-                    android:background="@drawable/background_cell_red"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -355,11 +356,11 @@
                     android:id="@+id/txt_3_0"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text=""
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
                     android:textColor="@color/negro"
-                    android:background="@drawable/background_cell_grey"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -373,11 +374,11 @@
                     android:id="@+id/txt_3_1"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="2"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
-                    android:textColor="@color/grisOscuro"
-                    android:background="@drawable/background_cell_primary"
+                    android:textColor="@color/tile0"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -390,11 +391,11 @@
                     android:id="@+id/txt_3_2"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="32"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
                     android:textColor="@color/blanco"
-                    android:background="@drawable/background_cell_secondary"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 
@@ -407,11 +408,11 @@
                     android:id="@+id/txt_3_3"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:text="8"
+                    android:text="@string/valorCelda"
                     android:textSize="50sp"
                     android:gravity="center"
                     android:textColor="@color/blanco"
-                    android:background="@drawable/background_cell_red"
+                    android:background="@drawable/background_tile_0"
                     />
             </LinearLayout>
 

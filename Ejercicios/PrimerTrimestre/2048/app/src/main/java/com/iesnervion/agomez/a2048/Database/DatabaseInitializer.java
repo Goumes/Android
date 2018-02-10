@@ -1,48 +1,42 @@
-package com.iesnervion.agomez.a2048.Entities;
+package com.iesnervion.agomez.a2048.Database;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
+/**
+ * Created by aleja on 21/01/2018.
+ */
+
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.widget.TextView;
+
+import com.iesnervion.agomez.a2048.Entities.Tablero;
+import com.iesnervion.agomez.a2048.R;
 
 import java.util.Random;
 
-/**
- * Created by aleja on 08/02/2018.
- */
+public class DatabaseInitializer {
 
-@Entity(tableName = "tableros", indices = {@Index("id")})
-public class Tablero
-{
-    @PrimaryKey
-    @NonNull
-    private int id;
+    // Simulate a blocking operation delaying each Loan insertion with a delay:
 
-    @ColumnInfo(name = "tabla")
-    private String[][] tabla;
+    public static void populateAsync(final AppDatabase db) {
 
-    public Tablero()
-    {
-        this.tabla = new String[4][4];
-        this.id = 0;
+        PopulateDbAsync task = new PopulateDbAsync(db);
+        task.execute();
     }
 
-    public Tablero(String[][] tabla) {
-        this.tabla = tabla;
+    public static void populateSync(@NonNull final AppDatabase db) {
+        populateWithTestData(db);
     }
 
-    public String[][] getTabla() {
-        return tabla;
+    private static Tablero addTablero(AppDatabase db, int id, String [][] tabla) {
+        Tablero tablero = new Tablero();
+        tablero.setId(id);
+        tablero.setTabla(tabla);
+        db.tableroDAO().insertTablero(tablero);
+        return tablero;
     }
 
-    public void setTabla(String[][] tabla) {
-        this.tabla = tabla;
-    }
+    private static void populateWithTestData(AppDatabase db) {
+        db.tableroDAO().deleteAll ();
 
-    public void rellenarTablero ()
-    {
         String [][] tabla =  {
                 {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
                 {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
@@ -76,14 +70,22 @@ public class Tablero
             }
         }
 
-        this.tabla = tabla;
+        addTablero(db, 0, tabla);
+
     }
 
-    public int getId() {
-        return id;
-    }
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-    public void setId(int id) {
-        this.id = id;
+        private final AppDatabase mDb;
+
+        PopulateDbAsync(AppDatabase db) {
+            mDb = db;
+        }
+
+        @Override
+        protected Void doInBackground(final Void... params) {
+            populateWithTestData(mDb);
+            return null;
+        }
     }
 }

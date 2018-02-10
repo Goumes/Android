@@ -1,19 +1,24 @@
 package com.iesnervion.agomez.a2048.Activities;
 
-import android.content.Intent;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.iesnervion.agomez.a2048.Entities.OnSwipeTouchListener;
 import com.iesnervion.agomez.a2048.Entities.Tablero;
 import com.iesnervion.agomez.a2048.R;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class JuegoActivity extends AppCompatActivity {
@@ -35,23 +40,61 @@ public class JuegoActivity extends AppCompatActivity {
     TextView row31;
     TextView row32;
     TextView row33;
+
+    LinearLayout linearRow00;
+    LinearLayout linearRow01;
+    LinearLayout linearRow02;
+    LinearLayout linearRow03;
+    LinearLayout linearRow10;
+    LinearLayout linearRow11;
+    LinearLayout linearRow12;
+    LinearLayout linearRow13;
+    LinearLayout linearRow20;
+    LinearLayout linearRow21;
+    LinearLayout linearRow22;
+    LinearLayout linearRow23;
+    LinearLayout linearRow30;
+    LinearLayout linearRow31;
+    LinearLayout linearRow32;
+    LinearLayout linearRow33;
+
+    LinearLayout [][] linears;
+
     Tablero tablero;
     TextView [][] textos;
+    TextView score;
+    TextView highscore;
+    JuegoActivityViewModel mViewModel;
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
 
+        mViewModel = ViewModelProviders.of(this).get(JuegoActivityViewModel.class);
+
+        sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+        //tablero = mViewModel.getTablero().getValue();
+
         myTableLayout = findViewById(R.id.tableJuego);
 
-        tablero = new Tablero();
+        //tablero = new Tablero();
 
-        tablero.rellenarTablero();
+        //tablero.rellenarTablero();
 
         overridePendingTransition(0, 0);
 
         textos = new TextView[4][4]; //Creo un array bidimensional de TextViews para poder refrescar la UI con facilidad
+        linears = new LinearLayout[4][4];
+
+        score = findViewById(R.id.valorPuntuacion);
+        highscore = findViewById(R.id.valorHighscore);
+        score.setText(String.valueOf(sharedPref.getInt("score", 0)));
+        highscore.setText(String.valueOf(sharedPref.getInt("highscore", 0)));
 
         row00 = findViewById(R.id.txt_0_0);
         textos[0][0] = row00;
@@ -86,7 +129,50 @@ public class JuegoActivity extends AppCompatActivity {
         row33 = findViewById(R.id.txt_3_3);;
         textos[3][3] = row33;
 
-        reiniciarUI();
+        linearRow00 = findViewById(R.id.linear_0_0);
+        linears[0][0] = linearRow00;
+        linearRow01 = findViewById(R.id.linear_0_1);
+        linears[0][0] = linearRow00;
+        linearRow02 = findViewById(R.id.linear_0_2);
+        linears[0][0] = linearRow00;
+        linearRow03 = findViewById(R.id.linear_0_3);
+        linears[0][0] = linearRow00;
+        linearRow10 = findViewById(R.id.linear_1_0);
+        linears[0][0] = linearRow00;
+        linearRow11 = findViewById(R.id.linear_1_1);
+        linears[0][0] = linearRow00;
+        linearRow12 = findViewById(R.id.linear_1_2);
+        linears[0][0] = linearRow00;
+        linearRow13 = findViewById(R.id.linear_1_3);
+        linears[0][0] = linearRow00;
+        linearRow20 = findViewById(R.id.linear_2_0);
+        linears[0][0] = linearRow00;
+        linearRow21 = findViewById(R.id.linear_2_1);
+        linears[0][0] = linearRow00;
+        linearRow22 = findViewById(R.id.linear_2_2);
+        linears[0][0] = linearRow00;
+        linearRow23 = findViewById(R.id.linear_2_3);
+        linears[0][0] = linearRow00;
+        linearRow30 = findViewById(R.id.linear_3_0);
+        linears[0][0] = linearRow00;
+        linearRow31 = findViewById(R.id.linear_3_1);
+        linears[0][0] = linearRow00;
+        linearRow32 = findViewById(R.id.linear_3_2);
+        linears[0][0] = linearRow00;
+        linearRow33 = findViewById(R.id.linear_3_3);
+        linears[0][0] = linearRow00;
+
+        mViewModel.getTablero().observe(this, new Observer<Tablero>() {
+            @Override
+            public void onChanged(@Nullable Tablero tablero2) {
+                if (tablero2 != null) {
+                    tablero = tablero2;
+                    reiniciarUI();
+                }
+            }
+        });
+
+        //reiniciarUI();
 
 
         myTableLayout.setOnTouchListener(new OnSwipeTouchListener(JuegoActivity.this) {
@@ -117,6 +203,13 @@ public class JuegoActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        actualizarTablero();
+
+    }
+
     public void moverFilaDerecha ()
     {
         for (int i = 0; i < tablero.getTabla().length ; i++)
@@ -128,6 +221,7 @@ public class JuegoActivity extends AppCompatActivity {
                     if (!(tablero.getTabla()[i][j + 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 1])) && (!tablero.getTabla()[i][j].contains("*")))
                     {
                         tablero.getTabla()[i][j + 1] =  String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
+                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j + 1]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j + 1] + "*";
                         i = 0;
@@ -138,8 +232,13 @@ public class JuegoActivity extends AppCompatActivity {
 
                     else if (tablero.getTabla()[i][j + 1].equals(String.valueOf(0)))
                     {
+                        textos[i][j].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right));
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
+                        textos[i][j + 1].setBackgroundResource(R.drawable.background_tile_1);
+                        textos[i][j + 1].setTextColor(getResources().getColor(R.color.fuenteNegra));
+                        textos[i][j + 1].setText(tablero.getTabla()[i][j + 1]);
+                        textos[i][j + 1].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right));
                         i = 0;
                         j = 3;
                     }
@@ -168,9 +267,10 @@ public class JuegoActivity extends AppCompatActivity {
             {
                 if ((!tablero.getTabla()[i][j].equals(String.valueOf(0))) && (j - 1 >= 0))
                 {
-                    if ((!tablero.getTabla()[i][j - 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 1])))
+                    if ((!tablero.getTabla()[i][j - 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 1])) && (!tablero.getTabla()[i][j].contains("*")))
                     {
                         tablero.getTabla()[i][j - 1] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
+                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j - 1]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j - 1] + "*";
                         i = 0;
@@ -209,9 +309,10 @@ public class JuegoActivity extends AppCompatActivity {
             {
                 if ((!tablero.getTabla()[i][j].equals(String.valueOf(0))) && (i - 1 >= 0))
                 {
-                    if ((!tablero.getTabla()[i - 1][j].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i - 1][j])))
+                    if ((!tablero.getTabla()[i - 1][j].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i - 1][j])) && (!tablero.getTabla()[i][j].contains("*")))
                     {
                         tablero.getTabla()[i - 1][j] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
+                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i - 1][j]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i - 1][j] = tablero.getTabla()[i - 1][j] + "*";
                         i = 0;
@@ -252,9 +353,10 @@ public class JuegoActivity extends AppCompatActivity {
             {
                 if ((!tablero.getTabla()[i][j].equals(String.valueOf(0))) && (i + 1 < tablero.getTabla().length))
                 {
-                    if ((!tablero.getTabla()[i + 1][j].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i + 1][j])))
+                    if ((!tablero.getTabla()[i + 1][j].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i + 1][j])) && (!tablero.getTabla()[i][j].contains("*")))
                     {
                         tablero.getTabla()[i + 1][j] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
+                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i + 1][j]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i + 1][j] = tablero.getTabla()[i + 1][j] + "*";
                         i = 3;
@@ -288,25 +390,6 @@ public class JuegoActivity extends AppCompatActivity {
 
     public void reiniciarUI ()
     {
-        /*
-        row00.setText(String.valueOf(tablero.getTabla()[0][0]));
-        row01.setText(String.valueOf(tablero.getTabla()[0][1]));
-        row02.setText(String.valueOf(tablero.getTabla()[0][2]));
-        row03.setText(String.valueOf(tablero.getTabla()[0][3]));
-        row10.setText(String.valueOf(tablero.getTabla()[1][0]));
-        row11.setText(String.valueOf(tablero.getTabla()[1][1]));
-        row12.setText(String.valueOf(tablero.getTabla()[1][2]));
-        row13.setText(String.valueOf(tablero.getTabla()[1][3]));
-        row20.setText(String.valueOf(tablero.getTabla()[2][0]));
-        row21.setText(String.valueOf(tablero.getTabla()[2][1]));
-        row22.setText(String.valueOf(tablero.getTabla()[2][2]));
-        row23.setText(String.valueOf(tablero.getTabla()[2][3]));
-        row30.setText(String.valueOf(tablero.getTabla()[3][0]));
-        row31.setText(String.valueOf(tablero.getTabla()[3][1]));
-        row32.setText(String.valueOf(tablero.getTabla()[3][2]));
-        row33.setText(String.valueOf(tablero.getTabla()[3][3]));
-        */
-
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < 4; j++)
@@ -314,6 +397,8 @@ public class JuegoActivity extends AppCompatActivity {
                 if (tablero.getTabla()[i][j].equals("0"))
                 {
                     textos[i][j].setText("");
+                    textos[i][j].setBackgroundResource(R.drawable.background_tile_0);
+
                 }
 
                 else
@@ -322,6 +407,10 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         case 1: case2:
                             textos[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                            if (Integer.valueOf(tablero.getTabla()[i][j]) == 2)
+                            {
+                               // textos[i][j].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right));
+                            }
                         break;
 
                         case 3:
@@ -347,6 +436,73 @@ public class JuegoActivity extends AppCompatActivity {
 
                     }
 
+                    if (Integer.valueOf(tablero.getTabla()[i][j]) <= 2048) {
+
+                        switch (Integer.valueOf(tablero.getTabla()[i][j])) {
+
+                            case 2:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_1);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                break;
+
+                            case 4:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_2);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                break;
+
+                            case 8:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_3);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 16:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_4);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 32:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_5);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 64:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_6);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 128:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_7);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 256:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_8);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 512:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_9);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 1024:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_10);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 2048:
+                                textos[i][j].setBackgroundResource(R.drawable.background_tile_11);
+                                textos[i][j].setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            break;
+                        }
+                    }
+
+                    else
+                    {
+                        textos[i][j].setBackgroundResource(R.drawable.background_tile_12);
+                        textos[i][j].setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                    }
+
                     textos[i][j].setText(tablero.getTabla()[i][j]);
                 }
             }
@@ -364,7 +520,7 @@ public class JuegoActivity extends AppCompatActivity {
         {
             for (int j = 0; j < tablero.getTabla()[0].length && !generado; j++)
             {
-                generar = random.nextBoolean();
+                generar = Math.random() < 0.3;
 
                 if (tablero.getTabla()[i][j].equals("0") && generar)
                 {
@@ -372,7 +528,51 @@ public class JuegoActivity extends AppCompatActivity {
                     tablero.getTabla()[i][j] = String.valueOf(numeroAleatorio);
                     generado = true;
                 }
+
+                if (i == 3 && j == 3 && !generar)
+                {
+                    i = 0;
+                    j = 0;
+                }
             }
         }
+    }
+
+    public void aumentarPuntuacion (int aumentar)
+    {
+        editor.putInt("score", Integer.valueOf(sharedPref.getInt("score", 0)) + aumentar);
+        editor.commit();
+        score.setText(String.valueOf(sharedPref.getInt("score", 0)));
+
+        Log.d("LogsAndroid", String.valueOf(sharedPref.getInt("score", 0)));
+
+        if (Integer.valueOf(score.getText().toString()) >= Integer.valueOf(highscore.getText().toString()))
+        {
+            editor.putInt("highscore", sharedPref.getInt("score", 0));
+            editor.commit();
+            highscore.setText(String.valueOf(sharedPref.getInt("highscore", 0)));
+        }
+    }
+
+    public void clickReiniciar(View view)
+    {
+        tablero.rellenarTablero();
+        actualizarTablero();
+        editor.putInt("score", 0);
+        editor.commit();
+        score.setText(String.valueOf(sharedPref.getInt("score", 0)));
+        highscore.setText(String.valueOf(sharedPref.getInt("highscore", 0)));
+        reiniciarUI();
+    }
+
+    public void actualizarTablero ()
+    {
+        new AsyncTask<Void, Void, Integer>() {
+            @Override
+            protected Integer doInBackground(Void... params) {
+                mViewModel.updateTablero(tablero);
+                return 1;
+            }
+        }.execute();
     }
 }

@@ -5,8 +5,9 @@
     <string name="btnEstadisticas">Puntuaciones</string>
     <string name="puntuacion">Score</string>
     <string name="highscore">Highscore</string>
-    <string name="valorScore">100</string>
-    <string name="valorHighscore">9999</string>
+    <string name="valorScore">0</string>
+    <string name="valorHighscore">0</string>
     <string name="btnReiniciar">Reiniciar</string>
-    <string name="valorCelda">1</string>
+    <string name="valorCelda"></string>
+    <string name="preference_file_key">clave</string>
 </resources>

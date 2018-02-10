@@ -1,56 +1,48 @@
 package com.iesnervion.agomez.a2048.Activities;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.media.AudioRecord;
 
+import com.iesnervion.agomez.a2048.Database.AppDatabase;
 import com.iesnervion.agomez.a2048.Entities.Tablero;
+import com.iesnervion.agomez.a2048.Repositories.TableroRepository;
 
 /**
  * Created by aleja on 08/02/2018.
  */
 
-public class JuegoActivityViewModel extends ViewModel
+public class JuegoActivityViewModel extends AndroidViewModel
 {
-    private MutableLiveData<Tablero> tablero;
-    private MutableLiveData<Integer> score;
-    private MutableLiveData<Integer> highscore;
+    private AppDatabase mDb;
+    private LiveData<Tablero> tablero;
+    TableroRepository mRepositorio;
 
-    public JuegoActivityViewModel()
+    public JuegoActivityViewModel(Application application)
     {
-        //El viewModel entero se puede guardar en la badat para cuando el jugador se salga se quede guardado el estado de la partida.
-        this.tablero = new MutableLiveData<>();
-        this.score = new MutableLiveData<>();
-        this.highscore = new MutableLiveData<>();
+        super(application);
+
+        mRepositorio = new TableroRepository(application);
+        this.tablero = mRepositorio.getTablero();
     }
 
-
-    public JuegoActivityViewModel(MutableLiveData<Tablero> tablero, MutableLiveData<Integer> score, MutableLiveData<Integer> highscore) {
-        this.tablero = tablero;
-        this.score = score;
-        this.highscore = highscore;
+    public void createDb() {
+        mDb = AppDatabase.getDatabase(this.getApplication());
     }
 
-    public MutableLiveData<Tablero> getTablero() {
+    public void updateTablero (Tablero tablero)
+    {
+        mRepositorio.updateTablero(this.getApplication(), tablero);
+    }
+
+    public LiveData<Tablero> getTablero() {
         return tablero;
     }
 
-    public void setTablero(MutableLiveData<Tablero> tablero) {
+    public void setTablero(LiveData<Tablero> tablero) {
         this.tablero = tablero;
-    }
-
-    public MutableLiveData<Integer> getScore() {
-        return score;
-    }
-
-    public void setScore(MutableLiveData<Integer> score) {
-        this.score = score;
-    }
-
-    public MutableLiveData<Integer> getHighscore() {
-        return highscore;
-    }
-
-    public void setHighscore(MutableLiveData<Integer> highscore) {
-        this.highscore = highscore;
     }
 }
