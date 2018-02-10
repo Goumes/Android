@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +19,11 @@ import android.widget.TextView;
 import com.iesnervion.agomez.a2048.Entities.OnSwipeTouchListener;
 import com.iesnervion.agomez.a2048.Entities.Tablero;
 import com.iesnervion.agomez.a2048.R;
+import com.iesnervion.agomez.a2048.Runnable.MyRunnable;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class JuegoActivity extends AppCompatActivity {
 
@@ -67,6 +71,7 @@ public class JuegoActivity extends AppCompatActivity {
     JuegoActivityViewModel mViewModel;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
+    Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,6 +217,8 @@ public class JuegoActivity extends AppCompatActivity {
 
     public void moverFilaDerecha ()
     {
+        //int delay = 0;
+        //int contador = 0;
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
             for (int j = tablero.getTabla()[0].length - 1; j >= 0; j--)
@@ -232,17 +239,43 @@ public class JuegoActivity extends AppCompatActivity {
 
                     else if (tablero.getTabla()[i][j + 1].equals(String.valueOf(0)))
                     {
-                        //textos[i][j].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right));
                         /*
-                        linears[i][j].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right));
-                        tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
-                        tablero.getTabla()[i][j] = String.valueOf(0);
-                        textos[i][j + 1].setBackgroundResource(R.drawable.background_tile_1);
-                        textos[i][j + 1].setTextColor(getResources().getColor(R.color.fuenteNegra));
-                        textos[i][j + 1].setText(tablero.getTabla()[i][j + 1]);
-                        i = 0;
-                        j = 3;
+                        if (contador == 1)
+                        {
+                            delay = 150;
+                        }
+
+                        else if (contador == 2)
+                        {
+                            delay = 350;
+                        }
+
+                        else if (contador == 3)
+                        {
+                            delay = 450;
+                        }
+
+                        new Handler().postDelayed(new Runnable() {
+                        int i;
+                        int j;
+                        @Override
+                        public void run() {
+                            textos[i][j].setBackgroundResource(R.drawable.background_tile_1);
+                            textos[i][j].setTextColor(getResources().getColor(R.color.fuenteNegra));
+                            textos[i][j].setText("2");
+                            linears[i][j].startAnimation(AnimationUtils.loadAnimation(JuegoActivity.this, R.anim.anim_slide_right));
+
+                        }
+                        public Runnable init(int i, int j) {
+                        this.i = i;
+                        this.j = j;
+                        return(this);
+                    }
+                        }.init(i, j), delay);
+
+                        contador++;
                         */
+
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         i = 0;
