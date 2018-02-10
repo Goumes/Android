@@ -132,35 +132,35 @@ public class JuegoActivity extends AppCompatActivity {
         linearRow00 = findViewById(R.id.linear_0_0);
         linears[0][0] = linearRow00;
         linearRow01 = findViewById(R.id.linear_0_1);
-        linears[0][0] = linearRow00;
+        linears[0][1] = linearRow01;
         linearRow02 = findViewById(R.id.linear_0_2);
-        linears[0][0] = linearRow00;
+        linears[0][2] = linearRow02;
         linearRow03 = findViewById(R.id.linear_0_3);
-        linears[0][0] = linearRow00;
+        linears[0][3] = linearRow03;
         linearRow10 = findViewById(R.id.linear_1_0);
-        linears[0][0] = linearRow00;
+        linears[1][0] = linearRow10;
         linearRow11 = findViewById(R.id.linear_1_1);
-        linears[0][0] = linearRow00;
+        linears[1][1] = linearRow11;
         linearRow12 = findViewById(R.id.linear_1_2);
-        linears[0][0] = linearRow00;
+        linears[1][2] = linearRow12;
         linearRow13 = findViewById(R.id.linear_1_3);
-        linears[0][0] = linearRow00;
+        linears[1][3] = linearRow13;
         linearRow20 = findViewById(R.id.linear_2_0);
-        linears[0][0] = linearRow00;
+        linears[2][0] = linearRow20;
         linearRow21 = findViewById(R.id.linear_2_1);
-        linears[0][0] = linearRow00;
+        linears[2][1] = linearRow21;
         linearRow22 = findViewById(R.id.linear_2_2);
-        linears[0][0] = linearRow00;
+        linears[2][2] = linearRow22;
         linearRow23 = findViewById(R.id.linear_2_3);
-        linears[0][0] = linearRow00;
+        linears[2][3] = linearRow23;
         linearRow30 = findViewById(R.id.linear_3_0);
-        linears[0][0] = linearRow00;
+        linears[3][0] = linearRow30;
         linearRow31 = findViewById(R.id.linear_3_1);
-        linears[0][0] = linearRow00;
+        linears[3][1] = linearRow31;
         linearRow32 = findViewById(R.id.linear_3_2);
-        linears[0][0] = linearRow00;
+        linears[3][2] = linearRow32;
         linearRow33 = findViewById(R.id.linear_3_3);
-        linears[0][0] = linearRow00;
+        linears[3][3] = linearRow33;
 
         mViewModel.getTablero().observe(this, new Observer<Tablero>() {
             @Override
@@ -232,17 +232,24 @@ public class JuegoActivity extends AppCompatActivity {
 
                     else if (tablero.getTabla()[i][j + 1].equals(String.valueOf(0)))
                     {
-                        textos[i][j].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right));
+                        //textos[i][j].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right));
+                        /*
+                        linears[i][j].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right));
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         textos[i][j + 1].setBackgroundResource(R.drawable.background_tile_1);
                         textos[i][j + 1].setTextColor(getResources().getColor(R.color.fuenteNegra));
                         textos[i][j + 1].setText(tablero.getTabla()[i][j + 1]);
-                        textos[i][j + 1].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right));
+                        i = 0;
+                        j = 3;
+                        */
+                        tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
+                        tablero.getTabla()[i][j] = String.valueOf(0);
                         i = 0;
                         j = 3;
                     }
                 }
+
             }
         }
 
