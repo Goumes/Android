@@ -5,10 +5,10 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -16,14 +16,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
 import com.iesnervion.agomez.a2048.Entities.OnSwipeTouchListener;
 import com.iesnervion.agomez.a2048.Entities.Tablero;
 import com.iesnervion.agomez.a2048.R;
-import com.iesnervion.agomez.a2048.Runnable.MyRunnable;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class JuegoActivity extends AppCompatActivity {
 
@@ -217,8 +215,8 @@ public class JuegoActivity extends AppCompatActivity {
 
     public void moverFilaDerecha ()
     {
-        //int delay = 0;
-        //int contador = 0;
+        int delay = 0;
+        int contador = 0;
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
             for (int j = tablero.getTabla()[0].length - 1; j >= 0; j--)
@@ -239,7 +237,7 @@ public class JuegoActivity extends AppCompatActivity {
 
                     else if (tablero.getTabla()[i][j + 1].equals(String.valueOf(0)))
                     {
-                        /*
+
                         if (contador == 1)
                         {
                             delay = 150;
@@ -263,7 +261,9 @@ public class JuegoActivity extends AppCompatActivity {
                             textos[i][j].setBackgroundResource(R.drawable.background_tile_1);
                             textos[i][j].setTextColor(getResources().getColor(R.color.fuenteNegra));
                             textos[i][j].setText("2");
-                            linears[i][j].startAnimation(AnimationUtils.loadAnimation(JuegoActivity.this, R.anim.anim_slide_right));
+                            linears[i][j].startAnimation(AnimationUtils.loadAnimation(JuegoActivity.this, R.anim.anim_slide_right_in));
+                            linears[i][j].startAnimation(AnimationUtils.loadAnimation(JuegoActivity.this, R.anim.anim_slide_right_out));
+                            linears[i][j].startAnimation(AnimationUtils.loadAnimation(JuegoActivity.this, R.anim.anim_slide_right_in));
 
                         }
                         public Runnable init(int i, int j) {
@@ -274,7 +274,7 @@ public class JuegoActivity extends AppCompatActivity {
                         }.init(i, j), delay);
 
                         contador++;
-                        */
+
 
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
@@ -449,7 +449,7 @@ public class JuegoActivity extends AppCompatActivity {
                             textos[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
                             if (Integer.valueOf(tablero.getTabla()[i][j]) == 2)
                             {
-                               // textos[i][j].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right));
+                               // textos[i][j].startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
                             }
                         break;
 
