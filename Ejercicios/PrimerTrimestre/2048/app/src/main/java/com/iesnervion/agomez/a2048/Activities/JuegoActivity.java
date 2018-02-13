@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -168,7 +169,7 @@ public class JuegoActivity extends AppCompatActivity {
             public void onChanged(@Nullable Tablero tablero2) {
                 if (tablero2 != null) {
                     tablero = tablero2;
-                    reiniciarUI();
+                    crearUI();
                 }
             }
         });
@@ -181,25 +182,21 @@ public class JuegoActivity extends AppCompatActivity {
                 //Toast.makeText(JuegoActivity.this, "top", Toast.LENGTH_SHORT).show();
                 moverFilaArriba();
                 generarNumeroAleatorio ();
-                reiniciarUI();
             }
             public void onSwipeRight() {
                 //Toast.makeText(JuegoActivity.this, "right", Toast.LENGTH_SHORT).show();
                 moverFilaDerecha();
                 generarNumeroAleatorio ();
-                reiniciarUI();
             }
             public void onSwipeLeft() {
                 //Toast.makeText(JuegoActivity.this, "left", Toast.LENGTH_SHORT).show();
                 moverFilaIzquierda();
                 generarNumeroAleatorio ();
-                reiniciarUI();
             }
             public void onSwipeBottom() {
                 //Toast.makeText(JuegoActivity.this, "bottom", Toast.LENGTH_SHORT).show();
                 moverFilaAbajo();
                 generarNumeroAleatorio ();
-                reiniciarUI();
             }
         });
     }
@@ -215,6 +212,7 @@ public class JuegoActivity extends AppCompatActivity {
     {
         int delay = 0;
         int contador = 0;
+
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
             for (int j = 0; j < tablero.getTabla()[0].length; j++)
@@ -223,20 +221,45 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if (!(tablero.getTabla()[i][j + 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 1])) && ((!tablero.getTabla()[i][j].contains("*")) && ((!tablero.getTabla()[i][j + 1].contains("*")))))
                     {
+                        if (contador == 1)
+                        {
+                            delay = 80;
+                        }
+
+                        else if (contador == 2)
+                        {
+                            delay = 160;
+                        }
+
+                        else if (contador == 3)
+                        {
+                            delay = 240;
+                        }
+
                         tablero.getTabla()[i][j + 1] =  String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j + 1]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j + 1] + "*";
+
                         i = 0;
                         j = 0;
+
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                reiniciarUI();
+                            }
+                        }, delay);
+
+                        contador++;
 
                         //Si la casilla actual ha sido mergeada, la siguiente no puede sumarse
                     }
 
                     else if (tablero.getTabla()[i][j + 1].equals(String.valueOf(0)))
                     {
-
-                        /*
                         if (contador == 1)
                         {
                             delay = 80;
@@ -257,43 +280,15 @@ public class JuegoActivity extends AppCompatActivity {
 
                         new Handler().postDelayed(new Runnable()
                         {
-                            int i;
-                            int j;
                             @Override
                             public void run()
                             {
-                                //TENGO QUE CAMBIAR LA FORMA DE RECORRER CADA FILA PARA QUE LO HAGA EN EL SENTIDO DEL SWIPE. DESACTIVAR LAS ANIMACIONES PARA COMPROBAR QUE EL JUEGO FUNCIONA CORRECTAMENTE DE ESA MANERA Y DESPUÉS DESCOMENTAR ESTO
-                                textos[i][j].setInAnimation(AnimationUtils.loadAnimation(JuegoActivity.this, R.anim.anim_slide_right_in));
-                                textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(JuegoActivity.this, R.anim.anim_slide_right_out));
-                                textos[i][j + 1].setInAnimation(AnimationUtils.loadAnimation(JuegoActivity.this, R.anim.anim_slide_right_in));
-                                textos[i][j + 1].setOutAnimation(AnimationUtils.loadAnimation(JuegoActivity.this, R.anim.anim_slide_right_out));
-
-                                if (tablero.getTabla()[i][j].equals("0"))
-                                {
-                                    ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
-                                    textos[i][j].setText("");
-                                    ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
-                                    textos[i][j + 1].setText(tablero.getTabla()[i][j + 1]);
-                                }
-
-                                else {
-                                    ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
-                                    textos[i][j].setText(tablero.getTabla()[i][j]);
-                                    ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
-                                    textos[i][j + 1].setText(tablero.getTabla()[i][j + 1]);
-                                }
+                                reiniciarUI();
                             }
-                            public Runnable init(int i, int j) {
-                            this.i = i;
-                            this.j = j;
-                            return(this);
-                            }
-                        }.init(i, j), delay);
+                        }, delay);
 
                         contador++;
-                        */
-                        tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
-                        tablero.getTabla()[i][j] = String.valueOf(0);
+
                         i = 0;
                         j = 0;
                     }
@@ -320,26 +315,82 @@ public class JuegoActivity extends AppCompatActivity {
 
     public void moverFilaIzquierda ()
     {
+        int delay = 0;
+        int contador = 0;
+
         for (int i = 0; i < tablero.getTabla().length; i++)
         {
             for (int j = tablero.getTabla()[0].length - 1; j >= 0 ; j--)
             {
+
                 if ((!tablero.getTabla()[i][j].equals(String.valueOf(0))) && (j - 1 >= 0))
                 {
                     if ((!tablero.getTabla()[i][j - 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 1])) && ((!tablero.getTabla()[i][j].contains("*")) && (!tablero.getTabla()[i][j - 1].contains("*"))))
                     {
+                        if (contador == 1)
+                        {
+                            delay = 80;
+                        }
+
+                        else if (contador == 2)
+                        {
+                            delay = 160;
+                        }
+
+                        else if (contador == 3)
+                        {
+                            delay = 240;
+                        }
+
                         tablero.getTabla()[i][j - 1] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j - 1]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j - 1] + "*";
+
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                reiniciarUI();
+                            }
+                        }, delay);
+
+                        contador++;
                         i = 0;
                         j = 3;
                     }
 
                     else if (tablero.getTabla()[i][j - 1].equals(String.valueOf(0)))
                     {
+                        if (contador == 1)
+                        {
+                            delay = 80;
+                        }
+
+                        else if (contador == 2)
+                        {
+                            delay = 160;
+                        }
+
+                        else if (contador == 3)
+                        {
+                            delay = 240;
+                        }
+
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
+
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                reiniciarUI();
+                            }
+                        }, delay);
+
+                        contador++;
                         i = 0;
                         j = 3;
                     }
@@ -362,6 +413,9 @@ public class JuegoActivity extends AppCompatActivity {
 
     public void moverFilaArriba ()
     {
+        int delay = 0;
+        int contador = 0;
+
         for (int i = 0; i < tablero.getTabla().length; i++)
         {
             for (int j = tablero.getTabla()[0].length - 1; j >= 0; j--)
@@ -370,18 +424,72 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if ((!tablero.getTabla()[j - 1][i].equals(String.valueOf(0))) && (tablero.getTabla()[j][i].equals(tablero.getTabla()[j - 1][i])) && ((!tablero.getTabla()[j][i].contains("*")) && (!tablero.getTabla()[j - 1][i].contains("*"))))
                     {
+                        if (contador == 1)
+                        {
+                            delay = 80;
+                        }
+
+                        else if (contador == 2)
+                        {
+                            delay = 160;
+                        }
+
+                        else if (contador == 3)
+                        {
+                            delay = 240;
+                        }
+
                         tablero.getTabla()[j - 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j - 1][i]));
                         tablero.getTabla()[j][i] = String.valueOf(0);
                         tablero.getTabla()[j - 1][i] = tablero.getTabla()[j - 1][i] + "*";
+
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                reiniciarUI();
+                            }
+                        }, delay);
+
+                        contador++;
+
                         j = 3;
                         i = 0;
                     }
 
                     else if (tablero.getTabla()[j - 1][i].equals(String.valueOf(0)))
                     {
+                        if (contador == 1)
+                        {
+                            delay = 80;
+                        }
+
+                        else if (contador == 2)
+                        {
+                            delay = 160;
+                        }
+
+                        else if (contador == 3)
+                        {
+                            delay = 240;
+                        }
+
                         tablero.getTabla()[j - 1][i] = tablero.getTabla()[j][i];
                         tablero.getTabla()[j][i] = String.valueOf(0);
+
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                reiniciarUI();
+                            }
+                        }, delay);
+
+                        contador++;
+
                         j = 3;
                         i = 0;
                     }
@@ -406,27 +514,82 @@ public class JuegoActivity extends AppCompatActivity {
 
     public void moverFilaAbajo ()
     {
+        int delay = 0;
+        int contador = 0;
+
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
             for (int j = 0; j < tablero.getTabla()[0].length  ; j++)
             {
-                if ((!tablero.getTabla()[i][j].equals(String.valueOf(0))) && (i + 1 < tablero.getTabla().length))
+                if ((!tablero.getTabla()[j][i].equals(String.valueOf(0))) && (j + 1 < tablero.getTabla().length))
                 {
-                    if ((!tablero.getTabla()[i + 1][j].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i + 1][j])) && ((!tablero.getTabla()[i][j].contains("*")) && (!tablero.getTabla()[i + 1][j].contains("*"))))
+                    if ((!tablero.getTabla()[j + 1][i].equals(String.valueOf(0))) && (tablero.getTabla()[j][i].equals(tablero.getTabla()[j + 1][i])) && ((!tablero.getTabla()[j][i].contains("*")) && (!tablero.getTabla()[j + 1][i].contains("*"))))
                     {
-                        tablero.getTabla()[i + 1][j] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
-                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i + 1][j]));
-                        tablero.getTabla()[i][j] = String.valueOf(0);
-                        tablero.getTabla()[i + 1][j] = tablero.getTabla()[i + 1][j] + "*";
+                        if (contador == 1)
+                        {
+                            delay = 80;
+                        }
+
+                        else if (contador == 2)
+                        {
+                            delay = 160;
+                        }
+
+                        else if (contador == 3)
+                        {
+                            delay = 240;
+                        }
+
+                        tablero.getTabla()[j + 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
+                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j + 1][i]));
+                        tablero.getTabla()[j][i] = String.valueOf(0);
+                        tablero.getTabla()[j + 1][i] = tablero.getTabla()[j + 1][i] + "*";
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                reiniciarUI();
+                            }
+                        }, delay);
+
+                        contador++;
+
                         i = 0;
                         j = 0;
 
                     }
 
-                    else if (tablero.getTabla()[i + 1][j].equals(String.valueOf(0)))
+                    else if (tablero.getTabla()[j + 1][i].equals(String.valueOf(0)))
                     {
-                        tablero.getTabla()[i + 1][j] = tablero.getTabla()[i][j];
-                        tablero.getTabla()[i][j] = String.valueOf(0);
+                        if (contador == 1)
+                        {
+                            delay = 80;
+                        }
+
+                        else if (contador == 2)
+                        {
+                            delay = 160;
+                        }
+
+                        else if (contador == 3)
+                        {
+                            delay = 240;
+                        }
+
+                        tablero.getTabla()[j + 1][i] = tablero.getTabla()[j][i];
+                        tablero.getTabla()[j][i] = String.valueOf(0);
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                reiniciarUI();
+                            }
+                        }, delay);
+
+                        contador++;
+
                         i = 0;
                         j = 0;
                     }
@@ -447,7 +610,7 @@ public class JuegoActivity extends AppCompatActivity {
         }
     }
 
-    public void reiniciarUI ()
+    public void crearUI ()
     {
         for (int i = 0; i < 4; i++)
         {
@@ -559,6 +722,123 @@ public class JuegoActivity extends AppCompatActivity {
                     }
 
                     textos[i][j].setCurrentText(tablero.getTabla()[i][j]);
+                }
+            }
+        }
+    }
+
+    public void reiniciarUI ()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (tablero.getTabla()[i][j].equals("0"))
+                {
+                    textos[i][j].setText("");
+                    ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+
+                }
+
+                else
+                {
+                    switch (tablero.getTabla()[i][j].length())
+                    {
+                        case 1: case2:
+                        ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                            break;
+
+                        case 3:
+                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            break;
+
+                        case 4:
+                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            break;
+
+                        case 5:
+                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            break;
+
+                        case 6:
+                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            break;
+
+                        //A ver quien es el listo que llega aquí lol
+                        case 7:
+                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            break;
+
+                    }
+
+                    if (Integer.valueOf(tablero.getTabla()[i][j]) <= 2048) {
+
+                        switch (Integer.valueOf(tablero.getTabla()[i][j])) {
+
+                            case 2:
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+                                break;
+
+                            case 4:
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                break;
+
+                            case 8:
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 16:
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 32:
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 64:
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 128:
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 256:
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 512:
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 1024:
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 2048:
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_11);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+                        }
+                    }
+
+                    else
+                    {
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                    }
+
+                    textos[i][j].setText(tablero.getTabla()[i][j]);
                 }
             }
         }
