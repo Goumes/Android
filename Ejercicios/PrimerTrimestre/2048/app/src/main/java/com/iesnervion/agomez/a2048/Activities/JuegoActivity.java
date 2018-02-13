@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextSwitcher;
@@ -162,7 +163,6 @@ public class JuegoActivity extends AppCompatActivity {
         linearRow32 = findViewById(R.id.linear_3_2);
         linears[3][2] = linearRow32;
         linearRow33 = findViewById(R.id.linear_3_3);
-        linears[3][3] = linearRow33;
 
         mViewModel.getTablero().observe(this, new Observer<Tablero>() {
             @Override
@@ -181,22 +181,55 @@ public class JuegoActivity extends AppCompatActivity {
             public void onSwipeTop() {
                 //Toast.makeText(JuegoActivity.this, "top", Toast.LENGTH_SHORT).show();
                 moverFilaArriba();
-                generarNumeroAleatorio ();
+                new Handler().postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        generarNumeroAleatorio ();
+                    }
+
+                }, 340);
+
             }
             public void onSwipeRight() {
                 //Toast.makeText(JuegoActivity.this, "right", Toast.LENGTH_SHORT).show();
                 moverFilaDerecha();
-                generarNumeroAleatorio ();
+                new Handler().postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        generarNumeroAleatorio ();
+                    }
+
+                }, 340);
             }
             public void onSwipeLeft() {
                 //Toast.makeText(JuegoActivity.this, "left", Toast.LENGTH_SHORT).show();
                 moverFilaIzquierda();
-                generarNumeroAleatorio ();
+                new Handler().postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        generarNumeroAleatorio ();
+                    }
+
+                }, 340);
             }
             public void onSwipeBottom() {
                 //Toast.makeText(JuegoActivity.this, "bottom", Toast.LENGTH_SHORT).show();
                 moverFilaAbajo();
-                generarNumeroAleatorio ();
+                new Handler().postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        generarNumeroAleatorio ();
+                    }
+
+                }, 340);
             }
         });
     }
@@ -241,19 +274,37 @@ public class JuegoActivity extends AppCompatActivity {
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j + 1] + "*";
 
-                        i = 0;
-                        j = 0;
+                        textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
+                        textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
+                        textos[i][j + 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
+                        textos[i][j + 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_right));
 
                         new Handler().postDelayed(new Runnable()
                         {
+                            int i;
+                            int j;
+                            String textoActual;
+                            String textoSiguiente;
+
                             @Override
                             public void run()
                             {
-                                reiniciarUI();
+                                reiniciarUI(i, j, textoActual, textoSiguiente, 'r');
                             }
-                        }, delay);
 
+                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                            {
+                                this.i = i;
+                                this.j = j;
+                                this.textoActual = textoActual;
+                                this.textoSiguiente = textoSiguiente;
+                                return (this);
+                            }
+                        }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j + 1]), delay);
                         contador++;
+
+                        i = 0;
+                        j = 0;
 
                         //Si la casilla actual ha sido mergeada, la siguiente no puede sumarse
                     }
@@ -277,16 +328,33 @@ public class JuegoActivity extends AppCompatActivity {
 
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
+                        textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
+                        textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
+                        textos[i][j + 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
+                        textos[i][j + 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
 
                         new Handler().postDelayed(new Runnable()
                         {
+                            int i;
+                            int j;
+                            String textoActual;
+                            String textoSiguiente;
+
                             @Override
                             public void run()
                             {
-                                reiniciarUI();
+                                reiniciarUI(i, j, textoActual, textoSiguiente, 'r');
                             }
-                        }, delay);
 
+                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                            {
+                                this.i = i;
+                                this.j = j;
+                                this.textoActual = textoActual;
+                                this.textoSiguiente = textoSiguiente;
+                                return (this);
+                            }
+                        }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j + 1]), delay);
                         contador++;
 
                         i = 0;
@@ -301,16 +369,7 @@ public class JuegoActivity extends AppCompatActivity {
         }
 
         //Eliminar los asteriscos de cada columna
-        for (int i = 0; i < tablero.getTabla().length; i++)
-        {
-            for (int j = 0; j < tablero.getTabla()[0].length; j++)
-            {
-                if (tablero.getTabla()[i][j].contains("*"))
-                {
-                    tablero.getTabla()[i][j] = tablero.getTabla()[i][j].replace("*", "");
-                }
-            }
-        }
+       eliminarAsteriscos();
     }
 
     public void moverFilaIzquierda ()
@@ -347,15 +406,33 @@ public class JuegoActivity extends AppCompatActivity {
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j - 1] + "*";
 
+                        textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_in));
+                        textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_out));
+                        textos[i][j - 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
+                        textos[i][j - 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_left));
+
                         new Handler().postDelayed(new Runnable()
                         {
+                            int i;
+                            int j;
+                            String textoActual;
+                            String textoSiguiente;
+
                             @Override
                             public void run()
                             {
-                                reiniciarUI();
+                                reiniciarUI(i, j, textoActual, textoSiguiente, 'l');
                             }
-                        }, delay);
 
+                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                            {
+                                this.i = i;
+                                this.j = j;
+                                this.textoActual = textoActual;
+                                this.textoSiguiente = textoSiguiente;
+                                return (this);
+                            }
+                        }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j - 1]), delay);
                         contador++;
                         i = 0;
                         j = 3;
@@ -381,16 +458,35 @@ public class JuegoActivity extends AppCompatActivity {
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
 
+                        textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_in));
+                        textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_out));
+                        textos[i][j - 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_in));
+                        textos[i][j - 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_out));
+
                         new Handler().postDelayed(new Runnable()
                         {
+                            int i;
+                            int j;
+                            String textoActual;
+                            String textoSiguiente;
+
                             @Override
                             public void run()
                             {
-                                reiniciarUI();
+                                reiniciarUI(i, j, textoActual, textoSiguiente, 'l');
                             }
-                        }, delay);
 
+                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                            {
+                                this.i = i;
+                                this.j = j;
+                                this.textoActual = textoActual;
+                                this.textoSiguiente = textoSiguiente;
+                                return (this);
+                            }
+                        }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j - 1]), delay);
                         contador++;
+
                         i = 0;
                         j = 3;
                     }
@@ -444,15 +540,33 @@ public class JuegoActivity extends AppCompatActivity {
                         tablero.getTabla()[j][i] = String.valueOf(0);
                         tablero.getTabla()[j - 1][i] = tablero.getTabla()[j - 1][i] + "*";
 
+                        textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_in));
+                        textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_out));
+                        textos[j - 1][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_up));
+                        textos[j - 1][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
+
                         new Handler().postDelayed(new Runnable()
                         {
+                            int i;
+                            int j;
+                            String textoActual;
+                            String textoSiguiente;
+
                             @Override
                             public void run()
                             {
-                                reiniciarUI();
+                                reiniciarUI(i, j, textoActual, textoSiguiente, 'u');
                             }
-                        }, delay);
 
+                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                            {
+                                this.i = i;
+                                this.j = j;
+                                this.textoActual = textoActual;
+                                this.textoSiguiente = textoSiguiente;
+                                return (this);
+                            }
+                        }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j - 1][i]), delay);
                         contador++;
 
                         j = 3;
@@ -479,15 +593,33 @@ public class JuegoActivity extends AppCompatActivity {
                         tablero.getTabla()[j - 1][i] = tablero.getTabla()[j][i];
                         tablero.getTabla()[j][i] = String.valueOf(0);
 
+                        textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_in));
+                        textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_out));
+                        textos[j - 1][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_in));
+                        textos[j - 1][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_out));
+
                         new Handler().postDelayed(new Runnable()
                         {
+                            int i;
+                            int j;
+                            String textoActual;
+                            String textoSiguiente;
+
                             @Override
                             public void run()
                             {
-                                reiniciarUI();
+                                reiniciarUI(i, j, textoActual, textoSiguiente, 'u');
                             }
-                        }, delay);
 
+                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                            {
+                                this.i = i;
+                                this.j = j;
+                                this.textoActual = textoActual;
+                                this.textoSiguiente = textoSiguiente;
+                                return (this);
+                            }
+                        }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j - 1][i]), delay);
                         contador++;
 
                         j = 3;
@@ -544,15 +676,34 @@ public class JuegoActivity extends AppCompatActivity {
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j + 1][i]));
                         tablero.getTabla()[j][i] = String.valueOf(0);
                         tablero.getTabla()[j + 1][i] = tablero.getTabla()[j + 1][i] + "*";
+
+                        textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_in));
+                        textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_out));
+                        textos[j + 1][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_down));
+                        textos[j + 1][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
+
                         new Handler().postDelayed(new Runnable()
                         {
+                            int i;
+                            int j;
+                            String textoActual;
+                            String textoSiguiente;
+
                             @Override
                             public void run()
                             {
-                                reiniciarUI();
+                                reiniciarUI(i, j, textoActual, textoSiguiente, 'd');
                             }
-                        }, delay);
 
+                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                            {
+                                this.i = i;
+                                this.j = j;
+                                this.textoActual = textoActual;
+                                this.textoSiguiente = textoSiguiente;
+                                return (this);
+                            }
+                        }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j + 1][i]), delay);
                         contador++;
 
                         i = 0;
@@ -579,15 +730,34 @@ public class JuegoActivity extends AppCompatActivity {
 
                         tablero.getTabla()[j + 1][i] = tablero.getTabla()[j][i];
                         tablero.getTabla()[j][i] = String.valueOf(0);
+
+                        textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_in));
+                        textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_out));
+                        textos[j + 1][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_in));
+                        textos[j + 1][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_out));
+
                         new Handler().postDelayed(new Runnable()
                         {
+                            int i;
+                            int j;
+                            String textoActual;
+                            String textoSiguiente;
+
                             @Override
                             public void run()
                             {
-                                reiniciarUI();
+                                reiniciarUI(i, j, textoActual, textoSiguiente, 'd');
                             }
-                        }, delay);
 
+                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                            {
+                                this.i = i;
+                                this.j = j;
+                                this.textoActual = textoActual;
+                                this.textoSiguiente = textoSiguiente;
+                                return (this);
+                            }
+                        }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j + 1][i]), delay);
                         contador++;
 
                         i = 0;
@@ -620,6 +790,7 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     textos[i][j].setCurrentText("");
                     ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+                    ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
 
                 }
 
@@ -629,27 +800,33 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         case 1: case2:
                         ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
                         break;
 
                         case 3:
                             ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
                         break;
 
                         case 4:
                             ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
                         break;
 
                         case 5:
                             ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
                         break;
 
                         case 6:
                             ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                         break;
 
                         //A ver quien es el listo que llega aquí lol
                         case 7:
                             ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                         break;
 
                     }
@@ -661,54 +838,76 @@ public class JuegoActivity extends AppCompatActivity {
                             case 2:
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
                                 break;
 
                             case 4:
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
                                 break;
 
                             case 8:
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_3);
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 16:
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_4);
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 32:
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_5);
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 64:
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_6);
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 128:
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_7);
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 256:
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_8);
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 512:
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_9);
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 1024:
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_10);
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
+                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 2048:
+                                ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                                ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
                                 ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                             break;
@@ -719,6 +918,8 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_12);
                         ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                     }
 
                     textos[i][j].setCurrentText(tablero.getTabla()[i][j]);
@@ -727,120 +928,712 @@ public class JuegoActivity extends AppCompatActivity {
         }
     }
 
-    public void reiniciarUI ()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            for (int j = 0; j < 4; j++)
-            {
-                if (tablero.getTabla()[i][j].equals("0"))
-                {
-                    textos[i][j].setText("");
-                    ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+    public void reiniciarUI (int i, int j, String valorActual, String valorSiguiente, char direccion)
 
+    {
+        if (valorActual.contains("*") || valorSiguiente.contains("*"))
+        {
+            valorActual = valorActual.replace("*", "");
+            valorSiguiente = valorSiguiente.replace("*", "");
+        }
+
+        if (valorActual.equals("0"))
+        {
+            textos[i][j].setText("");
+            ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+            ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+
+        }
+
+        else
+        {
+            switch (tablero.getTabla()[i][j].length())
+            {
+                case 1: case2:
+                ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    break;
+
+                case 3:
+                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                    break;
+
+                case 4:
+                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                    break;
+
+                case 5:
+                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                    break;
+
+                case 6:
+                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    break;
+
+                //A ver quien es el listo que llega aquí lol
+                case 7:
+                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                    break;
+
+            }
+
+            if (Integer.valueOf(valorActual) <= 2048) {
+
+                switch (Integer.valueOf(valorActual)) {
+
+                    case 2:
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+                        break;
+
+                    case 4:
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                        break;
+
+                    case 8:
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_3);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 16:
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_4);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 32:
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_5);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 64:
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_6);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 128:
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_7);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 256:
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_8);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 512:
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_9);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 1024:
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_10);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
+                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 2048:
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+                }
+            }
+
+            else
+            {
+                ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_12);
+                ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
+                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+            }
+
+            textos[i][j].setText(valorActual);
+        }
+
+
+        switch (direccion)
+        {
+            case 'l':
+
+                if (valorSiguiente.equals("0"))
+                {
+                    textos[i][j - 1].setText("");
+                    ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+                    ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
                 }
 
                 else
                 {
-                    switch (tablero.getTabla()[i][j].length())
+                    switch (valorSiguiente.length())
                     {
                         case 1: case2:
-                        ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                        ((TextView)textos[i][j - 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                            ((TextView)textos[i][j - 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
                             break;
 
                         case 3:
-                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            ((TextView)textos[i][j - 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            ((TextView)textos[i][j - 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
                             break;
 
                         case 4:
-                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            ((TextView)textos[i][j - 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            ((TextView)textos[i][j - 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
                             break;
 
                         case 5:
-                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            ((TextView)textos[i][j - 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            ((TextView)textos[i][j - 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
                             break;
 
                         case 6:
-                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            ((TextView)textos[i][j - 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            ((TextView)textos[i][j - 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                             break;
 
                         //A ver quien es el listo que llega aquí lol
                         case 7:
-                            ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            ((TextView)textos[i][j - 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            ((TextView)textos[i][j - 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                             break;
 
                     }
 
-                    if (Integer.valueOf(tablero.getTabla()[i][j]) <= 2048) {
+                    if (Integer.valueOf(valorSiguiente) <= 2048) {
 
-                        switch (Integer.valueOf(tablero.getTabla()[i][j])) {
+                        switch (Integer.valueOf(valorSiguiente)) {
 
                             case 2:
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
                                 break;
 
                             case 4:
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
                                 break;
 
                             case 8:
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_3);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 16:
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_4);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 32:
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_5);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 64:
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_6);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 128:
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_7);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 256:
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_8);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 512:
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_9);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 1024:
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_10);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
+                                ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
 
                             case 2048:
-                                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_11);
-                                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                                ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                                 break;
                         }
                     }
 
                     else
                     {
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_12);
+                        ((TextView)textos[i][j - 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
+                        ((TextView)textos[i][j - 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                     }
 
-                    textos[i][j].setText(tablero.getTabla()[i][j]);
+                    textos[i][j - 1].setText(valorSiguiente);
                 }
-            }
+                break;
+
+            case 'r':
+                if (valorSiguiente.equals("0"))
+                {
+                    textos[i][j - 1].setText("");
+                    ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+                    ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+                }
+
+                else {
+                    switch (valorSiguiente.length()) {
+                        case 1:
+                            case2:
+                            ((TextView) textos[i][j + 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                            ((TextView) textos[i][j + 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                            break;
+
+                        case 3:
+                            ((TextView) textos[i][j + 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            ((TextView) textos[i][j + 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            break;
+
+                        case 4:
+                            ((TextView) textos[i][j + 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            ((TextView) textos[i][j + 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            break;
+
+                        case 5:
+                            ((TextView) textos[i][j + 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            ((TextView) textos[i][j + 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            break;
+
+                        case 6:
+                            ((TextView) textos[i][j + 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            ((TextView) textos[i][j + 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            break;
+
+                        //A ver quien es el listo que llega aquí lol
+                        case 7:
+                            ((TextView) textos[i][j + 1].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            ((TextView) textos[i][j + 1].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            break;
+
+                    }
+
+                    if (Integer.valueOf(valorSiguiente) <= 2048) {
+
+                        switch (Integer.valueOf(valorSiguiente)) {
+
+                            case 2:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+                                break;
+
+                            case 4:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                break;
+
+                            case 8:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_3);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 16:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_4);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 32:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_5);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 64:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_6);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 128:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_7);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 256:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_8);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 512:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_9);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 1024:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_10);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
+                                ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 2048:
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                                ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+                        }
+                    } else {
+                        ((TextView) textos[i][j + 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_12);
+                        ((TextView) textos[i][j + 1].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView) textos[i][j + 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
+                        ((TextView) textos[i][j + 1].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                    }
+
+                    textos[i][j + 1].setText(valorSiguiente);
+                }
+
+
+                break;
+
+            case 'u':
+                if (valorSiguiente.equals("0"))
+                {
+                    textos[i][j - 1].setText("");
+                    ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+                    ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+                }
+
+                else {
+                    switch (valorSiguiente.length()) {
+                        case 1:
+                            case2:
+                            ((TextView) textos[i - 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                            ((TextView) textos[i - 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                            break;
+
+                        case 3:
+                            ((TextView) textos[i - 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            ((TextView) textos[i - 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            break;
+
+                        case 4:
+                            ((TextView) textos[i - 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            ((TextView) textos[i - 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            break;
+
+                        case 5:
+                            ((TextView) textos[i - 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            ((TextView) textos[i - 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            break;
+
+                        case 6:
+                            ((TextView) textos[i - 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            ((TextView) textos[i - 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            break;
+
+                        //A ver quien es el listo que llega aquí lol
+                        case 7:
+                            ((TextView) textos[i - 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            ((TextView) textos[i - 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            break;
+
+                    }
+
+                    if (Integer.valueOf(valorSiguiente) <= 2048) {
+
+                        switch (Integer.valueOf(valorSiguiente)) {
+
+                            case 2:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+                                break;
+
+                            case 4:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                break;
+
+                            case 8:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_3);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 16:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_4);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 32:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_5);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 64:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_6);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 128:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_7);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 256:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_8);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 512:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_9);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 1024:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_10);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
+                                ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 2048:
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                                ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+                        }
+                    } else {
+                        ((TextView) textos[i - 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_12);
+                        ((TextView) textos[i - 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView) textos[i - 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
+                        ((TextView) textos[i - 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                    }
+
+                    textos[i - 1][j].setText(valorSiguiente);
+                }
+
+
+                break;
+
+            case 'd':
+                if (valorSiguiente.equals("0"))
+                {
+                    textos[i][j - 1].setText("");
+                    ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+                    ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+                }
+
+                else {
+                    switch (valorSiguiente.length()) {
+                        case 1:
+                            case2:
+                            ((TextView) textos[i + 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                            ((TextView) textos[i + 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                            break;
+
+                        case 3:
+                            ((TextView) textos[i + 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            ((TextView) textos[i + 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            break;
+
+                        case 4:
+                            ((TextView) textos[i + 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            ((TextView) textos[i + 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            break;
+
+                        case 5:
+                            ((TextView) textos[i + 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            ((TextView) textos[i + 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            break;
+
+                        case 6:
+                            ((TextView) textos[i + 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            ((TextView) textos[i + 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            break;
+
+                        //A ver quien es el listo que llega aquí lol
+                        case 7:
+                            ((TextView) textos[i + 1][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            ((TextView) textos[i + 1][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            break;
+
+                    }
+
+                    if (Integer.valueOf(valorSiguiente) <= 2048) {
+
+                        switch (Integer.valueOf(valorSiguiente)) {
+
+                            case 2:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+                                break;
+
+                            case 4:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                                break;
+
+                            case 8:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_3);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 16:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_4);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 32:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_5);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 64:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_6);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 128:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_7);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 256:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_8);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 512:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_9);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 1024:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_10);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
+                                ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+
+                            case 2048:
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                                ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                                break;
+                        }
+                    } else {
+                        ((TextView) textos[i + 1][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_12);
+                        ((TextView) textos[i + 1][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView) textos[i + 1][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
+                        ((TextView) textos[i + 1][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                    }
+
+                    textos[i + 1][j].setText(valorSiguiente);
+                }
+
+
+                break;
+
         }
     }
 
@@ -861,6 +1654,9 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     numeroAleatorio = (Math.random() >= .9 ? 4 : 2); //Crea un aleatorio ya sea 2 o 4 con un 90% de probabilidad de que sea un 2
                     tablero.getTabla()[i][j] = String.valueOf(numeroAleatorio);
+
+                    animarAparicion(i, j, tablero.getTabla()[i][j]);
+
                     generado = true;
                 }
 
@@ -871,6 +1667,33 @@ public class JuegoActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    public void animarAparicion (int i, int j, String valorActual)
+    {
+        ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+        ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+
+        switch (Integer.valueOf(valorActual))
+        {
+            case 2:
+                ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+                break;
+
+            case 4:
+                ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
+                ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
+                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                break;
+        }
+
+        textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.expand_in));
+        textos[i][j].setText(valorActual);
+
     }
 
     public void aumentarPuntuacion (int aumentar)
@@ -897,7 +1720,7 @@ public class JuegoActivity extends AppCompatActivity {
         editor.commit();
         score.setText(String.valueOf(sharedPref.getInt("score", 0)));
         highscore.setText(String.valueOf(sharedPref.getInt("highscore", 0)));
-        reiniciarUI();
+        crearUI();
     }
 
     public void actualizarTablero ()
@@ -909,5 +1732,19 @@ public class JuegoActivity extends AppCompatActivity {
                 return 1;
             }
         }.execute();
+    }
+
+    public void eliminarAsteriscos ()
+    {
+        for (int i = 0; i < tablero.getTabla().length; i++)
+        {
+            for (int j = 0; j < tablero.getTabla()[0].length; j++)
+            {
+                if (tablero.getTabla()[i][j].contains("*"))
+                {
+                    tablero.getTabla()[i][j] = tablero.getTabla()[i][j].replace("*", "");
+                }
+            }
+        }
     }
 }
