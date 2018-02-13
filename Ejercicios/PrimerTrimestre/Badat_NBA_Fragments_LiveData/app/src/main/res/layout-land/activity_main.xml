@@ -14,7 +14,6 @@
         android:layout_height="match_parent"/>
 
     <FrameLayout
-        android:name="com.iesnervion.agomez.badat_nba.Fragments.ListFragment"
         android:id="@+id/FrameDetalles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

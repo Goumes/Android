@@ -6,18 +6,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
 
 import com.iesnervion.agomez.a2048.Entities.OnSwipeTouchListener;
 import com.iesnervion.agomez.a2048.Entities.Tablero;
@@ -220,18 +217,18 @@ public class JuegoActivity extends AppCompatActivity {
         int contador = 0;
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
-            for (int j = tablero.getTabla()[0].length - 1; j >= 0; j--)
+            for (int j = 0; j < tablero.getTabla()[0].length; j++)
             {
                 if ((!tablero.getTabla()[i][j].equals(String.valueOf(0))) && (j + 1 < tablero.getTabla()[0].length))
                 {
-                    if (!(tablero.getTabla()[i][j + 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 1])) && (!tablero.getTabla()[i][j].contains("*")))
+                    if (!(tablero.getTabla()[i][j + 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 1])) && ((!tablero.getTabla()[i][j].contains("*")) && ((!tablero.getTabla()[i][j + 1].contains("*")))))
                     {
                         tablero.getTabla()[i][j + 1] =  String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j + 1]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j + 1] + "*";
                         i = 0;
-                        j = 3;
+                        j = 0;
 
                         //Si la casilla actual ha sido mergeada, la siguiente no puede sumarse
                     }
@@ -239,6 +236,7 @@ public class JuegoActivity extends AppCompatActivity {
                     else if (tablero.getTabla()[i][j + 1].equals(String.valueOf(0)))
                     {
 
+                        /*
                         if (contador == 1)
                         {
                             delay = 80;
@@ -293,8 +291,11 @@ public class JuegoActivity extends AppCompatActivity {
                         }.init(i, j), delay);
 
                         contador++;
+                        */
+                        tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
+                        tablero.getTabla()[i][j] = String.valueOf(0);
                         i = 0;
-                        j = 3;
+                        j = 0;
                     }
                 }
 
@@ -321,18 +322,18 @@ public class JuegoActivity extends AppCompatActivity {
     {
         for (int i = 0; i < tablero.getTabla().length; i++)
         {
-            for (int j = 0; j < tablero.getTabla()[0].length; j++)
+            for (int j = tablero.getTabla()[0].length - 1; j >= 0 ; j--)
             {
                 if ((!tablero.getTabla()[i][j].equals(String.valueOf(0))) && (j - 1 >= 0))
                 {
-                    if ((!tablero.getTabla()[i][j - 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 1])) && (!tablero.getTabla()[i][j].contains("*")))
+                    if ((!tablero.getTabla()[i][j - 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 1])) && ((!tablero.getTabla()[i][j].contains("*")) && (!tablero.getTabla()[i][j - 1].contains("*"))))
                     {
                         tablero.getTabla()[i][j - 1] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j - 1]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j - 1] + "*";
                         i = 0;
-                        j = 0;
+                        j = 3;
                     }
 
                     else if (tablero.getTabla()[i][j - 1].equals(String.valueOf(0)))
@@ -340,7 +341,7 @@ public class JuegoActivity extends AppCompatActivity {
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         i = 0;
-                        j = 0;
+                        j = 3;
                     }
                 }
             }
@@ -363,26 +364,26 @@ public class JuegoActivity extends AppCompatActivity {
     {
         for (int i = 0; i < tablero.getTabla().length; i++)
         {
-            for (int j = 0; j < tablero.getTabla()[0].length; j++)
+            for (int j = tablero.getTabla()[0].length - 1; j >= 0; j--)
             {
-                if ((!tablero.getTabla()[i][j].equals(String.valueOf(0))) && (i - 1 >= 0))
+                if ((!tablero.getTabla()[j][i].equals(String.valueOf(0))) && (j - 1 >= 0))
                 {
-                    if ((!tablero.getTabla()[i - 1][j].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i - 1][j])) && (!tablero.getTabla()[i][j].contains("*")))
+                    if ((!tablero.getTabla()[j - 1][i].equals(String.valueOf(0))) && (tablero.getTabla()[j][i].equals(tablero.getTabla()[j - 1][i])) && ((!tablero.getTabla()[j][i].contains("*")) && (!tablero.getTabla()[j - 1][i].contains("*"))))
                     {
-                        tablero.getTabla()[i - 1][j] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
-                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i - 1][j]));
-                        tablero.getTabla()[i][j] = String.valueOf(0);
-                        tablero.getTabla()[i - 1][j] = tablero.getTabla()[i - 1][j] + "*";
+                        tablero.getTabla()[j - 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
+                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j - 1][i]));
+                        tablero.getTabla()[j][i] = String.valueOf(0);
+                        tablero.getTabla()[j - 1][i] = tablero.getTabla()[j - 1][i] + "*";
+                        j = 3;
                         i = 0;
-                        j = 0;
                     }
 
-                    else if (tablero.getTabla()[i - 1][j].equals(String.valueOf(0)))
+                    else if (tablero.getTabla()[j - 1][i].equals(String.valueOf(0)))
                     {
-                        tablero.getTabla()[i - 1][j] = tablero.getTabla()[i][j];
-                        tablero.getTabla()[i][j] = String.valueOf(0);
+                        tablero.getTabla()[j - 1][i] = tablero.getTabla()[j][i];
+                        tablero.getTabla()[j][i] = String.valueOf(0);
+                        j = 3;
                         i = 0;
-                        j = 0;
                     }
                 }
             }
@@ -405,19 +406,19 @@ public class JuegoActivity extends AppCompatActivity {
 
     public void moverFilaAbajo ()
     {
-        for (int i = tablero.getTabla().length - 1; i >= 0 ; i--)
+        for (int i = 0; i < tablero.getTabla().length ; i++)
         {
             for (int j = 0; j < tablero.getTabla()[0].length  ; j++)
             {
                 if ((!tablero.getTabla()[i][j].equals(String.valueOf(0))) && (i + 1 < tablero.getTabla().length))
                 {
-                    if ((!tablero.getTabla()[i + 1][j].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i + 1][j])) && (!tablero.getTabla()[i][j].contains("*")))
+                    if ((!tablero.getTabla()[i + 1][j].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i + 1][j])) && ((!tablero.getTabla()[i][j].contains("*")) && (!tablero.getTabla()[i + 1][j].contains("*"))))
                     {
                         tablero.getTabla()[i + 1][j] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i + 1][j]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i + 1][j] = tablero.getTabla()[i + 1][j] + "*";
-                        i = 3;
+                        i = 0;
                         j = 0;
 
                     }
@@ -426,7 +427,7 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         tablero.getTabla()[i + 1][j] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
-                        i = 3;
+                        i = 0;
                         j = 0;
                     }
                 }
@@ -468,24 +469,24 @@ public class JuegoActivity extends AppCompatActivity {
                         break;
 
                         case 3:
-                            ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                            ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
                         break;
 
                         case 4:
-                            ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                            ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
                         break;
 
                         case 5:
-                            ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                            ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
                         break;
 
                         case 6:
-                            ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                            ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                         break;
 
                         //A ver quien es el listo que llega aquí lol
                         case 7:
-                            ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                            ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                         break;
 
                     }

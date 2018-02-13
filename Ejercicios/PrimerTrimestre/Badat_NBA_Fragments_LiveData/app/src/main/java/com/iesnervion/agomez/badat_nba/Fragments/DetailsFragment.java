@@ -59,7 +59,7 @@ public class DetailsFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
+        //super.onCreateView(inflater, container, savedInstanceState);
 
         View mView = inflater.inflate(R.layout.fragment_details, null);
 
