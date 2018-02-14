@@ -256,17 +256,17 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         if (contador == 1)
                         {
-                            delay = 80;
+                            delay = 40;
                         }
 
                         else if (contador == 2)
                         {
-                            delay = 160;
+                            delay = 80;
                         }
 
                         else if (contador == 3)
                         {
-                            delay = 240;
+                            delay = 120;
                         }
 
                         tablero.getTabla()[i][j + 1] =  String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
@@ -304,7 +304,7 @@ public class JuegoActivity extends AppCompatActivity {
                         contador++;
 
                         i = 0;
-                        j = 0;
+                        j = -1;
 
                         //Si la casilla actual ha sido mergeada, la siguiente no puede sumarse
                     }
@@ -313,17 +313,17 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         if (contador == 1)
                         {
-                            delay = 80;
+                            delay = 40;
                         }
 
                         else if (contador == 2)
                         {
-                            delay = 160;
+                            delay = 80;
                         }
 
                         else if (contador == 3)
                         {
-                            delay = 240;
+                            delay = 120;
                         }
 
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
@@ -358,7 +358,7 @@ public class JuegoActivity extends AppCompatActivity {
                         contador++;
 
                         i = 0;
-                        j = 0;
+                        j = -1;
                     }
                 }
 
@@ -388,17 +388,17 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         if (contador == 1)
                         {
-                            delay = 80;
+                            delay = 40;
                         }
 
                         else if (contador == 2)
                         {
-                            delay = 160;
+                            delay = 80;
                         }
 
                         else if (contador == 3)
                         {
-                            delay = 240;
+                            delay = 120;
                         }
 
                         tablero.getTabla()[i][j - 1] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
@@ -435,24 +435,24 @@ public class JuegoActivity extends AppCompatActivity {
                         }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j - 1]), delay);
                         contador++;
                         i = 0;
-                        j = 3;
+                        j = 4;
                     }
 
                     else if (tablero.getTabla()[i][j - 1].equals(String.valueOf(0)))
                     {
                         if (contador == 1)
                         {
-                            delay = 80;
+                            delay = 40;
                         }
 
                         else if (contador == 2)
                         {
-                            delay = 160;
+                            delay = 80;
                         }
 
                         else if (contador == 3)
                         {
-                            delay = 240;
+                            delay = 120;
                         }
 
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j];
@@ -488,7 +488,7 @@ public class JuegoActivity extends AppCompatActivity {
                         contador++;
 
                         i = 0;
-                        j = 3;
+                        j = 4;
                     }
                 }
             }
@@ -522,17 +522,17 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         if (contador == 1)
                         {
-                            delay = 80;
+                            delay = 40;
                         }
 
                         else if (contador == 2)
                         {
-                            delay = 160;
+                            delay = 80;
                         }
 
                         else if (contador == 3)
                         {
-                            delay = 240;
+                            delay = 120;
                         }
 
                         tablero.getTabla()[j - 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
@@ -569,7 +569,7 @@ public class JuegoActivity extends AppCompatActivity {
                         }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j - 1][i]), delay);
                         contador++;
 
-                        j = 3;
+                        j = 4;
                         i = 0;
                     }
 
@@ -577,17 +577,17 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         if (contador == 1)
                         {
-                            delay = 80;
+                            delay = 40;
                         }
 
                         else if (contador == 2)
                         {
-                            delay = 160;
+                            delay = 80;
                         }
 
                         else if (contador == 3)
                         {
-                            delay = 240;
+                            delay = 120;
                         }
 
                         tablero.getTabla()[j - 1][i] = tablero.getTabla()[j][i];
@@ -622,7 +622,7 @@ public class JuegoActivity extends AppCompatActivity {
                         }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j - 1][i]), delay);
                         contador++;
 
-                        j = 3;
+                        j = 4;
                         i = 0;
                     }
                 }
@@ -659,17 +659,17 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         if (contador == 1)
                         {
-                            delay = 80;
+                            delay = 40;
                         }
 
                         else if (contador == 2)
                         {
-                            delay = 160;
+                            delay = 80;
                         }
 
                         else if (contador == 3)
                         {
-                            delay = 240;
+                            delay = 150;
                         }
 
                         tablero.getTabla()[j + 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
@@ -707,7 +707,7 @@ public class JuegoActivity extends AppCompatActivity {
                         contador++;
 
                         i = 0;
-                        j = 0;
+                        j = -1;
 
                     }
 
@@ -715,17 +715,17 @@ public class JuegoActivity extends AppCompatActivity {
                     {
                         if (contador == 1)
                         {
-                            delay = 80;
+                            delay = 40;
                         }
 
                         else if (contador == 2)
                         {
-                            delay = 160;
+                            delay = 80;
                         }
 
                         else if (contador == 3)
                         {
-                            delay = 240;
+                            delay = 150;
                         }
 
                         tablero.getTabla()[j + 1][i] = tablero.getTabla()[j][i];
@@ -761,7 +761,7 @@ public class JuegoActivity extends AppCompatActivity {
                         contador++;
 
                         i = 0;
-                        j = 0;
+                        j = -1;
                     }
                 }
             }
@@ -939,10 +939,10 @@ public class JuegoActivity extends AppCompatActivity {
 
         if (valorActual.equals("0"))
         {
-            textos[i][j].setText("");
             ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
             ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
 
+            textos[i][j].setText("");
         }
 
         else
@@ -1083,9 +1083,9 @@ public class JuegoActivity extends AppCompatActivity {
 
                 if (valorSiguiente.equals("0"))
                 {
-                    textos[i][j - 1].setText("");
                     ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
                     ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+                    textos[i][j - 1].setText("");
                 }
 
                 else
@@ -1223,9 +1223,9 @@ public class JuegoActivity extends AppCompatActivity {
             case 'r':
                 if (valorSiguiente.equals("0"))
                 {
-                    textos[i][j - 1].setText("");
                     ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
                     ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+                    textos[i][j - 1].setText("");
                 }
 
                 else {
@@ -1361,9 +1361,10 @@ public class JuegoActivity extends AppCompatActivity {
             case 'u':
                 if (valorSiguiente.equals("0"))
                 {
-                    textos[i][j - 1].setText("");
                     ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
                     ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+                    textos[i][j - 1].setText("");
+
                 }
 
                 else {
@@ -1499,9 +1500,9 @@ public class JuegoActivity extends AppCompatActivity {
             case 'd':
                 if (valorSiguiente.equals("0"))
                 {
-                    textos[i][j - 1].setText("");
                     ((TextView)textos[i][j - 1].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
                     ((TextView)textos[i][j - 1].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+                    textos[i][j - 1].setText("");
                 }
 
                 else {
