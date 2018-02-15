@@ -32,12 +32,12 @@ namespace _2048_API_CORE_DAL.Conexion
         public clsMyConnection()
         {
             // this.server = "(local)";
-            this.server = "personasbdserver.database.windows.net";
+            this.server = "2048dbserver.database.windows.net";
 
-            this.dataBase = "PersonasDB";
+            this.dataBase = "2048DB";
             this.user = "agomez";
             //this.pass = "123";
-            this.pass = "Password123";
+            this.pass = "Alejandro567";
 
         }
         //Con parámetros por si quisiera cambiar las conexiones

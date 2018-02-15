@@ -196,6 +196,29 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "2048_API_CORE_DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "2048_API_CORE_ET": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/2048_API_CORE_DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/2048_API_CORE_DAL.dll": {}
+        }
+      },
+      "2048_API_CORE_ET/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/2048_API_CORE_ET.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/2048_API_CORE_ET.dll": {}
+        }
       }
     }
   },
@@ -656,10 +679,22 @@
         "netstandard.library.2.0.0.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "2048_API_CORE_DAL/1.0.0": {
+      "type": "project",
+      "path": "../2048_API_CORE_DAL/2048_API_CORE_DAL.csproj",
+      "msbuildProject": "../2048_API_CORE_DAL/2048_API_CORE_DAL.csproj"
+    },
+    "2048_API_CORE_ET/1.0.0": {
+      "type": "project",
+      "path": "../2048_API_CORE_ET/2048_API_CORE_ET.csproj",
+      "msbuildProject": "../2048_API_CORE_ET/2048_API_CORE_ET.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "2048_API_CORE_DAL >= 1.0.0",
+      "2048_API_CORE_ET >= 1.0.0",
       "Microsoft.NETCore.App >= 2.0.0"
     ]
   },
@@ -698,7 +733,14 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\aleja\\Documents\\GitHub\\Android\\2048_API_CORE\\2048_API_CORE_DAL\\2048_API_CORE_DAL.csproj": {
+              "projectPath": "C:\\Users\\aleja\\Documents\\GitHub\\Android\\2048_API_CORE\\2048_API_CORE_DAL\\2048_API_CORE_DAL.csproj"
+            },
+            "C:\\Users\\aleja\\Documents\\GitHub\\Android\\2048_API_CORE\\2048_API_CORE_ET\\2048_API_CORE_ET.csproj": {
+              "projectPath": "C:\\Users\\aleja\\Documents\\GitHub\\Android\\2048_API_CORE\\2048_API_CORE_ET\\2048_API_CORE_ET.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\2048_API_CORE_DAL\2048_API_CORE_DAL.csproj" />
+    <ProjectReference Include="..\2048_API_CORE_ET\2048_API_CORE_ET.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -495,16 +495,7 @@ public class JuegoActivity extends AppCompatActivity {
         }
 
         //Eliminar los asteriscos de cada columna
-        for (int i = 0; i < tablero.getTabla().length; i++)
-        {
-            for (int j = 0; j < tablero.getTabla()[0].length; j++)
-            {
-                if (tablero.getTabla()[i][j].contains("*"))
-                {
-                    tablero.getTabla()[i][j] = tablero.getTabla()[i][j].replace("*", "");
-                }
-            }
-        }
+        eliminarAsteriscos();
     }
 
     public void moverFilaArriba ()
@@ -630,16 +621,7 @@ public class JuegoActivity extends AppCompatActivity {
         }
 
         //Eliminar los asteriscos de cada columna
-        for (int i = 0; i < tablero.getTabla().length; i++)
-        {
-            for (int j = 0; j < tablero.getTabla()[0].length; j++)
-            {
-                if (tablero.getTabla()[i][j].contains("*"))
-                {
-                    tablero.getTabla()[i][j] = tablero.getTabla()[i][j].replace("*", "");
-                }
-            }
-        }
+        eliminarAsteriscos();
 
 
     }
@@ -768,16 +750,7 @@ public class JuegoActivity extends AppCompatActivity {
         }
 
         //Eliminar los asteriscos de cada columna
-        for (int i = 0; i < tablero.getTabla().length; i++)
-        {
-            for (int j = 0; j < tablero.getTabla()[0].length; j++)
-            {
-                if (tablero.getTabla()[i][j].contains("*"))
-                {
-                    tablero.getTabla()[i][j] = tablero.getTabla()[i][j].replace("*", "");
-                }
-            }
-        }
+        eliminarAsteriscos();
     }
 
     public void crearUI ()

@@ -1,0 +1,13 @@
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\bin\Debug\netcoreapp2.0\2048_API_CORE_DAL.deps.json
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\bin\Debug\netcoreapp2.0\2048_API_CORE_DAL.dll
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\bin\Debug\netcoreapp2.0\2048_API_CORE_DAL.pdb
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\bin\Debug\netcoreapp2.0\2048_API_CORE_ET.dll
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\bin\Debug\netcoreapp2.0\System.Data.SqlClient.dll
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\bin\Debug\netcoreapp2.0\2048_API_CORE_ET.pdb
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\bin\Debug\netcoreapp2.0\System.Data.SqlClient.xml
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\obj\Debug\netcoreapp2.0\2048_API_CORE_DAL.csprojResolveAssemblyReference.cache
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\obj\Debug\netcoreapp2.0\2048_API_CORE_DAL.csproj.CoreCompileInputs.cache
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\obj\Debug\netcoreapp2.0\2048_API_CORE_DAL.AssemblyInfoInputs.cache
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\obj\Debug\netcoreapp2.0\2048_API_CORE_DAL.AssemblyInfo.cs
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\obj\Debug\netcoreapp2.0\2048_API_CORE_DAL.dll
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_DAL\obj\Debug\netcoreapp2.0\2048_API_CORE_DAL.pdb

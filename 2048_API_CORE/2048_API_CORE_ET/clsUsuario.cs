@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace 2048_API_CORE_ET
+namespace _2048_API_CORE_ET
 {
-    class clsUsuario
+    public class clsUsuario
     {
+        public String id { get; set; }
+        public int highscore { get; set; }
     }
 }
