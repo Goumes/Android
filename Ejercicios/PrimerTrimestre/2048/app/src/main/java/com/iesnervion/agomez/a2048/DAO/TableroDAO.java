@@ -8,8 +8,6 @@ import android.arch.persistence.room.Update;
 
 import com.iesnervion.agomez.a2048.Entities.Tablero;
 
-import java.util.List;
-
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
 /**
@@ -35,5 +33,4 @@ public interface TableroDAO
     */
     @Update
     void updateTablero (Tablero tablero);
-
 }
