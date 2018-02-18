@@ -10,4 +10,8 @@
     <string name="btnReiniciar">Reiniciar</string>
     <string name="valorCelda"></string>
     <string name="preference_file_key">clave</string>
+    <string name="txtUser">Usuario:</string>
+    <string name="valorUser">pepejava</string>
+    <string name="valorListaHighscore">99999</string>
+    <string name="txtHighscore">Highscore:</string>
 </resources>
