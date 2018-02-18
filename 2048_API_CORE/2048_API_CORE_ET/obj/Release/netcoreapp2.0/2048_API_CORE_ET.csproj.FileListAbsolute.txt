@@ -1,0 +1,9 @@
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_ET\bin\Release\netcoreapp2.0\2048_API_CORE_ET.deps.json
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_ET\bin\Release\netcoreapp2.0\2048_API_CORE_ET.dll
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_ET\bin\Release\netcoreapp2.0\2048_API_CORE_ET.pdb
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_ET\obj\Release\netcoreapp2.0\2048_API_CORE_ET.csprojResolveAssemblyReference.cache
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_ET\obj\Release\netcoreapp2.0\2048_API_CORE_ET.csproj.CoreCompileInputs.cache
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_ET\obj\Release\netcoreapp2.0\2048_API_CORE_ET.AssemblyInfoInputs.cache
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_ET\obj\Release\netcoreapp2.0\2048_API_CORE_ET.AssemblyInfo.cs
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_ET\obj\Release\netcoreapp2.0\2048_API_CORE_ET.dll
+C:\Users\aleja\Documents\GitHub\Android\2048_API_CORE\2048_API_CORE_ET\obj\Release\netcoreapp2.0\2048_API_CORE_ET.pdb
