@@ -25,4 +25,11 @@ public class MainActivity extends AppCompatActivity {
         //i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(i);
     }
+
+    public void clickPuntuaciones(View view)
+    {
+        Intent i = new Intent (this, PuntuacionesActivity.class);
+        //i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(i);
+    }
 }
