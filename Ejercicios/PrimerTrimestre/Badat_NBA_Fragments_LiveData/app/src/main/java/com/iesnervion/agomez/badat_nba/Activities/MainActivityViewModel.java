@@ -25,7 +25,8 @@ public class MainActivityViewModel extends AndroidViewModel //Si no se usa appli
 
     private MutableLiveData<Equipo> equipoSeleccionado;
 
-    public MainActivityViewModel(Application application) {
+    public MainActivityViewModel(Application application)
+    {
         super(application);
         //createDb();
 

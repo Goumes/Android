@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ExamenFinalAñoPasado</string>
+    <string name="btnAdd">Añadir</string>
+    <string name="btnSearch">Consultar</string>
+    <string name="nombreValue">Nombre</string>
+    <string name="telefono">954224444</string>
+    <string name="txtNombre">Nombre:</string>
+    <string name="txtEdad">Edad:</string>
+    <string name="txtTelefono">Telefono:</string>
+    <string name="radioHombre">Hombre</string>
+    <string name="radioMujer">Mujer</string>
+    <string name="btnCrear">Aceptar</string>
+    <string name="txtEditar">Editar</string>
+</resources>
