@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Examen_Final_Alejandro_Gomez</string>
+    <string name="btnInsertar">Insertar</string>
+    <string name="btnListar">Listar</string>
+    <string name="txtNombreFutbolista">Nombre:</string>
+    <string name="nombreFutbolistaFila">Messi</string>
+    <string name="txtPosicion1Fila">Posiciones:</string>
+    <string name="posicion1Fila">Delantero</string>
+    <string name="txtPosicion2Fila">Posicion 2:</string>
+    <string name="posicion2Fila">Defensa</string>
+    <string name="txtInsertNombre">Nombre:</string>
+    <string name="txtInsertApellido">Apellido:</string>
+    <string name="btnAdd">Añadir</string>
+    <string name="txtPosicionFila">Posiciones</string>
+    <string name="posicionFila">DEF, DEL, POR, CEN</string>
+    <string name="checkboxDEL">Delantero</string>
+    <string name="checkboxPOR">Portero</string>
+    <string name="checkboxDEF">Defensa</string>
+    <string name="checkboxCEN">Centrocampista</string>
+</resources>
