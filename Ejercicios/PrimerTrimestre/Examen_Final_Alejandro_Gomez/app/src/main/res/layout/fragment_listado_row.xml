@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:id="@+id/linearNombreRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/nombreFutbolistaFila"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombreFutbolistaFila"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearPosicion1Row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@id/linearNombreRow">
+
+        <TextView
+            android:id="@+id/posicionFila"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/posicionFila"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>
