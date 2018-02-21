@@ -38,7 +38,7 @@ public class SearchFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view;
+        final View view;
         view = inflater.inflate(R.layout.search_fragment, container, false);
 
         mViewModel = ViewModelProviders.of(getActivity()).get(MainActivityVM.class);
@@ -49,7 +49,7 @@ public class SearchFragment extends Fragment
             @Override
             public void onChanged(@NonNull final List<Contact> contacts2) {
                 contacts = contacts2;
-                adapter = new Adapter(getActivity(), R.layout.row_contact, contacts);
+                adapter = new Adapter(view.getContext(), R.layout.row_contact, contacts);
                 lista.setAdapter(adapter);
             }
         });
@@ -63,4 +63,5 @@ public class SearchFragment extends Fragment
 
         return view;
     }
+
 }
