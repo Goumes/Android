@@ -2,6 +2,7 @@ package com.iesnervion.agomez.a2048.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -34,6 +35,11 @@ public class PuntuacionesActivity extends AppCompatActivity
 
         usuarios = new ArrayList<>();
         lista = findViewById(R.id.listPuntuaciones);
+
+        //String user = "holaGomes"
+        //String pass = "ripamigo"
+        //String base = user+ ":"+ pass;
+        //String authHeader = "Basic "+ Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
 
         loadUsers();
     }
