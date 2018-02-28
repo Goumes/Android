@@ -3,9 +3,12 @@ package com.iesnervion.agomez.pruebaanimaciontextswitcher;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.TextSwitcher;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     TextSwitcher switcher1;
@@ -174,32 +177,102 @@ public class MainActivity extends AppCompatActivity {
         crearUI();
 
         int delay = 0;
-        int contador = 0;
+        int counter = 0;
+
+        /*
+         if (!(tablero.getTabla()[i][j + 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 1])) && ((!tablero.getTabla()[i][j].contains("*")) && ((!tablero.getTabla()[i][j + 1].contains("*")))))
+                    {
+                        if (contador == 1)
+                        {
+                            delay = 40;
+                        }
+
+                        else if (contador == 2)
+                        {
+                            delay = 80;
+                        }
+
+                        else if (contador == 3)
+                        {
+                            delay = 120;
+                        }
+
+                        tablero.getTabla()[i][j + 1] =  String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
+                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j + 1]));
+                        tablero.getTabla()[i][j] = String.valueOf(0);
+                        tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j + 1] + "*";
+
+                        textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
+                        textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
+                        textos[i][j + 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
+                        textos[i][j + 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_right));
+
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            int i;
+                            int j;
+                            String textoActual;
+                            String textoSiguiente;
+
+                            @Override
+                            public void run()
+                            {
+                                reiniciarUI(i, j, textoActual, textoSiguiente, 'r');
+                            }
+
+                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                            {
+                                this.i = i;
+                                this.j = j;
+                                this.textoActual = textoActual;
+                                this.textoSiguiente = textoSiguiente;
+                                return (this);
+                            }
+                        }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j + 1]), delay);
+                        contador++;
+
+                        i = 0;
+                        j = -1;
+        */
 
 
         //Con la J yendo en su sentido natural
 
+        /*
+        int delayAcumulado = 0;
         for (int i = 0; i < switchers.length; i++)
         {
             for (int j = 0; j < switchers[0].length; j++)
             {
                 if ((j + 1 < switchers[0].length))
                 {
+                    Log.d("i", String.valueOf(i));
+                    Log.d("j", String.valueOf(j));
+
                     if (contador == 1)
                     {
-                        delay = 80;
+                        delay = 40;
+
                     } else if (contador == 2)
                     {
-                        delay = 160;
+                        delay = 80;
                     }
 
                     else if (contador == 3)
                     {
-                        delay = 240;
+                        delay = 120;
                     }
+                    delayAcumulado = delayAcumulado + delay;
+                    Log.d("delayAcumulado", String.valueOf(delayAcumulado));
 
                     tablero[i][j + 1] = "2";
                     tablero[i][j] = "";
+
+                    switchers[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
+                    switchers[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
+                    switchers[i][j + 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
+                    switchers[i][j + 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
+
 
                     new Handler().postDelayed(new Runnable()
                     {
@@ -207,28 +280,297 @@ public class MainActivity extends AppCompatActivity {
                         int j;
                         String textoActual;
                         String textoSiguiente;
+                        int delay;
 
                         @Override
                         public void run()
                         {
+                            //reiniciarUI(i, j, textoActual, textoSiguiente, 'r');
+                            Log.d("iAsync", String.valueOf(i));
+                            Log.d("jAsync", String.valueOf(j));
+                            Log.d("delayAsync", String.valueOf(delay));
                             actualizarUI(i, j, textoActual, textoSiguiente);
                         }
 
-                        public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                        public Runnable init(int i, int j, String textoActual, String textoSiguiente, int delay)
                         {
                             this.i = i;
                             this.j = j;
                             this.textoActual = textoActual;
                             this.textoSiguiente = textoSiguiente;
+                            this.delay = delay;
                             return (this);
                         }
-                    }.init(i, j, tablero[i][j], tablero[i][j + 1]), delay);
+                    }.init(i, j, tablero[i][j], tablero[i][j + 1], delayAcumulado), delay);
                     contador++;
                 }
             }
 
             contador = 0;
             delay = 0;
+        }
+        */
+        for (int i = 0; i < switchers.length; i++)
+        {
+            for (int j = 0; j < switchers[0].length; j++)
+            {
+                if ((j + 1 < switchers[0].length))
+                {
+                    if (counter == 1)
+                    {
+                        delay = 40;
+
+                    } else if (counter == 2)
+                    {
+                        delay = 80;
+                    }
+
+                    else if (counter == 3)
+                    {
+                        delay = 120;
+                    }
+
+                    tablero[i][j + 1] = "2";
+                    tablero[i][j] = "";
+
+                    switchers[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
+                    switchers[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
+                    switchers[i][j + 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
+                    switchers[i][j + 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
+
+
+                    new Handler().postDelayed(new Runnable()
+                    {
+                        int i;
+                        int j;
+                        String currentText;
+                        String nextText;
+
+                        @Override
+                        public void run()
+                        {
+                            updateUI(i, j, currentText, nextText);
+                        }
+
+                        public Runnable init(int i, int j, String currentText, String nextText)
+                        {
+                            this.i = i;
+                            this.j = j;
+                            this.currentText = currentText;
+                            this.nextText = nextText;
+                            return (this);
+                        }
+                    }.init(i, j, tablero[i][j], tablero[i][j + 1]), delay);
+                    counter++;
+                }
+            }
+
+            counter = 0;
+            delay = 0;
+        }
+    }
+
+
+    public void reiniciarUI (int i, int j, String valorActual, String valorSiguiente, char direccion)
+    {
+        int valorI = 0;
+        int valorJ = 0;
+
+
+        if (valorActual.contains("*") || valorSiguiente.contains("*"))
+        {
+            valorActual = valorActual.replace("*", "");
+            valorSiguiente = valorSiguiente.replace("*", "");
+        }
+
+        configurarCasilla(i, j, valorActual, "reiniciar");
+
+        switch (direccion)
+        {
+            case 'l':
+                valorI = i;
+                valorJ = j - 1;
+                break;
+
+            case 'r':
+                valorI = i;
+                valorJ = j + 1;
+                break;
+
+            case 'u':
+                valorI = i - 1;
+                valorJ = j;
+                break;
+
+            case 'd':
+                valorI = i + 1;
+                valorJ = j;
+                break;
+        }
+
+        configurarCasilla(valorI, valorJ, valorSiguiente, "reiniciar");
+    }
+
+    public void configurarCasilla(int i, int j, String valorActual, String tipo)
+    {
+        if (valorActual.equals("0"))
+        {
+            ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+            ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+
+            if (tipo.equals("crear"))
+            {
+                switchers[i][j].setCurrentText("");
+            }
+            else if (tipo.equals("reiniciar"))
+            {
+                switchers[i][j].setText("");
+            }
+
+        }
+
+        else
+        {
+            switch (valorActual.length())
+            {
+                case 1:
+                    ((TextView)switchers[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    ((TextView)switchers[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    break;
+
+                //Poniendo case1: case2: me petaba, y los he tenido que separar
+                case 2:
+                    ((TextView)switchers[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    ((TextView)switchers[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    break;
+
+                case 3:
+                    ((TextView)switchers[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                    ((TextView)switchers[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                    break;
+
+                case 4:
+                    ((TextView)switchers[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                    ((TextView)switchers[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                    break;
+
+                case 5:
+                    ((TextView)switchers[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                    ((TextView)switchers[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                    break;
+
+                case 6:
+                    ((TextView)switchers[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    ((TextView)switchers[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    break;
+
+                //A ver quien es el listo que llega aquí lol
+                case 7:
+                    ((TextView)switchers[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                    ((TextView)switchers[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                    break;
+
+            }
+
+            if (Integer.valueOf(valorActual) <= 2048) {
+
+                switch (Integer.valueOf(valorActual)) {
+
+                    case 2:
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+                        break;
+
+                    case 4:
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
+                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                        break;
+
+                    case 8:
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_3);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
+                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 16:
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_4);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
+                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 32:
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_5);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
+                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 64:
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_6);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
+                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 128:
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_7);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
+                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 256:
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_8);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
+                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 512:
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_9);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
+                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 1024:
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_10);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
+                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+
+                    case 2048:
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        break;
+                }
+            }
+
+            else
+            {
+                ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_12);
+                ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
+                ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+            }
+
+            if (tipo.equals("crear"))
+            {
+                switchers[i][j].setCurrentText(valorActual);
+            }
+            else if (tipo.equals("reiniciar"))
+            {
+                switchers[i][j].setText(valorActual);
+            }
         }
     }
 
@@ -276,8 +618,12 @@ public class MainActivity extends AppCompatActivity {
         switchers[3][3].setText(tablero[3][3]);
     }
 
-    public void actualizarUI (int i, int j, String textoActual, String textoSiguiente)
+    public void updateUI (int i, int j, String currentText, String nextText)
     {
+        int aux = 0;
+        //aux = j;
+        //j = i;
+        //i = aux;
         /*
         for (int i = 0; i < switchers.length; i++)
         {
@@ -292,8 +638,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         */
-        switchers[i][j].setText(textoActual);
-        switchers[i][j + 1].setText(textoSiguiente);
+        switchers[i][j].setText(currentText);
+        switchers[i][j + 1].setText(nextText);
 
         /*
         switchers[0][0].setText(tablero[0][0]);

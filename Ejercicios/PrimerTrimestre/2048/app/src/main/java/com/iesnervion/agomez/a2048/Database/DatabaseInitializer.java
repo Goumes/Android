@@ -80,7 +80,7 @@ public class DatabaseInitializer {
                 }
             }
         }
-        
+
 
         addTablero(db, 0, tabla);
 
