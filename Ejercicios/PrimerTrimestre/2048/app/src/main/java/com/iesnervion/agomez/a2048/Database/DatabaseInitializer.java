@@ -37,11 +37,20 @@ public class DatabaseInitializer {
     private static void populateWithTestData(AppDatabase db) {
         db.tableroDAO().deleteAll ();
 
+        /*
         String [][] tabla =  {
                 {String.valueOf(0), String.valueOf(2), String.valueOf(64), String.valueOf(512)},
                 {String.valueOf(8), String.valueOf(4), String.valueOf(32), String.valueOf(8)},
                 {String.valueOf(4), String.valueOf(8), String.valueOf(128), String.valueOf(16)},
                 {String.valueOf(2), String.valueOf(16), String.valueOf(256), String.valueOf(2)}
+        };
+        */
+
+        String [][] tabla =  {
+                {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
+                {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
+                {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
+                {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)}
         };
 
         Random random = new Random();
@@ -49,7 +58,7 @@ public class DatabaseInitializer {
         int contador = 0;
         boolean generar = false;
 
-        /*
+
 
         for (int i = 0; i < tabla.length && contador < 2; i++)
         {
@@ -71,7 +80,7 @@ public class DatabaseInitializer {
                 }
             }
         }
-        */
+        
 
         addTablero(db, 0, tabla);
 
