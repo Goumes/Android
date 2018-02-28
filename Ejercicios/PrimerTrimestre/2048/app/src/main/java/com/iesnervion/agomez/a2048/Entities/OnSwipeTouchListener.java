@@ -1,11 +1,13 @@
 package com.iesnervion.agomez.a2048.Entities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+
 
 public class OnSwipeTouchListener implements OnTouchListener {
 

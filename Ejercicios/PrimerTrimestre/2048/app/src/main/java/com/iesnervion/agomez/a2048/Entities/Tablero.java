@@ -29,8 +29,16 @@ public class Tablero
         this.id = 0;
     }
 
-    public Tablero(String[][] tabla) {
-        this.tabla = tabla;
+    public Tablero(String[][] tabla)
+    {
+        this.tabla = new String[tabla.length][tabla[0].length];
+        for (int i = 0; i < tabla.length; i++)
+        {
+            for (int j = 0; j < tabla[0].length; j++)
+            {
+                this.tabla[i][j] = tabla[i][j];
+            }
+        }
     }
 
     public String[][] getTabla() {
@@ -39,6 +47,40 @@ public class Tablero
 
     public void setTabla(String[][] tabla) {
         this.tabla = tabla;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean resultado = true;
+
+        if (obj != null && obj instanceof  Tablero)
+        {
+            Tablero tablero = (Tablero) obj;
+
+            if ((tablero.getTabla().length == this.getTabla().length) && (tablero.getTabla()[0].length == this.getTabla()[0].length))
+            {
+                for (int i = 0; i < tablero.getTabla().length && resultado; i++)
+                {
+                    for (int j = 0; j < tablero.getTabla()[0].length && resultado; j++)
+                    {
+                        if (!tablero.getTabla()[i][j].equals(this.getTabla()[i][j]))
+                        {
+                            resultado = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return resultado;
     }
 
     public void rellenarTablero ()
@@ -77,13 +119,5 @@ public class Tablero
         }
 
         this.tabla = tabla;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

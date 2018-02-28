@@ -38,16 +38,18 @@ public class DatabaseInitializer {
         db.tableroDAO().deleteAll ();
 
         String [][] tabla =  {
-                {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
-                {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
-                {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
-                {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)}
+                {String.valueOf(4), String.valueOf(2), String.valueOf(4), String.valueOf(2)},
+                {String.valueOf(8), String.valueOf(4), String.valueOf(2), String.valueOf(4)},
+                {String.valueOf(4), String.valueOf(2), String.valueOf(4), String.valueOf(2)},
+                {String.valueOf(2), String.valueOf(4), String.valueOf(2), String.valueOf(4)}
         };
 
         Random random = new Random();
         int numeroAleatorio = 0;
         int contador = 0;
         boolean generar = false;
+
+        /*
 
         for (int i = 0; i < tabla.length && contador < 2; i++)
         {
@@ -69,6 +71,7 @@ public class DatabaseInitializer {
                 }
             }
         }
+        */
 
         addTablero(db, 0, tabla);
 

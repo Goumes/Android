@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="30dp"
+    android:background="@color/background">
+
+    <TextView
+        android:id="@+id/txtFinPartida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtFinPartida"
+        android:textColor="@color/fuenteNegra"
+        android:textSize="25dp"/>
+
+    <LinearLayout
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/txtFinPartida"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtScore"
+            android:textSize="30dp"
+            android:textColor="@color/fuenteNegra"/>
+        <TextView
+            android:id="@+id/valorDialogScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/valorScore"
+            android:textSize="30dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/fuenteNegra"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAceptar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnAceptar"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/info"
+        android:background="@drawable/shape_boton_claro"/>
+
+</RelativeLayout>

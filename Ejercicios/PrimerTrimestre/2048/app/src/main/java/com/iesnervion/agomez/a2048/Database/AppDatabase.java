@@ -33,7 +33,7 @@ public abstract class AppDatabase extends RoomDatabase
             {
                 if (INSTANCE == null)
                 {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "equipo_database.db")
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "tablero_database.db")
                             //.allowMainThreadQueries() //Esto es para que se puedan hacer querys desde el main
                             .addCallback(new Callback() {
                                 @Override

@@ -14,4 +14,7 @@
     <string name="valorUser">pepejava</string>
     <string name="valorListaHighscore">99999</string>
     <string name="txtHighscore">Highscore:</string>
+    <string name="btnAceptar">Aceptar</string>
+    <string name="txtFinPartida">Se acabó la partida</string>
+    <string name="txtScore">Score:</string>
 </resources>
