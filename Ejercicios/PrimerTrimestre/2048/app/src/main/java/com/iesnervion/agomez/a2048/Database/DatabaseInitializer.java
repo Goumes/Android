@@ -38,10 +38,10 @@ public class DatabaseInitializer {
         db.tableroDAO().deleteAll ();
 
         String [][] tabla =  {
-                {String.valueOf(4), String.valueOf(2), String.valueOf(4), String.valueOf(2)},
-                {String.valueOf(8), String.valueOf(4), String.valueOf(2), String.valueOf(4)},
-                {String.valueOf(4), String.valueOf(2), String.valueOf(4), String.valueOf(2)},
-                {String.valueOf(2), String.valueOf(4), String.valueOf(2), String.valueOf(4)}
+                {String.valueOf(0), String.valueOf(2), String.valueOf(64), String.valueOf(512)},
+                {String.valueOf(8), String.valueOf(4), String.valueOf(32), String.valueOf(8)},
+                {String.valueOf(4), String.valueOf(8), String.valueOf(128), String.valueOf(16)},
+                {String.valueOf(2), String.valueOf(16), String.valueOf(256), String.valueOf(2)}
         };
 
         Random random = new Random();

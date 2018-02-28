@@ -112,35 +112,35 @@ public class JuegoActivity extends AppCompatActivity {
 
         row00 = findViewById(R.id.txt_0_0);
         textos[0][0] = row00;
-        row01 = findViewById(R.id.txt_0_1);;
+        row01 = findViewById(R.id.txt_0_1);
         textos[0][1] = row01;
-        row02 = findViewById(R.id.txt_0_2);;
+        row02 = findViewById(R.id.txt_0_2);
         textos[0][2] = row02;
-        row03 = findViewById(R.id.txt_0_3);;
+        row03 = findViewById(R.id.txt_0_3);
         textos[0][3] = row03;
-        row10 = findViewById(R.id.txt_1_0);;
+        row10 = findViewById(R.id.txt_1_0);
         textos[1][0] = row10;
-        row11 = findViewById(R.id.txt_1_1);;
+        row11 = findViewById(R.id.txt_1_1);
         textos[1][1] = row11;
-        row12 = findViewById(R.id.txt_1_2);;
+        row12 = findViewById(R.id.txt_1_2);
         textos[1][2] = row12;
-        row13 = findViewById(R.id.txt_1_3);;
+        row13 = findViewById(R.id.txt_1_3);
         textos[1][3] = row13;
-        row20 = findViewById(R.id.txt_2_0);;
+        row20 = findViewById(R.id.txt_2_0);
         textos[2][0] = row20;
-        row21 = findViewById(R.id.txt_2_1);;
+        row21 = findViewById(R.id.txt_2_1);
         textos[2][1] = row21;
-        row22 = findViewById(R.id.txt_2_2);;
+        row22 = findViewById(R.id.txt_2_2);
         textos[2][2] = row22;
-        row23 = findViewById(R.id.txt_2_3);;
+        row23 = findViewById(R.id.txt_2_3);
         textos[2][3] = row23;
-        row30 = findViewById(R.id.txt_3_0);;
+        row30 = findViewById(R.id.txt_3_0);
         textos[3][0] = row30;
-        row31 = findViewById(R.id.txt_3_1);;
+        row31 = findViewById(R.id.txt_3_1);
         textos[3][1] = row31;
-        row32 = findViewById(R.id.txt_3_2);;
+        row32 = findViewById(R.id.txt_3_2);
         textos[3][2] = row32;
-        row33 = findViewById(R.id.txt_3_3);;
+        row33 = findViewById(R.id.txt_3_3);
         textos[3][3] = row33;
 
         linearRow00 = findViewById(R.id.linear_0_0);
@@ -190,107 +190,90 @@ public class JuegoActivity extends AppCompatActivity {
             public void onSwipeTop() {
                 tableroAuxiliar = new Tablero(tablero.getTabla());
                 moverFilaArriba();
-
-                if (!comprobarContinuar())
+                if (!tableroAuxiliar.equals(tablero))
                 {
-                    acabarPartida();
-                }
-
-                else
-                {
-                    if (!tableroAuxiliar.equals(tablero))
+                    new Handler().postDelayed(new Runnable()
                     {
-                        new Handler().postDelayed(new Runnable()
+                        @Override
+                        public void run()
                         {
-                            @Override
-                            public void run()
+                            generarNumeroAleatorio ();
+                            if (!comprobarContinuar())
                             {
-                                generarNumeroAleatorio ();
+                                acabarPartida();
                             }
+                        }
 
-                        }, 340);
-                    }
-
-                    tableroAuxiliar = new Tablero(tablero.getTabla());
+                    }, 200);
                 }
+
+                tableroAuxiliar = new Tablero(tablero.getTabla());
             }
             public void onSwipeRight() {
                 tableroAuxiliar = new Tablero(tablero.getTabla());
                 moverFilaDerecha();
-                if (!comprobarContinuar())
+                if (!tableroAuxiliar.equals(tablero))
                 {
-                    acabarPartida();
-                }
-
-                else
-                {
-                    if (!tableroAuxiliar.equals(tablero))
+                    new Handler().postDelayed(new Runnable()
                     {
-                        new Handler().postDelayed(new Runnable()
+                        @Override
+                        public void run()
                         {
-                            @Override
-                            public void run()
+                            generarNumeroAleatorio ();
+                            if (!comprobarContinuar())
                             {
-                                generarNumeroAleatorio ();
+                                acabarPartida();
                             }
+                        }
 
-                        }, 340);
-                    }
-
-                    tableroAuxiliar = new Tablero(tablero.getTabla());
+                    }, 200);
                 }
+
+                tableroAuxiliar = new Tablero(tablero.getTabla());
             }
             public void onSwipeLeft() {
                 tableroAuxiliar = new Tablero(tablero.getTabla());
                 moverFilaIzquierda();
-                if (!comprobarContinuar())
+                if (!tableroAuxiliar.equals(tablero))
                 {
-                    acabarPartida();
-                }
-
-                else
-                {
-                    if (!tableroAuxiliar.equals(tablero))
+                    new Handler().postDelayed(new Runnable()
                     {
-                        new Handler().postDelayed(new Runnable()
+                        @Override
+                        public void run()
                         {
-                            @Override
-                            public void run()
+                            generarNumeroAleatorio ();
+                            if (!comprobarContinuar())
                             {
-                                generarNumeroAleatorio ();
+                                acabarPartida();
                             }
+                        }
 
-                        }, 340);
-                    }
-
-                    tableroAuxiliar = new Tablero(tablero.getTabla());
+                    }, 200);
                 }
+
+                tableroAuxiliar = new Tablero(tablero.getTabla());
             }
             public void onSwipeBottom() {
                 tableroAuxiliar = new Tablero(tablero.getTabla());
                 moverFilaAbajo();
-                if (!comprobarContinuar())
+                if (!tableroAuxiliar.equals(tablero))
                 {
-                    acabarPartida();
-                }
-
-                else
-                {
-                    if (!tableroAuxiliar.equals(tablero))
+                    new Handler().postDelayed(new Runnable()
                     {
-                        new Handler().postDelayed(new Runnable()
+                        @Override
+                        public void run()
                         {
-                            @Override
-                            public void run()
-                            {
-                                generarNumeroAleatorio ();
+                            generarNumeroAleatorio ();
+                            if (!comprobarContinuar())
+                           {
+                                acabarPartida();
                             }
+                        }
 
-                        }, 340);
-                    }
-
-                    tableroAuxiliar = new Tablero(tablero.getTabla());
+                    }, 200);
                 }
+
+                tableroAuxiliar = new Tablero(tablero.getTabla());
             }
         });
     }
@@ -841,8 +824,14 @@ public class JuegoActivity extends AppCompatActivity {
         {
             switch (valorActual.length())
             {
-                case 1: case2:
-                ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                case 1:
+                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    break;
+
+                    //Poniendo case1: case2: me petaba, y los he tenido que separar
+                case 2:
+                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
                     ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
                     break;
 
@@ -1022,6 +1011,7 @@ public class JuegoActivity extends AppCompatActivity {
         int numeroAleatorio = 0;
         boolean generado = false;
         boolean generar = false;
+        boolean ending = false;
 
         for (int i = 0; i < tablero.getTabla().length && !generado; i++)
         {
@@ -1029,7 +1019,7 @@ public class JuegoActivity extends AppCompatActivity {
             {
                 generar = Math.random() < 0.3;
 
-                if (tablero.getTabla()[i][j].equals("0") && generar)
+                if ((tablero.getTabla()[i][j].equals("0") && generar) || ((tablero.getTabla()[i][j].equals("0") && ending)))
                 {
                     numeroAleatorio = (Math.random() >= .9 ? 4 : 2); //Crea un aleatorio ya sea 2 o 4 con un 90% de probabilidad de que sea un 2
                     tablero.getTabla()[i][j] = String.valueOf(numeroAleatorio);
@@ -1039,10 +1029,11 @@ public class JuegoActivity extends AppCompatActivity {
                     generado = true;
                 }
 
-                if (i == 3 && j == 3 && !generar)
+                if (i == 3 && j == 3 && !generado)
                 {
                     i = 0;
-                    j = 0;
+                    j = -1;
+                    ending = true;
                 }
             }
         }
