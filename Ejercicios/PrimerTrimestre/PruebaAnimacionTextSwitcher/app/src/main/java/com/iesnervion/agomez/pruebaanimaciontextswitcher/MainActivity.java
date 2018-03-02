@@ -318,20 +318,21 @@ public class MainActivity extends AppCompatActivity {
                 {
                     if (counter == 1)
                     {
-                        delay = 40;
+                        delay = 200;
+                    }
 
-                    } else if (counter == 2)
+                    else if (counter == 2)
                     {
-                        delay = 80;
+                        delay = 400;
                     }
 
                     else if (counter == 3)
                     {
-                        delay = 120;
+                        delay = 600;
                     }
 
                     tablero[i][j + 1] = "2";
-                    tablero[i][j] = "";
+                    tablero[i][j] = "0";
 
                     switchers[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
                     switchers[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
@@ -349,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run()
                         {
-                            updateUI(i, j, currentText, nextText);
+                            reiniciarUI(i, j, currentText, nextText, 'r');
                         }
 
                         public Runnable init(int i, int j, String currentText, String nextText)
@@ -413,20 +414,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void configurarCasilla(int i, int j, String valorActual, String tipo)
     {
-        if (valorActual.equals("0"))
+        if (valorActual.equals("0") && tipo.equals("reiniciar"))
         {
-            ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
-            ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+            //((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+            ((TextView)switchers[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_0);
+            switchers[i][j].setText("");
 
-            if (tipo.equals("crear"))
-            {
-                switchers[i][j].setCurrentText("");
-            }
-            else if (tipo.equals("reiniciar"))
-            {
-                switchers[i][j].setText("");
-            }
+        }
 
+        else if (valorActual.equals("0") && tipo.equals("crear"))
+        {
+            ((TextView)switchers[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_0);
+            switchers[i][j].setCurrentText("");
         }
 
         else
@@ -477,77 +476,85 @@ public class MainActivity extends AppCompatActivity {
                 switch (Integer.valueOf(valorActual)) {
 
                     case 2:
-                        ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
-                        ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
-                        ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)switchers[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                            ((TextView)switchers[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_1);
+                        }
+                        else
+                        {
+                            ((TextView)switchers[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                            ((TextView)switchers[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_1);
+                        }
+
                         break;
 
                     case 4:
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
+                        //((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
                         ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
                         ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
                         break;
 
                     case 8:
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_3);
+                        //((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_3);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
                         ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         break;
 
                     case 16:
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_4);
+                       // ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_4);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
                         ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         break;
 
                     case 32:
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_5);
+                        //((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_5);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
                         ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         break;
 
                     case 64:
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_6);
+                       // ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_6);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
                         ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         break;
 
                     case 128:
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_7);
+                       // ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_7);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
                         ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         break;
 
                     case 256:
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_8);
+                      //  ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_8);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
                         ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         break;
 
                     case 512:
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_9);
+                      //  ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_9);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
                         ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         break;
 
                     case 1024:
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_10);
+                       // ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_10);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
                         ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         break;
 
                     case 2048:
-                        ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
+                     //   ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                         ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
                         ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
@@ -557,7 +564,7 @@ public class MainActivity extends AppCompatActivity {
 
             else
             {
-                ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_12);
+              //  ((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_12);
                 ((TextView)switchers[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
                 ((TextView)switchers[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
                 ((TextView)switchers[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
@@ -616,6 +623,38 @@ public class MainActivity extends AppCompatActivity {
         switchers[3][1].setText(tablero[3][1]);
         switchers[3][2].setText(tablero[3][2]);
         switchers[3][3].setText(tablero[3][3]);
+
+        ((TextView)switchers[0][0].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+        ((TextView)switchers[0][0].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+        ((TextView)switchers[0][0].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+        ((TextView)switchers[0][0].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+
+        ((TextView)switchers[0][3].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+        ((TextView)switchers[0][3].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+
+        ((TextView)switchers[1][0].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+        ((TextView)switchers[1][0].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+        ((TextView)switchers[1][0].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+        ((TextView)switchers[1][0].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+
+        ((TextView)switchers[1][3].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+        ((TextView)switchers[1][3].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+
+        ((TextView)switchers[2][0].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+        ((TextView)switchers[2][0].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+        ((TextView)switchers[2][0].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+        ((TextView)switchers[2][0].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+
+        ((TextView)switchers[2][3].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+        ((TextView)switchers[2][3].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+
+        ((TextView)switchers[3][0].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+        ((TextView)switchers[3][0].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
+        ((TextView)switchers[3][0].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+        ((TextView)switchers[3][0].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+
+        ((TextView)switchers[3][3].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+        ((TextView)switchers[3][3].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
     }
 
     public void updateUI (int i, int j, String currentText, String nextText)

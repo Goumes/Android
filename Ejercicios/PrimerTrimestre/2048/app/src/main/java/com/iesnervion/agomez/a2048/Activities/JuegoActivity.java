@@ -198,7 +198,7 @@ public class JuegoActivity extends AppCompatActivity {
                             }
                         }
 
-                    }, 200);
+                    }, 150);
                 }
 
                 tableroAuxiliar = new Tablero(tablero.getTabla());
@@ -220,7 +220,7 @@ public class JuegoActivity extends AppCompatActivity {
                             }
                         }
 
-                    }, 200);
+                    }, 150);
                 }
 
                 tableroAuxiliar = new Tablero(tablero.getTabla());
@@ -242,7 +242,7 @@ public class JuegoActivity extends AppCompatActivity {
                             }
                         }
 
-                    }, 200);
+                    }, 150);
                 }
 
                 tableroAuxiliar = new Tablero(tablero.getTabla());
@@ -264,7 +264,7 @@ public class JuegoActivity extends AppCompatActivity {
                             }
                         }
 
-                    }, 200);
+                    }, 150);
                 }
 
                 tableroAuxiliar = new Tablero(tablero.getTabla());
@@ -282,6 +282,7 @@ public class JuegoActivity extends AppCompatActivity {
     public void moverFilaDerecha ()
     {
         int delay = 0;
+        int contador = 0;
 
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
@@ -291,25 +292,21 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if (!(tablero.getTabla()[i][j + 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 1])) && ((!tablero.getTabla()[i][j].contains("*")) && ((!tablero.getTabla()[i][j + 1].contains("*")))))
                     {
-                        if (j == 0)
+                        if (contador == 1)
                         {
-                            delay = 0;
+                            delay = 50;
                         }
 
-                        else if (j == 1)
+                        else if (contador == 2)
                         {
-                            delay = 40;
+                            delay = 100;
                         }
 
-                        else if (j == 2)
+                        else if (contador == 3)
                         {
-                            delay = 80;
+                            delay = 150;
                         }
-
-                        else if (j == 3)
-                        {
-                            delay = 120;
-                        }
+                        
 
                         tablero.getTabla()[i][j + 1] =  String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j + 1]));
@@ -343,8 +340,8 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j + 1]), delay);
+                        contador++;
 
-                        i = 0;
                         j = -1;
 
                         //Si la casilla actual ha sido mergeada, la siguiente no puede sumarse
@@ -352,26 +349,21 @@ public class JuegoActivity extends AppCompatActivity {
 
                     else if (tablero.getTabla()[i][j + 1].equals(String.valueOf(0)))
                     {
-                        if (j == 0)
+                        if (contador == 1)
                         {
-                            delay = 0;
+                            delay = 50;
                         }
 
-                        else if (j == 1)
+                        else if (contador == 2)
                         {
-                            delay = 40;
+                            delay = 100;
                         }
 
-                        else if (j == 2)
+                        else if (contador == 3)
                         {
-                            delay = 80;
+                            delay = 150;
                         }
-
-                        else if (j == 3)
-                        {
-                            delay = 120;
-                        }
-
+                        
 
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
@@ -402,23 +394,25 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j + 1]), delay);
+                        contador++;
 
-                        i = 0;
                         j = -1;
                     }
                 }
 
             }
 
+            contador = 0;
             delay = 0;
         }
 
-       eliminarAsteriscos();
+        eliminarAsteriscos();
     }
 
     public void moverFilaIzquierda ()
     {
         int delay = 0;
+        int contador = 0;
 
         for (int i = 0; i < tablero.getTabla().length; i++)
         {
@@ -429,27 +423,21 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if ((!tablero.getTabla()[i][j - 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 1])) && ((!tablero.getTabla()[i][j].contains("*")) && (!tablero.getTabla()[i][j - 1].contains("*"))))
                     {
-                        if (j == 3)
+                        if (contador == 1)
                         {
-                            delay = 0;
+                            delay = 50;
                         }
 
-                        else if (j == 2)
+                        else if (contador == 2)
                         {
-                            delay = 40;
+                            delay = 100;
                         }
 
-                        else if (j == 1)
+                        else if (contador == 3)
                         {
-                            delay = 80;
+                            delay = 150;
                         }
-
-                        else if (j == 0)
-                        {
-                            delay = 120;
-                        }
-
-
+                        
                         tablero.getTabla()[i][j - 1] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j - 1]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
@@ -482,32 +470,27 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j - 1]), delay);
-                        i = 0;
+                        contador++;
                         j = 4;
                     }
 
                     else if (tablero.getTabla()[i][j - 1].equals(String.valueOf(0)))
                     {
-                        if (j == 3)
+                        if (contador == 1)
                         {
-                            delay = 0;
+                            delay = 50;
                         }
 
-                        else if (j == 2)
+                        else if (contador == 2)
                         {
-                            delay = 40;
+                            delay = 100;
                         }
 
-                        else if (j == 1)
+                        else if (contador == 3)
                         {
-                            delay = 80;
+                            delay = 150;
                         }
-
-                        else if (j == 0)
-                        {
-                            delay = 120;
-                        }
-
+                        
 
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
@@ -539,12 +522,14 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j - 1]), delay);
+                        contador++;
 
-                        i = 0;
                         j = 4;
                     }
                 }
             }
+            delay = 0;
+            contador = 0;
         }
 
         eliminarAsteriscos();
@@ -553,6 +538,7 @@ public class JuegoActivity extends AppCompatActivity {
     public void moverFilaArriba ()
     {
         int delay = 0;
+        int contador = 0;
 
         for (int i = 0; i < tablero.getTabla().length; i++)
         {
@@ -562,26 +548,21 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if ((!tablero.getTabla()[j - 1][i].equals(String.valueOf(0))) && (tablero.getTabla()[j][i].equals(tablero.getTabla()[j - 1][i])) && ((!tablero.getTabla()[j][i].contains("*")) && (!tablero.getTabla()[j - 1][i].contains("*"))))
                     {
-                        if (j == 3)
+                        if (contador == 1)
                         {
-                            delay = 0;
+                            delay = 50;
                         }
 
-                        else if (j == 2)
+                        else if (contador == 2)
                         {
-                            delay = 40;
+                            delay = 100;
                         }
 
-                        else if (j == 1)
+                        else if (contador == 3)
                         {
-                            delay = 80;
+                            delay = 150;
                         }
-
-                        else if (j == 0)
-                        {
-                            delay = 120;
-                        }
-
+                        
 
                         tablero.getTabla()[j - 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j - 1][i]));
@@ -615,34 +596,28 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j - 1][i]), delay);
+                        contador++;
 
                         j = 4;
-                        i = 0;
                     }
 
                     else if (tablero.getTabla()[j - 1][i].equals(String.valueOf(0)))
                     {
-                        if (j == 3)
+                        if (contador == 1)
                         {
-                            delay = 0;
+                            delay = 50;
                         }
 
-                        else if (j == 2)
+                        else if (contador == 2)
                         {
-                            delay = 40;
+                            delay = 100;
                         }
 
-                        else if (j == 1)
+                        else if (contador == 3)
                         {
-                            delay = 80;
+                            delay = 150;
                         }
-
-                        else if (j == 0)
-                        {
-                            delay = 120;
-                        }
-
-
+                        
                         tablero.getTabla()[j - 1][i] = tablero.getTabla()[j][i];
                         tablero.getTabla()[j][i] = String.valueOf(0);
 
@@ -673,12 +648,14 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j - 1][i]), delay);
+                        contador++;
 
                         j = 4;
-                        i = 0;
                     }
                 }
             }
+            delay = 0;
+            contador = 0;
         }
 
         eliminarAsteriscos();
@@ -687,6 +664,7 @@ public class JuegoActivity extends AppCompatActivity {
     public void moverFilaAbajo ()
     {
         int delay = 0;
+        int contador = 0;
 
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
@@ -696,26 +674,21 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if ((!tablero.getTabla()[j + 1][i].equals(String.valueOf(0))) && (tablero.getTabla()[j][i].equals(tablero.getTabla()[j + 1][i])) && ((!tablero.getTabla()[j][i].contains("*")) && (!tablero.getTabla()[j + 1][i].contains("*"))))
                     {
-                        if (j == 0)
+                        if (contador == 1)
                         {
-                            delay = 0;
+                            delay = 50;
                         }
 
-                        else if (j == 1)
+                        else if (contador == 2)
                         {
-                            delay = 40;
+                            delay = 100;
                         }
 
-                        else if (j == 2)
+                        else if (contador == 3)
                         {
-                            delay = 80;
+                            delay = 150;
                         }
-
-                        else if (j == 3)
-                        {
-                            delay = 120;
-                        }
-
+                        
 
                         tablero.getTabla()[j + 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j + 1][i]));
@@ -749,34 +722,29 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j + 1][i]), delay);
+                        contador++;
 
-                        i = 0;
                         j = -1;
 
                     }
 
                     else if (tablero.getTabla()[j + 1][i].equals(String.valueOf(0)))
                     {
-                        if (j == 0)
+                        if (contador == 1)
                         {
-                            delay = 0;
+                            delay = 50;
                         }
 
-                        else if (j == 1)
+                        else if (contador == 2)
                         {
-                            delay = 40;
+                            delay = 100;
                         }
 
-                        else if (j == 2)
+                        else if (contador == 3)
                         {
-                            delay = 80;
+                            delay = 150;
                         }
-
-                        else if (j == 3)
-                        {
-                            delay = 120;
-                        }
-
+                        
 
                         tablero.getTabla()[j + 1][i] = tablero.getTabla()[j][i];
                         tablero.getTabla()[j][i] = String.valueOf(0);
@@ -808,12 +776,14 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j + 1][i]), delay);
+                        contador++;
 
-                        i = 0;
                         j = -1;
                     }
                 }
             }
+            delay = 0;
+            contador = 0;
         }
 
         eliminarAsteriscos();
@@ -832,20 +802,18 @@ public class JuegoActivity extends AppCompatActivity {
 
     public void configurarCasilla(int i, int j, String valorActual, String tipo)
     {
-        if (valorActual.equals("0"))
+        if (valorActual.equals("0") && tipo.equals("reiniciar"))
         {
-            ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
-            ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_0);
+            //((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
+            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_0);
+            textos[i][j].setText("");
 
-            if (tipo.equals("crear"))
-            {
-                textos[i][j].setCurrentText("");
-            }
-            else if (tipo.equals("reiniciar"))
-            {
-                textos[i][j].setText("");
-            }
+        }
 
+        else if (valorActual.equals("0") && tipo.equals("crear"))
+        {
+            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_0);
+            textos[i][j].setCurrentText("");
         }
 
         else
@@ -896,90 +864,162 @@ public class JuegoActivity extends AppCompatActivity {
                 switch (Integer.valueOf(valorActual)) {
 
                     case 2:
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_1);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_1);
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_1);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_1);
+                        }
                         break;
 
                     case 4:
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_2);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteNegra));
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_2);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_2);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteNegra));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_2);
+                        }
                         break;
 
                     case 8:
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_3);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_3);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_3);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_3);
+                        }
                         break;
 
                     case 16:
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_4);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_4);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_4);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_4);
+                        }
                         break;
 
                     case 32:
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_5);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_5);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_5);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_5);
+                        }
                         break;
 
                     case 64:
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_6);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_6);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_6);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_6);
+                        }
                         break;
 
                     case 128:
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_7);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_7);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_7);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_7);
+                        }
                         break;
 
                     case 256:
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_8);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_8);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_8);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_8);
+                        }
                         break;
 
                     case 512:
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_9);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_9);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_9);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_9);
+                        }
                         break;
 
                     case 1024:
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_10);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
-                        ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_10);
-                        ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_10);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_10);
+                        }
                         break;
 
                     case 2048:
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
-                        ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_11);
-                        ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                        if (tipo.equals("crear"))
+                        {
+                            ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_11);
+                        }
+                        else
+                        {
+                            ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                            ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_11);
+                        }
                         break;
                 }
             }
 
             else
             {
-                ((TextView)textos[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_12);
-                ((TextView)textos[i][j].getChildAt(0)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
-                ((TextView)textos[i][j].getChildAt(1)).setBackgroundResource(R.drawable.background_tile_12);
-                ((TextView)textos[i][j].getChildAt(1)).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                if (tipo.equals("crear"))
+                {
+                    ((TextView)textos[i][j].getCurrentView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                    ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_12);
+                }
+                else
+                {
+                    ((TextView)textos[i][j].getNextView()).setTextColor(getResources().getColor(R.color.fuenteBlanca));
+                    ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_12);
+                }
             }
 
             if (tipo.equals("crear"))
