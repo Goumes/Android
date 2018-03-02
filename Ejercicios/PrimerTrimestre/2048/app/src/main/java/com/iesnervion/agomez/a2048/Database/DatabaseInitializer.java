@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.iesnervion.agomez.a2048.Entities.Tablero;
-import com.iesnervion.agomez.a2048.R;
 
 import java.util.Random;
 
@@ -45,6 +44,8 @@ public class DatabaseInitializer {
                 {String.valueOf(2), String.valueOf(16), String.valueOf(256), String.valueOf(2)}
         };
         */
+
+
 
         String [][] tabla =  {
                 {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},

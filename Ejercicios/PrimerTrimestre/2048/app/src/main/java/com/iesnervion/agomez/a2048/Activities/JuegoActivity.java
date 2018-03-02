@@ -1,30 +1,24 @@
 package com.iesnervion.agomez.a2048.Activities;
 
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.iesnervion.agomez.a2048.AsyncTasks.MyAsyncTask;
 import com.iesnervion.agomez.a2048.Entities.OnSwipeTouchListener;
@@ -288,7 +282,6 @@ public class JuegoActivity extends AppCompatActivity {
     public void moverFilaDerecha ()
     {
         int delay = 0;
-        int contador = 0;
 
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
@@ -298,17 +291,22 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if (!(tablero.getTabla()[i][j + 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 1])) && ((!tablero.getTabla()[i][j].contains("*")) && ((!tablero.getTabla()[i][j + 1].contains("*")))))
                     {
-                        if (contador == 1)
+                        if (j == 0)
+                        {
+                            delay = 0;
+                        }
+
+                        else if (j == 1)
                         {
                             delay = 40;
                         }
 
-                        else if (contador == 2)
+                        else if (j == 2)
                         {
                             delay = 80;
                         }
 
-                        else if (contador == 3)
+                        else if (j == 3)
                         {
                             delay = 120;
                         }
@@ -345,7 +343,6 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j + 1]), delay);
-                        contador++;
 
                         i = 0;
                         j = -1;
@@ -355,20 +352,26 @@ public class JuegoActivity extends AppCompatActivity {
 
                     else if (tablero.getTabla()[i][j + 1].equals(String.valueOf(0)))
                     {
-                        if (contador == 1)
+                        if (j == 0)
+                        {
+                            delay = 0;
+                        }
+
+                        else if (j == 1)
                         {
                             delay = 40;
                         }
 
-                        else if (contador == 2)
+                        else if (j == 2)
                         {
                             delay = 80;
                         }
 
-                        else if (contador == 3)
+                        else if (j == 3)
                         {
                             delay = 120;
                         }
+
 
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
@@ -399,7 +402,6 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j + 1]), delay);
-                        contador++;
 
                         i = 0;
                         j = -1;
@@ -408,7 +410,6 @@ public class JuegoActivity extends AppCompatActivity {
 
             }
 
-            contador = 0;
             delay = 0;
         }
 
@@ -418,7 +419,6 @@ public class JuegoActivity extends AppCompatActivity {
     public void moverFilaIzquierda ()
     {
         int delay = 0;
-        int contador = 0;
 
         for (int i = 0; i < tablero.getTabla().length; i++)
         {
@@ -429,20 +429,26 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if ((!tablero.getTabla()[i][j - 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 1])) && ((!tablero.getTabla()[i][j].contains("*")) && (!tablero.getTabla()[i][j - 1].contains("*"))))
                     {
-                        if (contador == 1)
+                        if (j == 3)
+                        {
+                            delay = 0;
+                        }
+
+                        else if (j == 2)
                         {
                             delay = 40;
                         }
 
-                        else if (contador == 2)
+                        else if (j == 1)
                         {
                             delay = 80;
                         }
 
-                        else if (contador == 3)
+                        else if (j == 0)
                         {
                             delay = 120;
                         }
+
 
                         tablero.getTabla()[i][j - 1] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j - 1]));
@@ -476,27 +482,32 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j - 1]), delay);
-                        contador++;
                         i = 0;
                         j = 4;
                     }
 
                     else if (tablero.getTabla()[i][j - 1].equals(String.valueOf(0)))
                     {
-                        if (contador == 1)
+                        if (j == 3)
+                        {
+                            delay = 0;
+                        }
+
+                        else if (j == 2)
                         {
                             delay = 40;
                         }
 
-                        else if (contador == 2)
+                        else if (j == 1)
                         {
                             delay = 80;
                         }
 
-                        else if (contador == 3)
+                        else if (j == 0)
                         {
                             delay = 120;
                         }
+
 
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
@@ -528,7 +539,6 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j - 1]), delay);
-                        contador++;
 
                         i = 0;
                         j = 4;
@@ -543,7 +553,6 @@ public class JuegoActivity extends AppCompatActivity {
     public void moverFilaArriba ()
     {
         int delay = 0;
-        int contador = 0;
 
         for (int i = 0; i < tablero.getTabla().length; i++)
         {
@@ -553,20 +562,26 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if ((!tablero.getTabla()[j - 1][i].equals(String.valueOf(0))) && (tablero.getTabla()[j][i].equals(tablero.getTabla()[j - 1][i])) && ((!tablero.getTabla()[j][i].contains("*")) && (!tablero.getTabla()[j - 1][i].contains("*"))))
                     {
-                        if (contador == 1)
+                        if (j == 3)
+                        {
+                            delay = 0;
+                        }
+
+                        else if (j == 2)
                         {
                             delay = 40;
                         }
 
-                        else if (contador == 2)
+                        else if (j == 1)
                         {
                             delay = 80;
                         }
 
-                        else if (contador == 3)
+                        else if (j == 0)
                         {
                             delay = 120;
                         }
+
 
                         tablero.getTabla()[j - 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j - 1][i]));
@@ -600,7 +615,6 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j - 1][i]), delay);
-                        contador++;
 
                         j = 4;
                         i = 0;
@@ -608,20 +622,26 @@ public class JuegoActivity extends AppCompatActivity {
 
                     else if (tablero.getTabla()[j - 1][i].equals(String.valueOf(0)))
                     {
-                        if (contador == 1)
+                        if (j == 3)
+                        {
+                            delay = 0;
+                        }
+
+                        else if (j == 2)
                         {
                             delay = 40;
                         }
 
-                        else if (contador == 2)
+                        else if (j == 1)
                         {
                             delay = 80;
                         }
 
-                        else if (contador == 3)
+                        else if (j == 0)
                         {
                             delay = 120;
                         }
+
 
                         tablero.getTabla()[j - 1][i] = tablero.getTabla()[j][i];
                         tablero.getTabla()[j][i] = String.valueOf(0);
@@ -653,7 +673,6 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j - 1][i]), delay);
-                        contador++;
 
                         j = 4;
                         i = 0;
@@ -668,7 +687,6 @@ public class JuegoActivity extends AppCompatActivity {
     public void moverFilaAbajo ()
     {
         int delay = 0;
-        int contador = 0;
 
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
@@ -678,20 +696,26 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if ((!tablero.getTabla()[j + 1][i].equals(String.valueOf(0))) && (tablero.getTabla()[j][i].equals(tablero.getTabla()[j + 1][i])) && ((!tablero.getTabla()[j][i].contains("*")) && (!tablero.getTabla()[j + 1][i].contains("*"))))
                     {
-                        if (contador == 1)
+                        if (j == 0)
+                        {
+                            delay = 0;
+                        }
+
+                        else if (j == 1)
                         {
                             delay = 40;
                         }
 
-                        else if (contador == 2)
+                        else if (j == 2)
                         {
                             delay = 80;
                         }
 
-                        else if (contador == 3)
+                        else if (j == 3)
                         {
-                            delay = 150;
+                            delay = 120;
                         }
+
 
                         tablero.getTabla()[j + 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j + 1][i]));
@@ -725,7 +749,6 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j + 1][i]), delay);
-                        contador++;
 
                         i = 0;
                         j = -1;
@@ -734,20 +757,26 @@ public class JuegoActivity extends AppCompatActivity {
 
                     else if (tablero.getTabla()[j + 1][i].equals(String.valueOf(0)))
                     {
-                        if (contador == 1)
+                        if (j == 0)
+                        {
+                            delay = 0;
+                        }
+
+                        else if (j == 1)
                         {
                             delay = 40;
                         }
 
-                        else if (contador == 2)
+                        else if (j == 2)
                         {
                             delay = 80;
                         }
 
-                        else if (contador == 3)
+                        else if (j == 3)
                         {
-                            delay = 150;
+                            delay = 120;
                         }
+
 
                         tablero.getTabla()[j + 1][i] = tablero.getTabla()[j][i];
                         tablero.getTabla()[j][i] = String.valueOf(0);
@@ -779,7 +808,6 @@ public class JuegoActivity extends AppCompatActivity {
                                 return (this);
                             }
                         }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j + 1][i]), delay);
-                        contador++;
 
                         i = 0;
                         j = -1;
