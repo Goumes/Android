@@ -283,6 +283,8 @@ public class JuegoActivity extends AppCompatActivity {
     {
         int delay = 0;
         int contador = 0;
+        int jAnterior = 0;
+        String valorAnterior;
 
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
@@ -292,6 +294,11 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if (!(tablero.getTabla()[i][j + 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 1])) && ((!tablero.getTabla()[i][j].contains("*")) && ((!tablero.getTabla()[i][j + 1].contains("*")))))
                     {
+                        if (jAnterior > j)
+                        {
+                            contador--;
+                        }
+
                         if (contador == 1)
                         {
                             delay = 50;
@@ -313,11 +320,19 @@ public class JuegoActivity extends AppCompatActivity {
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j + 1] + "*";
 
+                        if (j - 1 >= 0)
+                        {
+                            valorAnterior = tablero.getTabla()[i][j - 1];
+                        }
+                        else
+                        {
+                            valorAnterior = String.valueOf(0);
+                        }
+
                         textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
                         textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
                         textos[i][j + 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
                         textos[i][j + 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_right));
-
                         new Handler().postDelayed(new Runnable()
                         {
                             int i;
@@ -339,8 +354,10 @@ public class JuegoActivity extends AppCompatActivity {
                                 this.textoSiguiente = textoSiguiente;
                                 return (this);
                             }
-                        }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j + 1]), delay);
+                        }.init(i, j, valorAnterior, tablero.getTabla()[i][j + 1]), delay);
                         contador++;
+
+                        jAnterior = j;
 
                         j = -1;
 
@@ -349,6 +366,11 @@ public class JuegoActivity extends AppCompatActivity {
 
                     else if (tablero.getTabla()[i][j + 1].equals(String.valueOf(0)))
                     {
+                        if (jAnterior > j)
+                        {
+                            contador--;
+                        }
+
                         if (contador == 1)
                         {
                             delay = 50;
@@ -367,6 +389,16 @@ public class JuegoActivity extends AppCompatActivity {
 
                         tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
+
+                        if (j - 1 >= 0)
+                        {
+                            valorAnterior = tablero.getTabla()[i][j - 1];
+                        }
+                        else
+                        {
+                            valorAnterior = String.valueOf(0);
+                        }
+
                         textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
                         textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
                         textos[i][j + 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
@@ -393,15 +425,17 @@ public class JuegoActivity extends AppCompatActivity {
                                 this.textoSiguiente = textoSiguiente;
                                 return (this);
                             }
-                        }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j + 1]), delay);
+                        }.init(i, j, valorAnterior, tablero.getTabla()[i][j + 1]), delay);
                         contador++;
+
+                        jAnterior = j;
 
                         j = -1;
                     }
                 }
 
             }
-
+            jAnterior = 0;
             contador = 0;
             delay = 0;
         }
@@ -413,6 +447,8 @@ public class JuegoActivity extends AppCompatActivity {
     {
         int delay = 0;
         int contador = 0;
+        int jAnterior = 3;
+        String valorAnterior;
 
         for (int i = 0; i < tablero.getTabla().length; i++)
         {
@@ -423,6 +459,11 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if ((!tablero.getTabla()[i][j - 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 1])) && ((!tablero.getTabla()[i][j].contains("*")) && (!tablero.getTabla()[i][j - 1].contains("*"))))
                     {
+                        if (jAnterior < j)
+                        {
+                            contador--;
+                        }
+
                         if (contador == 1)
                         {
                             delay = 50;
@@ -442,6 +483,15 @@ public class JuegoActivity extends AppCompatActivity {
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j - 1]));
                         tablero.getTabla()[i][j] = String.valueOf(0);
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j - 1] + "*";
+
+                        if (j + 1 < tablero.getTabla()[0].length)
+                        {
+                            valorAnterior = tablero.getTabla()[i][j + 1];
+                        }
+                        else
+                        {
+                            valorAnterior = String.valueOf(0);
+                        }
 
                         textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_in));
                         textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_out));
@@ -469,13 +519,21 @@ public class JuegoActivity extends AppCompatActivity {
                                 this.textoSiguiente = textoSiguiente;
                                 return (this);
                             }
-                        }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j - 1]), delay);
+                        }.init(i, j, valorAnterior, tablero.getTabla()[i][j - 1]), delay);
                         contador++;
+
+                        jAnterior = j;
+
                         j = 4;
                     }
 
                     else if (tablero.getTabla()[i][j - 1].equals(String.valueOf(0)))
                     {
+                        if (jAnterior < j)
+                        {
+                            contador--;
+                        }
+
                         if (contador == 1)
                         {
                             delay = 50;
@@ -494,6 +552,15 @@ public class JuegoActivity extends AppCompatActivity {
 
                         tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j];
                         tablero.getTabla()[i][j] = String.valueOf(0);
+
+                        if (j + 1 < tablero.getTabla()[0].length)
+                        {
+                            valorAnterior = tablero.getTabla()[i][j + 1];
+                        }
+                        else
+                        {
+                            valorAnterior = String.valueOf(0);
+                        }
 
                         textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_in));
                         textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_out));
@@ -521,13 +588,16 @@ public class JuegoActivity extends AppCompatActivity {
                                 this.textoSiguiente = textoSiguiente;
                                 return (this);
                             }
-                        }.init(i, j, tablero.getTabla()[i][j], tablero.getTabla()[i][j - 1]), delay);
+                        }.init(i, j, valorAnterior, tablero.getTabla()[i][j - 1]), delay);
                         contador++;
+
+                        jAnterior = j;
 
                         j = 4;
                     }
                 }
             }
+            jAnterior = 3;
             delay = 0;
             contador = 0;
         }
@@ -539,6 +609,8 @@ public class JuegoActivity extends AppCompatActivity {
     {
         int delay = 0;
         int contador = 0;
+        int jAnterior = 3;
+        String valorAnterior;
 
         for (int i = 0; i < tablero.getTabla().length; i++)
         {
@@ -548,6 +620,11 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if ((!tablero.getTabla()[j - 1][i].equals(String.valueOf(0))) && (tablero.getTabla()[j][i].equals(tablero.getTabla()[j - 1][i])) && ((!tablero.getTabla()[j][i].contains("*")) && (!tablero.getTabla()[j - 1][i].contains("*"))))
                     {
+                        if (jAnterior < j)
+                        {
+                            contador--;
+                        }
+
                         if (contador == 1)
                         {
                             delay = 50;
@@ -568,6 +645,15 @@ public class JuegoActivity extends AppCompatActivity {
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j - 1][i]));
                         tablero.getTabla()[j][i] = String.valueOf(0);
                         tablero.getTabla()[j - 1][i] = tablero.getTabla()[j - 1][i] + "*";
+
+                        if (j + 1 < tablero.getTabla()[0].length)
+                        {
+                            valorAnterior = tablero.getTabla()[j + 1][i];
+                        }
+                        else
+                        {
+                            valorAnterior = String.valueOf(0);
+                        }
 
                         textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_in));
                         textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_out));
@@ -595,14 +681,22 @@ public class JuegoActivity extends AppCompatActivity {
                                 this.textoSiguiente = textoSiguiente;
                                 return (this);
                             }
-                        }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j - 1][i]), delay);
+                        }.init(j, i, valorAnterior, tablero.getTabla()[j - 1][i]), delay);
                         contador++;
+
+                        jAnterior = j;
 
                         j = 4;
                     }
 
                     else if (tablero.getTabla()[j - 1][i].equals(String.valueOf(0)))
                     {
+                        if (jAnterior < j)
+                        {
+                            contador--;
+                        }
+
+
                         if (contador == 1)
                         {
                             delay = 50;
@@ -616,6 +710,15 @@ public class JuegoActivity extends AppCompatActivity {
                         else if (contador == 3)
                         {
                             delay = 150;
+                        }
+
+                        if (j + 1 < tablero.getTabla()[0].length)
+                        {
+                            valorAnterior = tablero.getTabla()[j + 1][i];
+                        }
+                        else
+                        {
+                            valorAnterior = String.valueOf(0);
                         }
                         
                         tablero.getTabla()[j - 1][i] = tablero.getTabla()[j][i];
@@ -647,13 +750,16 @@ public class JuegoActivity extends AppCompatActivity {
                                 this.textoSiguiente = textoSiguiente;
                                 return (this);
                             }
-                        }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j - 1][i]), delay);
+                        }.init(j, i, valorAnterior, tablero.getTabla()[j - 1][i]), delay);
                         contador++;
+
+                        jAnterior = j;
 
                         j = 4;
                     }
                 }
             }
+            jAnterior = 3;
             delay = 0;
             contador = 0;
         }
@@ -665,6 +771,8 @@ public class JuegoActivity extends AppCompatActivity {
     {
         int delay = 0;
         int contador = 0;
+        int jAnterior = 0;
+        String valorAnterior;
 
         for (int i = 0; i < tablero.getTabla().length ; i++)
         {
@@ -674,6 +782,11 @@ public class JuegoActivity extends AppCompatActivity {
                 {
                     if ((!tablero.getTabla()[j + 1][i].equals(String.valueOf(0))) && (tablero.getTabla()[j][i].equals(tablero.getTabla()[j + 1][i])) && ((!tablero.getTabla()[j][i].contains("*")) && (!tablero.getTabla()[j + 1][i].contains("*"))))
                     {
+                        if (jAnterior > j)
+                        {
+                            contador--;
+                        }
+
                         if (contador == 1)
                         {
                             delay = 50;
@@ -694,6 +807,15 @@ public class JuegoActivity extends AppCompatActivity {
                         aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j + 1][i]));
                         tablero.getTabla()[j][i] = String.valueOf(0);
                         tablero.getTabla()[j + 1][i] = tablero.getTabla()[j + 1][i] + "*";
+
+                        if (j - 1 >= 0)
+                        {
+                            valorAnterior = tablero.getTabla()[j - 1][i];
+                        }
+                        else
+                        {
+                            valorAnterior = String.valueOf(0);
+                        }
 
                         textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_in));
                         textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_out));
@@ -721,8 +843,10 @@ public class JuegoActivity extends AppCompatActivity {
                                 this.textoSiguiente = textoSiguiente;
                                 return (this);
                             }
-                        }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j + 1][i]), delay);
+                        }.init(j, i, valorAnterior, tablero.getTabla()[j + 1][i]), delay);
                         contador++;
+
+                        jAnterior = j;
 
                         j = -1;
 
@@ -730,6 +854,11 @@ public class JuegoActivity extends AppCompatActivity {
 
                     else if (tablero.getTabla()[j + 1][i].equals(String.valueOf(0)))
                     {
+                        if (jAnterior > j)
+                        {
+                            contador--;
+                        }
+
                         if (contador == 1)
                         {
                             delay = 50;
@@ -748,6 +877,15 @@ public class JuegoActivity extends AppCompatActivity {
 
                         tablero.getTabla()[j + 1][i] = tablero.getTabla()[j][i];
                         tablero.getTabla()[j][i] = String.valueOf(0);
+
+                        if (j - 1 >= 0)
+                        {
+                            valorAnterior = tablero.getTabla()[j - 1][i];
+                        }
+                        else
+                        {
+                            valorAnterior = String.valueOf(0);
+                        }
 
                         textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_in));
                         textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_out));
@@ -775,13 +913,16 @@ public class JuegoActivity extends AppCompatActivity {
                                 this.textoSiguiente = textoSiguiente;
                                 return (this);
                             }
-                        }.init(j, i, tablero.getTabla()[j][i], tablero.getTabla()[j + 1][i]), delay);
+                        }.init(j, i, valorAnterior, tablero.getTabla()[j + 1][i]), delay);
                         contador++;
+
+                        jAnterior = j;
 
                         j = -1;
                     }
                 }
             }
+            jAnterior = 0;
             delay = 0;
             contador = 0;
         }
@@ -804,8 +945,8 @@ public class JuegoActivity extends AppCompatActivity {
     {
         if (valorActual.equals("0") && tipo.equals("reiniciar"))
         {
-            //((TextView)switchers[i][j].getChildAt(0)).setBackgroundResource(R.drawable.background_tile_0);
             ((TextView)textos[i][j].getNextView()).setBackgroundResource(R.drawable.background_tile_0);
+            ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
             textos[i][j].setText("");
 
         }
@@ -813,6 +954,7 @@ public class JuegoActivity extends AppCompatActivity {
         else if (valorActual.equals("0") && tipo.equals("crear"))
         {
             ((TextView)textos[i][j].getCurrentView()).setBackgroundResource(R.drawable.background_tile_0);
+            ((TextView)textos[i][j].getCurrentView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
             textos[i][j].setCurrentText("");
         }
 

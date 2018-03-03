@@ -91,15 +91,15 @@
         android:layout_marginBottom="50dp"
         android:background="@drawable/main_background_grid"
         android:padding="2.5dp"
-        android:weightSum="4"
+        android:weightSum="1"
         >
 
         <TableRow
             android:id="@+id/tableRow0"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:weightSum="4"
-            android:layout_weight="1"
+            android:weightSum="1"
+            android:layout_weight="0.25"
             android:orientation="vertical"
             >
 
@@ -108,7 +108,7 @@
                 android:id="@+id/linear_0_0"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_0_0"
                     android:layout_height="match_parent"
@@ -138,7 +138,7 @@
                 android:id="@+id/linear_0_1"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
 
                 <TextSwitcher
                     android:id="@+id/txt_0_1"
@@ -168,7 +168,7 @@
                 android:id="@+id/linear_0_2"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_0_2"
                     android:layout_height="match_parent"
@@ -198,7 +198,7 @@
                 android:id="@+id/linear_0_3"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
 
                 <TextSwitcher
                     android:id="@+id/txt_0_3"
@@ -230,8 +230,8 @@
             android:id="@+id/tableRow1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:weightSum="4"
-            android:layout_weight="1"
+            android:weightSum="1"
+            android:layout_weight="0.25"
             android:orientation="vertical"
             >
 
@@ -240,7 +240,7 @@
                 android:id="@+id/linear_1_0"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_1_0"
                     android:layout_height="match_parent"
@@ -270,7 +270,7 @@
                 android:id="@+id/linear_1_1"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_1_1"
                     android:layout_height="match_parent"
@@ -299,7 +299,7 @@
                 android:id="@+id/linear_1_2"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_1_2"
                     android:layout_height="match_parent"
@@ -328,7 +328,7 @@
                 android:id="@+id/linear_1_3"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_1_3"
                     android:layout_height="match_parent"
@@ -360,8 +360,8 @@
             android:id="@+id/tableRow2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:weightSum="4"
-            android:layout_weight="1"
+            android:weightSum="1"
+            android:layout_weight="0.25"
             android:orientation="vertical"
             >
 
@@ -370,7 +370,7 @@
                 android:id="@+id/linear_2_0"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_2_0"
                     android:layout_height="match_parent"
@@ -400,7 +400,7 @@
                 android:id="@+id/linear_2_1"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_2_1"
                     android:layout_height="match_parent"
@@ -429,7 +429,7 @@
                 android:id="@+id/linear_2_2"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_2_2"
                     android:layout_height="match_parent"
@@ -458,7 +458,7 @@
                 android:id="@+id/linear_2_3"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_2_3"
                     android:layout_height="match_parent"
@@ -489,8 +489,8 @@
             android:id="@+id/tableRow3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:weightSum="4"
-            android:layout_weight="1"
+            android:weightSum="1"
+            android:layout_weight="0.25"
             android:orientation="vertical"
             >
             <!-- El orientation vertical es para que la propiedad weight funcione correctamente, porque sino las alturas petan al cambiar el texto por código-->
@@ -499,7 +499,7 @@
                 android:id="@+id/linear_3_0"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_3_0"
                     android:layout_height="match_parent"
@@ -529,7 +529,7 @@
                 android:id="@+id/linear_3_1"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_3_1"
                     android:layout_height="match_parent"
@@ -558,7 +558,7 @@
                 android:id="@+id/linear_3_2"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_3_2"
                     android:layout_height="match_parent"
@@ -587,7 +587,7 @@
                 android:id="@+id/linear_3_3"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1">
+                android:layout_weight="0.25">
                 <TextSwitcher
                     android:id="@+id/txt_3_3"
                     android:layout_height="match_parent"
