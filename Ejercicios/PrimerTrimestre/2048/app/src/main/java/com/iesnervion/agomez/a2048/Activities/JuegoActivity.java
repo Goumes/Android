@@ -313,53 +313,60 @@ public class JuegoActivity extends AppCompatActivity {
                         {
                             delay = 150;
                         }
-                        
 
-                        tablero.getTabla()[i][j + 1] =  String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
-                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j + 1]));
-                        tablero.getTabla()[i][j] = String.valueOf(0);
-                        tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j + 1] + "*";
-
-                        if (j - 1 >= 0)
+                        //Comprobaciones para hacer que se fusionen siempre las dos ultimas casillas de una fila, no las dos primeras
+                        if (((j + 2 < tablero.getTabla()[0].length) && !(j + 3 < tablero.getTabla()[0].length)) && !(tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 2])) //Si estas en la casilla 1 y el valor es distinto al de la casilla 3
+                                || !(j + 2 < tablero.getTabla()[0].length) // Si estas en la casilla 2
+                                || ((j + 3 < tablero.getTabla()[0].length) && ((tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 3])) && tablero.getTabla()[i][j + 2].equals(tablero.getTabla()[i][j])) //Si estas en la casilla 0 y todas en la fila son iguales
+                                || ((j + 3 < tablero.getTabla()[0].length) && ((tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 3])) && !tablero.getTabla()[i][j + 2].equals("0")) //Si estas en la casilla 0 y la casilla 0 es igual a la ultima y en la 2 no hay un 0
+                                || ((j + 3 < tablero.getTabla()[0].length) && (!(tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 3])) && !tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 2])))))) // Si estas en la casilla 0 la 2 y la 3 son distintas a la 0
                         {
-                            valorAnterior = tablero.getTabla()[i][j - 1];
-                        }
-                        else
-                        {
-                            valorAnterior = String.valueOf(0);
-                        }
+                            tablero.getTabla()[i][j + 1] =  String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
+                            aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j + 1]));
+                            tablero.getTabla()[i][j] = String.valueOf(0);
+                            tablero.getTabla()[i][j + 1] = tablero.getTabla()[i][j + 1] + "*";
 
-                        textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
-                        textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
-                        textos[i][j + 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
-                        textos[i][j + 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_right));
-                        new Handler().postDelayed(new Runnable()
-                        {
-                            int i;
-                            int j;
-                            String textoActual;
-                            String textoSiguiente;
-
-                            @Override
-                            public void run()
+                            if (j - 1 >= 0)
                             {
-                                reiniciarUI(i, j, textoActual, textoSiguiente, 'r');
+                                valorAnterior = tablero.getTabla()[i][j - 1];
+                            }
+                            else
+                            {
+                                valorAnterior = String.valueOf(0);
                             }
 
-                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                            textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_in));
+                            textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_right_out));
+                            textos[i][j + 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
+                            textos[i][j + 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_right));
+                            new Handler().postDelayed(new Runnable()
                             {
-                                this.i = i;
-                                this.j = j;
-                                this.textoActual = textoActual;
-                                this.textoSiguiente = textoSiguiente;
-                                return (this);
-                            }
-                        }.init(i, j, valorAnterior, tablero.getTabla()[i][j + 1]), delay);
-                        contador++;
+                                int i;
+                                int j;
+                                String textoActual;
+                                String textoSiguiente;
 
-                        jAnterior = j;
+                                @Override
+                                public void run()
+                                {
+                                    reiniciarUI(i, j, textoActual, textoSiguiente, 'r');
+                                }
 
-                        j = -1;
+                                public Runnable init(int i, int j, String textoActual, String textoSiguiente)
+                                {
+                                    this.i = i;
+                                    this.j = j;
+                                    this.textoActual = textoActual;
+                                    this.textoSiguiente = textoSiguiente;
+                                    return (this);
+                                }
+                            }.init(i, j, valorAnterior, tablero.getTabla()[i][j + 1]), delay);
+                            contador++;
+
+                            jAnterior = j;
+
+                            j = -1;
+                        }
 
                         //Si la casilla actual ha sido mergeada, la siguiente no puede sumarse
                     }
@@ -478,53 +485,55 @@ public class JuegoActivity extends AppCompatActivity {
                         {
                             delay = 150;
                         }
-                        
-                        tablero.getTabla()[i][j - 1] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
-                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j - 1]));
-                        tablero.getTabla()[i][j] = String.valueOf(0);
-                        tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j - 1] + "*";
 
-                        if (j + 1 < tablero.getTabla()[0].length)
+                        //Comprobaciones para hacer que se fusionen siempre las dos ultimas casillas de una fila, no las dos primeras
+                        if (((j - 2 >= 0) && !(j - 3 >= 0)) && !(tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 2])) //Si estas en la casilla 2 y el valor es distinto al de la casilla 0
+                                || !(j - 2 >= 0) // Si estas en la casilla 1
+                                || ((j - 3 >= 0) && ((tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 3])) && tablero.getTabla()[i][j - 2].equals(tablero.getTabla()[i][j])) //Si estas en la casilla 3 y todas en la fila son iguales
+                                || ((j - 3 >= 0) && ((tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 3])) && !tablero.getTabla()[i][j - 2].equals("0")) //Si estas en la casilla 3 y la casilla 3 es igual a la ultima y en la 1 no hay un 0
+                                || ((j - 3 >= 0) && (!(tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 3])) && !tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j - 2])))))) // Si estas en la casilla 3 la 1 y la 0 son distintas a la 3
                         {
-                            valorAnterior = tablero.getTabla()[i][j + 1];
-                        }
-                        else
-                        {
-                            valorAnterior = String.valueOf(0);
-                        }
+                            tablero.getTabla()[i][j - 1] = String.valueOf(Integer.valueOf(tablero.getTabla()[i][j]) * 2);
+                            aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[i][j - 1]));
+                            tablero.getTabla()[i][j] = String.valueOf(0);
+                            tablero.getTabla()[i][j - 1] = tablero.getTabla()[i][j - 1] + "*";
 
-                        textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_in));
-                        textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_out));
-                        textos[i][j - 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
-                        textos[i][j - 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_left));
-
-                        new Handler().postDelayed(new Runnable()
-                        {
-                            int i;
-                            int j;
-                            String textoActual;
-                            String textoSiguiente;
-
-                            @Override
-                            public void run()
-                            {
-                                reiniciarUI(i, j, textoActual, textoSiguiente, 'l');
+                            if (j + 1 < tablero.getTabla()[0].length) {
+                                valorAnterior = tablero.getTabla()[i][j + 1];
+                            } else {
+                                valorAnterior = String.valueOf(0);
                             }
 
-                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
-                            {
-                                this.i = i;
-                                this.j = j;
-                                this.textoActual = textoActual;
-                                this.textoSiguiente = textoSiguiente;
-                                return (this);
-                            }
-                        }.init(i, j, valorAnterior, tablero.getTabla()[i][j - 1]), delay);
-                        contador++;
+                            textos[i][j].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_in));
+                            textos[i][j].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_left_out));
+                            textos[i][j - 1].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
+                            textos[i][j - 1].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_left));
 
-                        jAnterior = j;
+                            new Handler().postDelayed(new Runnable() {
+                                int i;
+                                int j;
+                                String textoActual;
+                                String textoSiguiente;
 
-                        j = 4;
+                                @Override
+                                public void run() {
+                                    reiniciarUI(i, j, textoActual, textoSiguiente, 'l');
+                                }
+
+                                public Runnable init(int i, int j, String textoActual, String textoSiguiente) {
+                                    this.i = i;
+                                    this.j = j;
+                                    this.textoActual = textoActual;
+                                    this.textoSiguiente = textoSiguiente;
+                                    return (this);
+                                }
+                            }.init(i, j, valorAnterior, tablero.getTabla()[i][j - 1]), delay);
+                            contador++;
+
+                            jAnterior = j;
+
+                            j = 4;
+                        }
                     }
 
                     else if (tablero.getTabla()[i][j - 1].equals(String.valueOf(0)))
@@ -639,54 +648,56 @@ public class JuegoActivity extends AppCompatActivity {
                         {
                             delay = 150;
                         }
-                        
 
-                        tablero.getTabla()[j - 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
-                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j - 1][i]));
-                        tablero.getTabla()[j][i] = String.valueOf(0);
-                        tablero.getTabla()[j - 1][i] = tablero.getTabla()[j - 1][i] + "*";
 
-                        if (j + 1 < tablero.getTabla()[0].length)
+                        //Comprobaciones para hacer que se fusionen siempre las dos ultimas casillas de una fila, no las dos primeras
+                        if (((j - 2 >= 0) && !(j - 3 >= 0)) && !(tablero.getTabla()[j][i].equals(tablero.getTabla()[j - 2][i])) //Si estas en la casilla 2 y el valor es distinto al de la casilla 0
+                                || !(j - 2 >= 0) // Si estas en la casilla 1
+                                || ((j - 3 >= 0) && ((tablero.getTabla()[j][i].equals(tablero.getTabla()[j - 3][i])) && tablero.getTabla()[j - 2][i].equals(tablero.getTabla()[j][i])) //Si estas en la casilla 3 y todas en la fila son iguales
+                                || ((j - 3 >= 0) && ((tablero.getTabla()[j][i].equals(tablero.getTabla()[j - 3][i])) && !tablero.getTabla()[j - 2][i].equals("0")) //Si estas en la casilla 3 y la casilla 3 es igual a la ultima y en la 1 no hay un 0
+                                || ((j - 3 >= 0) && (!(tablero.getTabla()[j][i].equals(tablero.getTabla()[j - 3][i])) && !tablero.getTabla()[j][i].equals(tablero.getTabla()[j - 2][i])))))) // Si estas en la casilla 3 la 1 y la 0 son distintas a la 3
                         {
-                            valorAnterior = tablero.getTabla()[j + 1][i];
-                        }
-                        else
-                        {
-                            valorAnterior = String.valueOf(0);
-                        }
+                            tablero.getTabla()[j - 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
+                            aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j - 1][i]));
+                            tablero.getTabla()[j][i] = String.valueOf(0);
+                            tablero.getTabla()[j - 1][i] = tablero.getTabla()[j - 1][i] + "*";
 
-                        textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_in));
-                        textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_out));
-                        textos[j - 1][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_up));
-                        textos[j - 1][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
-
-                        new Handler().postDelayed(new Runnable()
-                        {
-                            int i;
-                            int j;
-                            String textoActual;
-                            String textoSiguiente;
-
-                            @Override
-                            public void run()
-                            {
-                                reiniciarUI(i, j, textoActual, textoSiguiente, 'u');
+                            if (j + 1 < tablero.getTabla()[0].length) {
+                                valorAnterior = tablero.getTabla()[j + 1][i];
+                            } else {
+                                valorAnterior = String.valueOf(0);
                             }
 
-                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
-                            {
-                                this.i = i;
-                                this.j = j;
-                                this.textoActual = textoActual;
-                                this.textoSiguiente = textoSiguiente;
-                                return (this);
-                            }
-                        }.init(j, i, valorAnterior, tablero.getTabla()[j - 1][i]), delay);
-                        contador++;
+                            textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_in));
+                            textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_up_out));
+                            textos[j - 1][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_up));
+                            textos[j - 1][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
 
-                        jAnterior = j;
+                            new Handler().postDelayed(new Runnable() {
+                                int i;
+                                int j;
+                                String textoActual;
+                                String textoSiguiente;
 
-                        j = 4;
+                                @Override
+                                public void run() {
+                                    reiniciarUI(i, j, textoActual, textoSiguiente, 'u');
+                                }
+
+                                public Runnable init(int i, int j, String textoActual, String textoSiguiente) {
+                                    this.i = i;
+                                    this.j = j;
+                                    this.textoActual = textoActual;
+                                    this.textoSiguiente = textoSiguiente;
+                                    return (this);
+                                }
+                            }.init(j, i, valorAnterior, tablero.getTabla()[j - 1][i]), delay);
+                            contador++;
+
+                            jAnterior = j;
+
+                            j = 4;
+                        }
                     }
 
                     else if (tablero.getTabla()[j - 1][i].equals(String.valueOf(0)))
@@ -801,54 +812,56 @@ public class JuegoActivity extends AppCompatActivity {
                         {
                             delay = 150;
                         }
-                        
 
-                        tablero.getTabla()[j + 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
-                        aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j + 1][i]));
-                        tablero.getTabla()[j][i] = String.valueOf(0);
-                        tablero.getTabla()[j + 1][i] = tablero.getTabla()[j + 1][i] + "*";
 
-                        if (j - 1 >= 0)
+                        //Comprobaciones para hacer que se fusionen siempre las dos ultimas casillas de una fila, no las dos primeras
+                        if (((j + 2 < tablero.getTabla()[0].length) && !(j + 3 < tablero.getTabla()[0].length)) && !(tablero.getTabla()[j][i].equals(tablero.getTabla()[j + 2][i])) //Si estas en la casilla 1 y el valor es distinto al de la casilla 3
+                                || !(j + 2 < tablero.getTabla()[0].length) // Si estas en la casilla 2
+                                || ((j + 3 < tablero.getTabla()[0].length) && ((tablero.getTabla()[j][i].equals(tablero.getTabla()[j + 3][i])) && tablero.getTabla()[j + 2][i].equals(tablero.getTabla()[j][i])) //Si estas en la casilla 0 y todas en la fila son iguales
+                                || ((j + 3 < tablero.getTabla()[0].length) && ((tablero.getTabla()[j][i].equals(tablero.getTabla()[j + 3][i])) && !tablero.getTabla()[j + 2][i].equals("0")) //Si estas en la casilla 0 y la casilla 0 es igual a la ultima y en la 2 no hay un 0
+                                || ((j + 3 < tablero.getTabla()[0].length) && (!(tablero.getTabla()[j][i].equals(tablero.getTabla()[j + 3][i])) && !tablero.getTabla()[j][i].equals(tablero.getTabla()[j + 2][i])))))) // Si estas en la casilla 0 la 2 y la 3 son distintas a la 0
                         {
-                            valorAnterior = tablero.getTabla()[j - 1][i];
-                        }
-                        else
-                        {
-                            valorAnterior = String.valueOf(0);
-                        }
+                            tablero.getTabla()[j + 1][i] = String.valueOf(Integer.valueOf(tablero.getTabla()[j][i]) * 2);
+                            aumentarPuntuacion(Integer.valueOf(tablero.getTabla()[j + 1][i]));
+                            tablero.getTabla()[j][i] = String.valueOf(0);
+                            tablero.getTabla()[j + 1][i] = tablero.getTabla()[j + 1][i] + "*";
 
-                        textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_in));
-                        textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_out));
-                        textos[j + 1][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_down));
-                        textos[j + 1][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
-
-                        new Handler().postDelayed(new Runnable()
-                        {
-                            int i;
-                            int j;
-                            String textoActual;
-                            String textoSiguiente;
-
-                            @Override
-                            public void run()
-                            {
-                                reiniciarUI(i, j, textoActual, textoSiguiente, 'd');
+                            if (j - 1 >= 0) {
+                                valorAnterior = tablero.getTabla()[j - 1][i];
+                            } else {
+                                valorAnterior = String.valueOf(0);
                             }
 
-                            public Runnable init(int i, int j, String textoActual, String textoSiguiente)
-                            {
-                                this.i = i;
-                                this.j = j;
-                                this.textoActual = textoActual;
-                                this.textoSiguiente = textoSiguiente;
-                                return (this);
-                            }
-                        }.init(j, i, valorAnterior, tablero.getTabla()[j + 1][i]), delay);
-                        contador++;
+                            textos[j][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_in));
+                            textos[j][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_slide_down_out));
+                            textos[j + 1][i].setInAnimation(AnimationUtils.loadAnimation(this, R.anim.merge_down));
+                            textos[j + 1][i].setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.empty));
 
-                        jAnterior = j;
+                            new Handler().postDelayed(new Runnable() {
+                                int i;
+                                int j;
+                                String textoActual;
+                                String textoSiguiente;
 
-                        j = -1;
+                                @Override
+                                public void run() {
+                                    reiniciarUI(i, j, textoActual, textoSiguiente, 'd');
+                                }
+
+                                public Runnable init(int i, int j, String textoActual, String textoSiguiente) {
+                                    this.i = i;
+                                    this.j = j;
+                                    this.textoActual = textoActual;
+                                    this.textoSiguiente = textoSiguiente;
+                                    return (this);
+                                }
+                            }.init(j, i, valorAnterior, tablero.getTabla()[j + 1][i]), delay);
+                            contador++;
+
+                            jAnterior = j;
+
+                            j = -1;
+                        }
 
                     }
 
@@ -963,40 +976,82 @@ public class JuegoActivity extends AppCompatActivity {
             switch (valorActual.length())
             {
                 case 1:
-                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
-                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    if (tipo.equals("crear"))
+                    {
+                        ((TextView)textos[i][j].getCurrentView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    }
+                    else
+                    {
+                        ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    }
                     break;
 
                     //Poniendo case1: case2: me petaba, y los he tenido que separar
                 case 2:
-                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
-                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    if (tipo.equals("crear"))
+                    {
+                        ((TextView)textos[i][j].getCurrentView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    }
+                    else
+                    {
+                        ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                    }
                     break;
 
                 case 3:
-                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
-                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                    if (tipo.equals("crear"))
+                    {
+                        ((TextView)textos[i][j].getCurrentView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                    }
+                    else
+                    {
+                        ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+                    }
                     break;
 
                 case 4:
-                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
-                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                    if (tipo.equals("crear"))
+                    {
+                        ((TextView)textos[i][j].getCurrentView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                    }
+                    else
+                    {
+                        ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                    }
                     break;
 
                 case 5:
-                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                    if (tipo.equals("crear"))
+                    {
+                        ((TextView)textos[i][j].getCurrentView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                    }
+                    else
+                    {
+                        ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                    }
                     break;
 
                 case 6:
-                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    if (tipo.equals("crear"))
+                    {
+                        ((TextView)textos[i][j].getCurrentView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    }
+                    else
+                    {
+                        ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    }
                     break;
 
                 //A ver quien es el listo que llega aquí lol
                 case 7:
-                    ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-                    ((TextView)textos[i][j].getChildAt(1)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                    if (tipo.equals("crear"))
+                    {
+                        ((TextView)textos[i][j].getCurrentView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                    }
+                    else
+                    {
+                        ((TextView)textos[i][j].getNextView()).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                    }
                     break;
 
             }

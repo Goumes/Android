@@ -35,20 +35,14 @@ public class DatabaseInitializer {
 
     private static void populateWithTestData(AppDatabase db) {
         db.tableroDAO().deleteAll ();
-
-
         /*
         String [][] tabla =  {
+                {String.valueOf(2), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
+                {String.valueOf(2), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
                 {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
-                {String.valueOf(0), String.valueOf(8), String.valueOf(0), String.valueOf(0)},
-                {String.valueOf(0), String.valueOf(128), String.valueOf(4), String.valueOf(0)},
                 {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)}
         };
         */
-
-
-
-
 
         String [][] tabla =  {
                 {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
