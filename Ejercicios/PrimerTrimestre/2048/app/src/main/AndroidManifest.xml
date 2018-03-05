@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Pongo el allowBackup en false para que no se guarden las sharedPreferences al reinstalar la aplicación-->
+    <!-- Pongo el allowBackup en false para que no se guarden las sharedPreferences al reinstalar la aplicación -->
     <application
         android:allowBackup="false"
         android:icon="@mipmap/icon"
@@ -16,18 +16,22 @@
             android:name=".Activities.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".Activities.JuegoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activities.PuntuacionesActivity" />
+        <activity
+            android:name=".Activities.IniciarSesionActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activities.JuegoActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Activities.PuntuacionesActivity"></activity>
-
     </application>
 
 </manifest>

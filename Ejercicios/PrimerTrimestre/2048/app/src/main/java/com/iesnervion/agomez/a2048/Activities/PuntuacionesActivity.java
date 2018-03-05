@@ -1,9 +1,7 @@
 package com.iesnervion.agomez.a2048.Activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.iesnervion.agomez.a2048.Adapters.AdapterHighscore;
@@ -12,7 +10,6 @@ import com.iesnervion.agomez.a2048.Entities.Usuario;
 import com.iesnervion.agomez.a2048.Interfaces.RestClient;
 import com.iesnervion.agomez.a2048.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import retrofit2.Call;

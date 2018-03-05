@@ -17,4 +17,6 @@
     <string name="btnAceptar">Aceptar</string>
     <string name="txtFinPartida">Se acabó la partida</string>
     <string name="txtScore">Score:</string>
+    <string name="txtIniciar">Iniciar sesión</string>
+    <string name="title_activity_iniciar_sesion">IniciarSesionActivity</string>
 </resources>

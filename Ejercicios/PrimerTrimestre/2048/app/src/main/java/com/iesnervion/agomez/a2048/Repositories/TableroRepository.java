@@ -7,8 +7,6 @@ import com.iesnervion.agomez.a2048.DAO.TableroDAO;
 import com.iesnervion.agomez.a2048.Database.AppDatabase;
 import com.iesnervion.agomez.a2048.Entities.Tablero;
 
-import java.util.List;
-
 /**
  * Created by agomez on 23/01/18.
  */

@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,14 +20,23 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.games.Player;
 import com.iesnervion.agomez.a2048.AsyncTasks.MyAsyncTask;
+import com.iesnervion.agomez.a2048.Database.RetrofitClient;
 import com.iesnervion.agomez.a2048.Entities.OnSwipeTouchListener;
 import com.iesnervion.agomez.a2048.Entities.Tablero;
+import com.iesnervion.agomez.a2048.Entities.Usuario;
 import com.iesnervion.agomez.a2048.Fragments.DialogFragmentFinPartida;
+import com.iesnervion.agomez.a2048.Interfaces.RestClient;
 import com.iesnervion.agomez.a2048.R;
 
 import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class JuegoActivity extends AppCompatActivity {
 
@@ -76,6 +86,10 @@ public class JuegoActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     Tablero tableroAuxiliar;
 
+    Intent actual;
+    Player jugador;
+    RestClient restClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +101,10 @@ public class JuegoActivity extends AppCompatActivity {
         editor = sharedPref.edit();
 
         myTableLayout = findViewById(R.id.tableJuego);
+
+        actual = getIntent();
+        jugador = actual.getParcelableExtra("jugador");
+        restClient = RetrofitClient.getClient().create(RestClient.class);
 
         overridePendingTransition(0, 0);
 
@@ -1415,6 +1433,12 @@ public class JuegoActivity extends AppCompatActivity {
         editor.commit();
         score.setText(String.valueOf(sharedPref.getInt("score", 0)));
         highscore.setText(String.valueOf(sharedPref.getInt("highscore", 0)));
+
+        if (sharedPref.getInt("highscore", 0) >= sharedPref.getInt("score", 0))
+        {
+            insertPuntuacion();
+        }
+
         crearUI();
     }
 
@@ -1531,15 +1555,44 @@ public class JuegoActivity extends AppCompatActivity {
         dialogFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                int auxHighscore = sharedPref.getInt("highscore", 0);
+
                 tablero.rellenarTablero();
                 actualizarTablero();
                 editor.putInt("score", 0);
                 editor.commit();
                 score.setText(String.valueOf(sharedPref.getInt("score", 0)));
                 highscore.setText(String.valueOf(sharedPref.getInt("highscore", 0)));
+
+                if (auxHighscore != sharedPref.getInt("highscore", 0))
+                {
+                    insertPuntuacion();
+                }
+
                 crearUI();
             }
         });
         dialogFragment.show(ft, "dialog");
+    }
+
+    public void insertPuntuacion ()
+    {
+        Call<Usuario> call2 = restClient.createUser(new Usuario(jugador.getDisplayName(), sharedPref.getInt("highscore", 0)));
+        call2.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response)
+            {
+                if(response.isSuccessful())
+                {
+                    Toast.makeText(JuegoActivity.this, "Puntuación máxima actualizada", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t)
+            {
+                Toast.makeText(JuegoActivity.this, "Hubo un error actualizando tu puntuación máxima", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
