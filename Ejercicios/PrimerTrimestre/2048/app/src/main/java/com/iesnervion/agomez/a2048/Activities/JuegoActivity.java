@@ -22,6 +22,7 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.games.Player;
 import com.iesnervion.agomez.a2048.AsyncTasks.MyAsyncTask;
 import com.iesnervion.agomez.a2048.Database.RetrofitClient;
@@ -89,6 +90,8 @@ public class JuegoActivity extends AppCompatActivity {
     Intent actual;
     Player jugador;
     RestClient restClient;
+    GoogleSignInAccount account;
+    boolean existe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +106,11 @@ public class JuegoActivity extends AppCompatActivity {
         myTableLayout = findViewById(R.id.tableJuego);
 
         actual = getIntent();
-        jugador = actual.getParcelableExtra("jugador");
+        if (actual.hasExtra("cuenta"))
+        {
+            account = actual.getParcelableExtra("cuenta");
+        }
+
         restClient = RetrofitClient.getClient().create(RestClient.class);
 
         overridePendingTransition(0, 0);
@@ -1434,7 +1441,7 @@ public class JuegoActivity extends AppCompatActivity {
         score.setText(String.valueOf(sharedPref.getInt("score", 0)));
         highscore.setText(String.valueOf(sharedPref.getInt("highscore", 0)));
 
-        if (sharedPref.getInt("highscore", 0) >= sharedPref.getInt("score", 0))
+        if (sharedPref.getInt("highscore", 0) >= sharedPref.getInt("score", 0) && account != null)
         {
             insertPuntuacion();
         }
@@ -1555,19 +1562,18 @@ public class JuegoActivity extends AppCompatActivity {
         dialogFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                int auxHighscore = sharedPref.getInt("highscore", 0);
-
                 tablero.rellenarTablero();
                 actualizarTablero();
+                if (sharedPref.getInt("score", 0) == sharedPref.getInt("highscore", 0) && sharedPref.getInt("score", 0) != 0 && account != null)
+                {
+                    insertPuntuacion();
+                }
                 editor.putInt("score", 0);
                 editor.commit();
                 score.setText(String.valueOf(sharedPref.getInt("score", 0)));
                 highscore.setText(String.valueOf(sharedPref.getInt("highscore", 0)));
 
-                if (auxHighscore != sharedPref.getInt("highscore", 0))
-                {
-                    insertPuntuacion();
-                }
+
 
                 crearUI();
             }
@@ -1577,22 +1583,54 @@ public class JuegoActivity extends AppCompatActivity {
 
     public void insertPuntuacion ()
     {
-        Call<Usuario> call2 = restClient.createUser(new Usuario(jugador.getDisplayName(), sharedPref.getInt("highscore", 0)));
-        call2.enqueue(new Callback<Usuario>() {
+        Call<Usuario> call = restClient.getUsuario(account.getDisplayName());
+        call.enqueue(new Callback<Usuario>() {
             @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response)
-            {
-                if(response.isSuccessful())
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if(response.code()== 200 && response.body().getHighscore() < sharedPref.getInt("highscore", 0)) {
+                    Call<Usuario> call3 = restClient.putUsuario(new Usuario(account.getDisplayName(), sharedPref.getInt("highscore", 0)), account.getDisplayName());
+                    call3.enqueue(new Callback<Usuario>() {
+                        @Override
+                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+
+                            Toast.makeText(JuegoActivity.this, "Hubo un error actualizando tu puntuación máxima", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Usuario> call, Throwable t) {
+                            Toast.makeText(JuegoActivity.this, "Puntuación máxima actualizada", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else if (response.code()== 204 && response.body().getHighscore() < sharedPref.getInt("highscore", 0))
                 {
-                    Toast.makeText(JuegoActivity.this, "Puntuación máxima actualizada", Toast.LENGTH_SHORT).show();
+                    Call<Usuario> call2 = restClient.createUser(new Usuario(account.getDisplayName(), sharedPref.getInt("highscore", 0)));
+                    call2.enqueue(new Callback<Usuario>() {
+                        @Override
+                        public void onResponse(Call<Usuario> call, Response<Usuario> response)
+                        {
+                            Toast.makeText(JuegoActivity.this, "Hubo un error actualizando tu puntuación máxima", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Usuario> call, Throwable t)
+                        {
+                            Toast.makeText(JuegoActivity.this, "Puntuación máxima actualizada", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+
+                else if (response.code() != 200 && response.code() != 204)
+                {
+                    Toast.makeText(JuegoActivity.this, "Error al actualizar la puntuación máxima", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Usuario> call, Throwable t)
-            {
-                Toast.makeText(JuegoActivity.this, "Hubo un error actualizando tu puntuación máxima", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Usuario> call, Throwable t) {
             }
         });
+
     }
 }

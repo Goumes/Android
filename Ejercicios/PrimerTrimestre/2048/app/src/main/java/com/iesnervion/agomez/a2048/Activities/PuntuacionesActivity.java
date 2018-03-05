@@ -6,11 +6,13 @@ import android.widget.ListView;
 
 import com.iesnervion.agomez.a2048.Adapters.AdapterHighscore;
 import com.iesnervion.agomez.a2048.Database.RetrofitClient;
+import com.iesnervion.agomez.a2048.Entities.MyQuickSort;
 import com.iesnervion.agomez.a2048.Entities.Usuario;
 import com.iesnervion.agomez.a2048.Interfaces.RestClient;
 import com.iesnervion.agomez.a2048.R;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,6 +24,7 @@ public class PuntuacionesActivity extends AppCompatActivity
     ListView lista;
     ArrayList<Usuario> usuarios;
     RestClient restClient;
+    MyQuickSort quickSort;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -62,10 +65,12 @@ public class PuntuacionesActivity extends AppCompatActivity
 
     public void loadUsers() {
         Call<ArrayList<Usuario>> call2 = restClient.getData();
+        quickSort = new MyQuickSort();
         call2.enqueue(new Callback<ArrayList<Usuario>>() {
             @Override
             public void onResponse(Call<ArrayList<Usuario>> call, Response<ArrayList<Usuario>> response) {
                 usuarios = response.body();
+                quickSort.sort(usuarios);
                 adapter = new AdapterHighscore(PuntuacionesActivity.this, R.layout.puntuaciones_row, usuarios);
                 lista.setAdapter(adapter);
             }

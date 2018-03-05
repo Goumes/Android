@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.iesnervion.agomez.a2048"
-        minSdkVersion 14
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -57,6 +57,7 @@ dependencies {
 
     //Google Play services
     //compile 'com.google.android.gms:play-services:11.8.0'
+    compile 'com.google.gms:google-services:3.2.0'
     compile 'com.google.android.gms:play-services-auth:11.8.0'
     compile 'com.google.android.gms:play-services-games:11.8.0'
     compile 'com.google.android.gms:play-services-identity:11.8.0'

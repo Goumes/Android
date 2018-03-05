@@ -33,4 +33,21 @@ public class Usuario {
         this.highscore = highscore;
     }
 
+    public int compareTo (Usuario usuario)
+    {
+        int resultado = 0;
+
+        if (this.getHighscore() > usuario.getHighscore())
+        {
+            resultado = 1;
+        }
+
+        else if (this.getHighscore() < usuario.getHighscore())
+        {
+            resultado = -1;
+        }
+
+        return resultado;
+    }
+
 }

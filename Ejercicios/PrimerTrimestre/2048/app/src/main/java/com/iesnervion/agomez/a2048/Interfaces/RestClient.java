@@ -24,6 +24,9 @@ public interface RestClient
     @GET("/api/users")
     Call<ArrayList<Usuario>> getData();
 
+    @GET ("api/users/{id}")
+    Call<Usuario> getUsuario(@Path("id") String id);
+
     @POST("/api/users")
     Call<Usuario> createUser(/*@Header("Authorization") String auth, */@Body Usuario user);
 

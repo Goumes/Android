@@ -23,6 +23,7 @@ import com.iesnervion.agomez.a2048.R;
 public class IniciarSesionActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInOptions gso;
+    boolean avanzar;
     final int RC_SIGN_IN = 10;
 
     @Override
@@ -37,12 +38,21 @@ public class IniciarSesionActivity extends AppCompatActivity {
             }
         });
 
+        Intent actual = getIntent();
 
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        if (actual.hasExtra("cerrar"))
+        {
+            avanzar = actual.getExtras().getBoolean("cerrar");
+            mGoogleSignInClient.signOut();
+        }
+
     }
 
 
@@ -51,21 +61,28 @@ public class IniciarSesionActivity extends AppCompatActivity {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
-            PlayersClient cliente = Games.getPlayersClient(this, account);
+            // PlayersClient cliente = Games.getPlayersClient(this, account);
 
-            Task<Player> task = cliente.getCurrentPlayer();
-            task.addOnCompleteListener(this, new OnCompleteListener<Player>() {
-                @Override
-                public void onComplete(@NonNull Task<Player> task) {
-                    if (task.isSuccessful())
-                    {
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                        i.putExtra("jugador", task.getResult());
-                        startActivity(i);
-                    }
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.putExtra("cuenta", account);
+            startActivity(i);
+            finish();
+        /*
+        Task<Player> task = cliente.getCurrentPlayer();
+        task.addOnCompleteListener(this, new OnCompleteListener<Player>() {
+            @Override
+            public void onComplete(@NonNull Task<Player> task) {
+                if (task.isSuccessful())
+                {
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    i.putExtra("jugador", task.getResult());
+                    startActivity(i);
                 }
-            });
-        }
+            }
+        });
+        */
+            }
+
     }
 
     private void signIn() {
@@ -89,20 +106,40 @@ public class IniciarSesionActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            PlayersClient cliente = Games.getPlayersClient(this, account);
+            //PlayersClient cliente = Games.getPlayersClient(this, account);
 
-            Task<Player> jugador = cliente.getCurrentPlayer();
-            jugador.getResult();
-
-            // Signed in successfully, show authenticated UI.
-            Intent i = new Intent(this, MainActivity.class);
-            i.putExtra("jugador", jugador.getResult());
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.putExtra("cuenta", account);
             startActivity(i);
+            finish();
+
+
+            /*
+            Task<Player> task = cliente.getCurrentPlayer();
+            task.addOnCompleteListener(this, new OnCompleteListener<Player>() {
+                @Override
+                public void onComplete(@NonNull Task<Player> task) {
+                    if (task.isSuccessful())
+                    {
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        i.putExtra("jugador", task.getResult());
+                        startActivity(i);
+                    }
+                }
+            });
+*/
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("GoogleSignIn", "signInResult:failed code=" + e.getStatusCode());
-            Toast.makeText(this, "Error al iniciar sesión", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "Error al iniciar sesión", Toast.LENGTH_SHORT);
         }
+    }
+
+    public void clickInvitado(View view)
+    {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+        finish();
     }
 }
