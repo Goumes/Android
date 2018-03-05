@@ -87,7 +87,7 @@ public class JuegoActivity extends AppCompatActivity {
         editor = sharedPref.edit();
 
         myTableLayout = findViewById(R.id.tableJuego);
-        
+
         overridePendingTransition(0, 0);
 
         textos = new TextSwitcher[4][4]; //Creo un array bidimensional de TextViews para poder refrescar la UI con facilidad
@@ -269,7 +269,6 @@ public class JuegoActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         actualizarTablero();
-
     }
 
     /* Prototipo: void moverFilaDerecha
@@ -291,6 +290,7 @@ public class JuegoActivity extends AppCompatActivity {
             {
                 if ((!tablero.getTabla()[i][j].equals(String.valueOf(0))) && (j + 1 < tablero.getTabla()[0].length))
                 {
+                    //Si es una suma entre dos casillas
                     if (!(tablero.getTabla()[i][j + 1].equals(String.valueOf(0))) && (tablero.getTabla()[i][j].equals(tablero.getTabla()[i][j + 1])) && ((!tablero.getTabla()[i][j].contains("*")) && ((!tablero.getTabla()[i][j + 1].contains("*")))))
                     {
                         if (jAnterior > j)
@@ -370,6 +370,7 @@ public class JuegoActivity extends AppCompatActivity {
                         //Si la casilla actual ha sido mergeada, la siguiente no puede sumarse
                     }
 
+                    //Si es un movimiento normal
                     else if (tablero.getTabla()[i][j + 1].equals(String.valueOf(0)))
                     {
                         if (jAnterior > j)
