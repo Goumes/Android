@@ -1602,7 +1602,7 @@ public class JuegoActivity extends AppCompatActivity {
                         }
                     });
                 }
-                else if (response.code()== 204 && response.body().getHighscore() < sharedPref.getInt("highscore", 0))
+                else if (response.code()== 204)
                 {
                     Call<Usuario> call2 = restClient.createUser(new Usuario(account.getDisplayName(), sharedPref.getInt("highscore", 0)));
                     call2.enqueue(new Callback<Usuario>() {
