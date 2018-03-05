@@ -86,14 +86,8 @@ public class JuegoActivity extends AppCompatActivity {
         sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        //tablero = mViewModel.getTablero().getValue();
-
         myTableLayout = findViewById(R.id.tableJuego);
-
-        //tablero = new Tablero();
-
-        //tablero.rellenarTablero();
-
+        
         overridePendingTransition(0, 0);
 
         textos = new TextSwitcher[4][4]; //Creo un array bidimensional de TextViews para poder refrescar la UI con facilidad
@@ -179,7 +173,6 @@ public class JuegoActivity extends AppCompatActivity {
             }
         });
 
-        //reiniciarUI();
         myTableLayout.setOnTouchListener(new OnSwipeTouchListener(JuegoActivity.this) {
             public void onSwipeTop() {
                 tableroAuxiliar = new Tablero(tablero.getTabla());
@@ -191,7 +184,7 @@ public class JuegoActivity extends AppCompatActivity {
                         @Override
                         public void run()
                         {
-                            generarNumeroAleatorio ();
+                            generarNumeroAleatorio (); //Esto esta en un postDelayed para que se genere despues de las animaciones
                             if (!comprobarContinuar())
                             {
                                 acabarPartida();
@@ -279,6 +272,12 @@ public class JuegoActivity extends AppCompatActivity {
 
     }
 
+    /* Prototipo: void moverFilaDerecha
+    * Descripcion: Metodo dedicado a hacer un movimiento completo hacia la derecha
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: El tablero actualizado
+    */
     public void moverFilaDerecha ()
     {
         int delay = 0;
@@ -450,6 +449,12 @@ public class JuegoActivity extends AppCompatActivity {
         eliminarAsteriscos();
     }
 
+    /* Prototipo: void moverFilaIzquierda
+    * Descripcion: Metodo dedicado a hacer un movimiento completo hacia la izquierda
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: El tablero actualizado
+    */
     public void moverFilaIzquierda ()
     {
         int delay = 0;
@@ -614,6 +619,12 @@ public class JuegoActivity extends AppCompatActivity {
         eliminarAsteriscos();
     }
 
+    /* Prototipo: void moverFilaArriba
+    * Descripcion: Metodo dedicado a hacer un movimiento completo hacia arriba
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: El tablero actualizado
+    */
     public void moverFilaArriba ()
     {
         int delay = 0;
@@ -778,6 +789,12 @@ public class JuegoActivity extends AppCompatActivity {
         eliminarAsteriscos();
     }
 
+    /* Prototipo: void moverFilaAbajo
+    * Descripcion: Metodo dedicado a hacer un movimiento completo hacia abajo
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: El tablero actualizado
+    */
     public void moverFilaAbajo ()
     {
         int delay = 0;
@@ -943,6 +960,12 @@ public class JuegoActivity extends AppCompatActivity {
         eliminarAsteriscos();
     }
 
+    /* Prototipo: void crearUI
+    * Descripcion: Metodo dedicado a crear la UI del tablero
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: La UI creada
+    */
     public void crearUI ()
     {
         for (int i = 0; i < 4; i++)
@@ -954,6 +977,12 @@ public class JuegoActivity extends AppCompatActivity {
         }
     }
 
+    /* Prototipo: void configurarCasilla
+    * Descripcion: Metodo dedicado a darle estilo a una celda dependiendo de su valor
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: La casilla con su estilo correspondiente
+    */
     public void configurarCasilla(int i, int j, String valorActual, String tipo)
     {
         if (valorActual.equals("0") && tipo.equals("reiniciar"))
@@ -1230,6 +1259,12 @@ public class JuegoActivity extends AppCompatActivity {
         }
     }
 
+    /* Prototipo: void reiniciarUI(int i, int j, String valorActual, String valorSiguiente, char direccion)
+    * Descripcion: Metodo dedicado a reiniciar la interfaz de usuario despues de cada movimiento de una celda en el tablero
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: La celda movida animada
+    */
     public void reiniciarUI (int i, int j, String valorActual, String valorSiguiente, char direccion)
     {
         int valorI = 0;
@@ -1270,6 +1305,12 @@ public class JuegoActivity extends AppCompatActivity {
         configurarCasilla(valorI, valorJ, valorSiguiente, "reiniciar");
     }
 
+    /* Prototipo: void generarNumeroAleatorio
+    * Descripcion: Metodo dedicado a generar un numero aleatorio en el tablero despues de un movimiento
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: El tablero con un numero aleatorio generado (2 o 4)
+    */
     public void generarNumeroAleatorio ()
     {
         Random random = new Random();
@@ -1304,6 +1345,12 @@ public class JuegoActivity extends AppCompatActivity {
         }
     }
 
+    /* Prototipo: void animarAparicion (int i, int j, String valorActual)
+    * Descripcion: Metodo dedicado a animar la puntuacion del numero generado por cada movimiento
+    * Entradas: Dos enteros y un string
+    * Salidas: Ninguna
+    * Postcondiciones: La animacion hecha
+    */
     public void animarAparicion (int i, int j, String valorActual)
     {
         ((TextView)textos[i][j].getChildAt(0)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
@@ -1331,6 +1378,12 @@ public class JuegoActivity extends AppCompatActivity {
 
     }
 
+    /* Prototipo: void aumentarPuntuacion(int aumentar)
+    * Descripcion: Metodo que aumenta la puntuacion cada vez que se suman dos casillas
+    * Entradas: un entero
+    * Salidas: Ninguna
+    * Postcondiciones: La puntuacion y la puntuacion maxima actualizadas
+    */
     public void aumentarPuntuacion (int aumentar)
     {
         editor.putInt("score", Integer.valueOf(sharedPref.getInt("score", 0)) + aumentar);
@@ -1347,6 +1400,12 @@ public class JuegoActivity extends AppCompatActivity {
         }
     }
 
+    /* Prototipo: void clickReiniciar(View view)
+    * Descripcion: Metodo onClick del boton reiniciar. Reinicia todos los valores de la partida menos la puntuacion maxima
+    * Entradas: Una view
+    * Salidas: Ninguna
+    * Postcondiciones: La partida reiniciada
+    */
     public void clickReiniciar(View view)
     {
         tablero.rellenarTablero();
@@ -1358,12 +1417,24 @@ public class JuegoActivity extends AppCompatActivity {
         crearUI();
     }
 
+    /* Prototipo: void actualizarTablero
+    * Descripcion: Metodo dedicado a hacer un update del tablero en la badat
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: El tablero de la badat actualizado
+    */
     public void actualizarTablero ()
     {
         MyAsyncTask myAsyncTask = new MyAsyncTask(mViewModel, tablero);
         myAsyncTask.execute();
     }
 
+    /* Prototipo: void eliminarAsteriscos
+    * Descripcion: Metodo dedicado a comprobar eliminar las marcas del tablero que indican si ese numero ya se ha sumado
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: Ninguna
+    */
     public void eliminarAsteriscos ()
     {
         for (int i = 0; i < tablero.getTabla().length; i++)
@@ -1378,6 +1449,12 @@ public class JuegoActivity extends AppCompatActivity {
         }
     }
 
+    /* Prototipo: boolean comprobarContinuar()
+    * Descripcion: Metodo dedicado a comprobar si es posible hacer un movimiento en la partida actual
+    * Entradas: Ninguna
+    * Salidas: Un booleano
+    * Postcondiciones: true si puede continuar, false sino
+    */
     public boolean comprobarContinuar ()
     {
         boolean continuar = false;
@@ -1439,6 +1516,12 @@ public class JuegoActivity extends AppCompatActivity {
         return continuar;
     }
 
+    /* Prototipo: void acabar()
+    * Descripcion: Metodo dedicado a mostrar un DialogFragment cuando acaba la partida
+    * Entradas: Ninguna
+    * Salidas: Ninguna
+    * Postcondiciones: Ninguna
+    */
     public void acabarPartida ()
     {
         FragmentManager fm = getSupportFragmentManager();
