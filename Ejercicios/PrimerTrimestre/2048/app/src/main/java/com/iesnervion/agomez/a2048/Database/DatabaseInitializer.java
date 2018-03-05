@@ -36,14 +36,16 @@ public class DatabaseInitializer {
     private static void populateWithTestData(AppDatabase db) {
         db.tableroDAO().deleteAll ();
 
+        /*
         String [][] tabla =  {
                 {String.valueOf(100), String.valueOf(1236), String.valueOf(4891), String.valueOf(2)},
                 {String.valueOf(200), String.valueOf(456), String.valueOf(4561), String.valueOf(2)},
                 {String.valueOf(300), String.valueOf(4589), String.valueOf(4615), String.valueOf(2)},
                 {String.valueOf(100), String.valueOf(821), String.valueOf(4855), String.valueOf(0)}
         };
+        */
 
-/*
+
         String [][] tabla =  {
                 {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
                 {String.valueOf(0), String.valueOf(0), String.valueOf(0), String.valueOf(0)},
@@ -78,7 +80,7 @@ public class DatabaseInitializer {
                 }
             }
         }
-*/
+
 
         addTablero(db, 0, tabla);
 
