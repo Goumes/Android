@@ -3,6 +3,7 @@ package com.iesnervion.agomez.a2048.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Player jugador;
     GoogleSignInAccount account;
     Button btnLogOut;
+    String nombre;
 
 
     @Override
@@ -29,13 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
         actual = getIntent();
 
-        if (actual.hasExtra("cuenta"))
+        if (actual.hasExtra("nombre"))
         {
-            account = actual.getParcelableExtra("cuenta");
+            nombre = actual.getStringExtra("nombre");
+            Log.d("nombre", nombre);
         }
 
 
-        if (account != null)
+        if (nombre != null)
         {
             btnLogOut.setEnabled(true);
         }

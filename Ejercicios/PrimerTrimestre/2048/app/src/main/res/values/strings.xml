@@ -22,4 +22,7 @@
     <string name="btnLogOut">Cerrar Sesión</string>
     <string name="guest">Entrar como invitado</string>
     <string name="inicioSesion">Iniciar sesión con Google</string>
+    <string name="webClient">625942850643-8d22unaudavcir75kug4nr31dmd8duul.apps.googleusercontent.com</string>
+    <string name="debugClient">625942850643-00gqgfjguckovvf4mql6imrpkn2kae4n.apps.googleusercontent.com</string>
+    <string name="appid">625942850643</string>
 </resources>
