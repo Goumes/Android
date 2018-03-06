@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
