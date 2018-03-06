@@ -79,6 +79,7 @@ public class PuntuacionesActivity extends AppCompatActivity
                 if (mProgressDialog.isShowing())mProgressDialog.dismiss();
                 usuarios = response.body();
                 quickSort.sort(usuarios);
+                cambiarNombres ();
                 adapter = new AdapterHighscore(PuntuacionesActivity.this, R.layout.puntuaciones_row, usuarios);
                 lista.setAdapter(adapter);
             }
@@ -90,6 +91,38 @@ public class PuntuacionesActivity extends AppCompatActivity
                 Toast.makeText(PuntuacionesActivity.this, "Hubo un problema cargando las puntuaciones", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void cambiarNombres ()
+    {
+        String nombreActual = "";
+        String [] nombre;
+        char inicial = ' ';
+
+        for (int i = 0; i < usuarios.size(); i++)
+        {
+            nombreActual = usuarios.get(i).getId();
+            nombre = nombreActual.split(" ");
+
+            if (nombre[0] != null)
+            {
+                nombreActual = nombre[0];
+            }
+
+            if (1 < nombre.length && nombre[1] != null)
+            {
+                inicial = Character.toUpperCase(nombre[1].charAt(0));
+                nombreActual = nombreActual + " " + inicial + ".";
+            }
+
+            if ( 2 < nombre.length && nombre[2] != null)
+            {
+                inicial = Character.toUpperCase(nombre[2].charAt(0));
+                nombreActual = nombreActual + " " + inicial + ".";
+            }
+
+            usuarios.get(i).setId(nombreActual);
+        }
     }
 
 }

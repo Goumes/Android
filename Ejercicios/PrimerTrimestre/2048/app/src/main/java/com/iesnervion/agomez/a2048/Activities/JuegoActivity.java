@@ -1564,10 +1564,6 @@ public class JuegoActivity extends AppCompatActivity {
             public void onDismiss(DialogInterface dialog) {
                 tablero.rellenarTablero();
                 actualizarTablero();
-                if (sharedPref.getInt("score", 0) == sharedPref.getInt("highscore", 0) && sharedPref.getInt("score", 0) != 0 && account != null)
-                {
-                    insertPuntuacion();
-                }
                 editor.putInt("score", 0);
                 editor.commit();
                 score.setText(String.valueOf(sharedPref.getInt("score", 0)));
@@ -1578,6 +1574,10 @@ public class JuegoActivity extends AppCompatActivity {
                 crearUI();
             }
         });
+        if (sharedPref.getInt("score", 0) == sharedPref.getInt("highscore", 0) && sharedPref.getInt("score", 0) != 0 && account != null)
+        {
+            insertPuntuacion();
+        }
         dialogFragment.show(ft, "dialog");
     }
 
