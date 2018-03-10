@@ -22,7 +22,7 @@ public class RetrofitClient {
 
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://api2048.azurewebsites.net")
+                .baseUrl("https://api2048.azurewebsites.net")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

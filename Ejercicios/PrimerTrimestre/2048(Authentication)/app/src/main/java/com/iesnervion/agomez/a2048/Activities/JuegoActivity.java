@@ -1587,36 +1587,34 @@ public class JuegoActivity extends AppCompatActivity {
         call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if(response.code()== 200 && response.body().getHighscore() < sharedPref.getInt("highscore", 0)) {
+                if(response.code()== 200 && response.body() != null && response.body().getHighscore() < sharedPref.getInt("highscore", 0)) {
                     Call<Usuario> call3 = restClient.putUsuario(new Usuario(account.getDisplayName(), sharedPref.getInt("highscore", 0)), account.getDisplayName(), "Basic YWRtaW46bFlUUndUUlMzTmJ4bUkwMA==");
                     call3.enqueue(new Callback<Usuario>() {
                         @Override
                         public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-
-                            Toast.makeText(JuegoActivity.this, "Hubo un error actualizando tu puntuación máxima", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(JuegoActivity.this, "Puntuación máxima actualizada", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<Usuario> call, Throwable t) {
-                            Toast.makeText(JuegoActivity.this, "Puntuación máxima actualizada", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(JuegoActivity.this, "Hubo un error actualizando tu puntuación máxima", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
-                else if (response.code()== 204)
+                else if (response.code()== 200 && response.body() == null)
                 {
                     Call<Usuario> call2 = restClient.createUser(new Usuario(account.getDisplayName(), sharedPref.getInt("highscore", 0)), "Basic YWRtaW46bFlUUndUUlMzTmJ4bUkwMA==");
                     call2.enqueue(new Callback<Usuario>() {
                         @Override
                         public void onResponse(Call<Usuario> call, Response<Usuario> response)
                         {
-                            Toast.makeText(JuegoActivity.this, "Hubo un error actualizando tu puntuación máxima", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(JuegoActivity.this, "Puntuación máxima actualizada", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<Usuario> call, Throwable t)
                         {
-                            Toast.makeText(JuegoActivity.this, "Puntuación máxima actualizada", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(JuegoActivity.this, "Hubo un error actualizando tu puntuación máxima", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
