@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/linearPrincipal"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/linearScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/puntuacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:fontFamily="casual"
+                android:text="@string/puntuacion" />
+
+            <TextView
+                android:id="@+id/valorPuntuacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="@string/valorScore" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearHighscore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/highscore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:fontFamily="casual"
+                android:text="@string/highscore" />
+
+            <TextView
+                android:id="@+id/valorHighscore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="@string/valorHighscore"
+                />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnReiniciar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnReiniciar"
+            android:layout_below="@id/linearScore"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:background="@drawable/shape_boton_claro"
+            android:fontFamily="casual"
+            android:onClick="clickReiniciar"/>
+
+    </RelativeLayout>
+
+
+    <TableLayout
+        android:id="@+id/tableJuego"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/main_background_grid"
+        android:padding="2.5dp"
+        android:weightSum="1"
+        >
+
+        <TableRow
+            android:id="@+id/tableRow0"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="1"
+            android:layout_weight="0.25"
+            android:orientation="vertical"
+            >
+
+
+            <LinearLayout
+                android:id="@+id/linear_0_0"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_0_0"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear_0_1"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+
+                <TextSwitcher
+                    android:id="@+id/txt_0_1"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_0_2"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_0_2"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_0_3"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+
+                <TextSwitcher
+                    android:id="@+id/txt_0_3"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="1"
+            android:layout_weight="0.25"
+            android:orientation="vertical"
+            >
+
+
+            <LinearLayout
+                android:id="@+id/linear_1_0"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_1_0"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear_1_1"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_1_1"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_1_2"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_1_2"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_1_3"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_1_3"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="1"
+            android:layout_weight="0.25"
+            android:orientation="vertical"
+            >
+
+
+            <LinearLayout
+                android:id="@+id/linear_2_0"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_2_0"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear_2_1"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_2_1"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_2_2"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_2_2"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_2_3"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_2_3"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="1"
+            android:layout_weight="0.25"
+            android:orientation="vertical"
+            >
+            <!-- El orientation vertical es para que la propiedad weight funcione correctamente, porque sino las alturas petan al cambiar el texto por código-->
+
+            <LinearLayout
+                android:id="@+id/linear_3_0"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_3_0"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear_3_1"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_3_1"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_3_2"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_3_2"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_3_3"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.25">
+                <TextSwitcher
+                    android:id="@+id/txt_3_3"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/valorCelda"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@color/fuenteNegra"
+                        android:background="@drawable/background_tile_0"/>
+                </TextSwitcher>
+            </LinearLayout>
+
+        </TableRow>
+
+
+
+    </TableLayout>
+
+
+</LinearLayout>

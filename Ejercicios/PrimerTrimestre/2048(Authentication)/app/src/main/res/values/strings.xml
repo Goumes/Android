@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">2048</string>
+    <string name="titulo">2048</string>
+    <string name="btnJugar">Jugar</string>
+    <string name="btnEstadisticas">Puntuaciones</string>
+    <string name="puntuacion">Score</string>
+    <string name="highscore">Highscore</string>
+    <string name="valorScore">0</string>
+    <string name="valorHighscore">0</string>
+    <string name="btnReiniciar">Reiniciar</string>
+    <string name="valorCelda"></string>
+    <string name="preference_file_key">clave</string>
+    <string name="txtUser">Usuario</string>
+    <string name="valorUser">pepejava</string>
+    <string name="valorListaHighscore">99999</string>
+    <string name="txtHighscore">Highscore</string>
+    <string name="btnAceptar">Aceptar</string>
+    <string name="txtFinPartida">Se acabó la partida</string>
+    <string name="txtScore">Score:</string>
+    <string name="txtIniciar">Iniciar sesión</string>
+    <string name="title_activity_iniciar_sesion">IniciarSesionActivity</string>
+    <string name="btnLogOut">Cerrar Sesión</string>
+    <string name="guest">Entrar como invitado</string>
+    <string name="inicioSesion">Iniciar sesión con Google</string>
+</resources>

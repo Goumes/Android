@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using _2048_API_CORE_BL.Manejadoras;
 using _2048_API_CORE_ET;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace _2048_API_CORE_UI.Controllers
         ListadoUsuariosBL listado = new ListadoUsuariosBL();
         // GET: api/users
         [HttpGet]
+        [Authorize]
         public IEnumerable<clsUsuario> Get()
         {
             return listado.getListadoUsuariosBL();
@@ -24,6 +26,7 @@ namespace _2048_API_CORE_UI.Controllers
 
         // GET: api/users/5
         [HttpGet("{id}", Name = "Get")]
+        [Authorize]
         public clsUsuario Get(String id)
         {
             return manejadora.getUsuarioPorId(id);
@@ -31,6 +34,7 @@ namespace _2048_API_CORE_UI.Controllers
         
         // POST: api/users
         [HttpPost]
+        [Authorize]
         public void Post([FromBody]clsUsuario value)
         {
             manejadora.addUsuario(value);
@@ -38,6 +42,7 @@ namespace _2048_API_CORE_UI.Controllers
         
         // PUT: api/users/5
         [HttpPut("{id}")]
+        [Authorize]
         public void Put(String id, [FromBody]clsUsuario value)
         {
             value.id = id;
@@ -46,6 +51,7 @@ namespace _2048_API_CORE_UI.Controllers
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize]
         public void Delete(String id)
         {
             manejadora.borrarUsuario(id);

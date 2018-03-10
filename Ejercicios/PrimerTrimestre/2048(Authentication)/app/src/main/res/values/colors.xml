@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F8ECC5</color>
+    <color name="background">#EFEBDB</color>
+    <color name="colorPrimaryDark">#C36B4B</color>
+    <color name="colorAccent">#93320F</color>
+    <color name="gris">#B3B1B1</color>
+    <color name="negro">#000</color>
+    <color name="blanco">#FFF</color>
+    <color name="fondoGrid">#BBADA0</color>
+    <color name="tile0">#CDC0B4</color>
+    <color name="tile1">#EEE4DA</color>
+    <color name="tile2">#EDE0C8</color>
+    <color name="tile3">#F2B179</color>
+    <color name="tile4">#F59563</color>
+    <color name="tile5">#F67C5F</color>
+    <color name="tile6">#F65E3B</color>
+    <color name="tile7">#EDCF72</color>
+    <color name="tile8">#EDCC61</color>
+    <color name="tile9">#EDC850</color>
+    <color name="tile10">#EDC53F</color>
+    <color name="tile11">#EDC22E</color>
+    <color name="tile12">#3C3A32</color>
+    <color name="fuenteNegra">#776E65</color>
+    <color name="fuenteBlanca">#F9F6F2</color>
+
+
+</resources>
